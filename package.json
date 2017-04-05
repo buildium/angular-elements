@@ -1,6 +1,6 @@
 {
-  "name": "@buildium/angular-ui",
-  "version": "1.1.0-9",
+  "name": "@buildium/angular-elements",
+  "version": "1.0.0-0",
   "description": "A collection of directives for building angular applications",
   "main": "index.js",
   "scripts": {
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buildium/angular-ui.git"
+    "url": "git+https://github.com/buildium/angular-elements.git"
   },
   "keywords": [],
   "author": "Buildium <buidiumadmin@buildium.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/buildium/angular-ui/issues"
+    "url": "https://github.com/buildium/angular-elements/issues"
   },
-  "homepage": "https://github.com/buildium/angular-ui#readme",
+  "homepage": "https://github.com/buildium/angular-elements#readme",
   "dependencies": {
     "lodash.uniqueid": "4.0.1",
     "ng-annotate": "1.2.1"
