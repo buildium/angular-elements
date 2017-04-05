@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-bd-compile-dynamic-html</title>
+  
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+  <script src="..\..\examples-dep\default\index.js"></script>
+  <script src="script.js"></script>
+  
+
+  
+</head>
+<body ng-app="compileDynamicHtmlExample">
+  <div ng-controller="ExampleController">
+    <label>Title
+        <input type="text" ng-model="title" />
+    </label>
+    <label>Dynamic Template
+        <textarea ng-model="dynamicHtml" style="display: block"></textarea>
+    </label>
+    <h2>Result</h2>
+    <div bd-compile-dynamic-html="dynamicHtml"></div>
+</div>
+</body>
+</html>

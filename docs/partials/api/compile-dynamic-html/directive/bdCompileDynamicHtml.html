@@ -1,0 +1,127 @@
+<a href='https://github.com/angular/angular.js/edit//src/compile-dynamic-html/index.js?message=docs(bdCompileDynamicHtml)%3A%20describe%20your%20change...#L10' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com///tree//src/compile-dynamic-html/index.js#L10' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">bdCompileDynamicHtml</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/compile-dynamic-html">compile-dynamic-html</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>Replaces the contents of the element with the result of compiling the html string.
+Updates on changes to any contained scope variables.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2>Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 0.</li>
+    
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <ul>
+    <li>as attribute:
+        <pre><code>&lt;ANY&#10;  bd-compile-dynamic-html=&quot;string&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+      </li>
+    
+  </div>
+  
+<section class="api-section">
+  <h3>Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        bdCompileDynamicHtml
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>AngularJS expression evaluating to the html
+                                     that should be rendered in this container.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+
+  
+  <h2 id="example">Examples</h2><p>
+
+<div>
+  <plnkr-opener example-path="examples/example-bd-compile-dynamic-html"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-bd-compile-dynamic-html"
+      module="compileDynamicHtmlExample"
+      name="bd-compile-dynamic-html">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;    &lt;label&gt;Title&#10;        &lt;input type=&quot;text&quot; ng-model=&quot;title&quot; /&gt;&#10;    &lt;/label&gt;&#10;    &lt;label&gt;Dynamic Template&#10;        &lt;textarea ng-model=&quot;dynamicHtml&quot; style=&quot;display: block&quot;&gt;&lt;/textarea&gt;&#10;    &lt;/label&gt;&#10;    &lt;h2&gt;Result&lt;/h2&gt;&#10;    &lt;div bd-compile-dynamic-html=&quot;dynamicHtml&quot;&gt;&lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;compileDynamicHtmlExample&#39;, [])&#10;.controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;    $scope.title = &#39;Hello world&#39;;&#10;    $scope.dynamicHtml = &#39;&lt;b&gt;{{title}}&lt;/b&gt;&#39;&#10;}]);</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-bd-compile-dynamic-html/index.html" name="example-bd-compile-dynamic-html"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+
