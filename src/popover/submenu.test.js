@@ -5,14 +5,14 @@ var angular = require('angular');
 require('angular-mocks');
 require('./index.js');
 
-describe('Service: buildium.components.popover.BdSubmenu', function () {
+describe('Service: buildium.angular-elements.popover.BdSubmenu', function () {
     var $rootScope,
         $timeout,
         $document,
         $compile,
         BdSubmenu;
 
-    beforeEach(angular.mock.module('buildium.components.popovers'));
+    beforeEach(angular.mock.module('buildium.angular-elements.popover'));
 
     beforeEach(angular.mock.inject(function (_$rootScope_, _$timeout_, _BdSubmenu_, _$document_, _$compile_) {
         $rootScope = _$rootScope_;

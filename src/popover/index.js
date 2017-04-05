@@ -6,7 +6,49 @@ let moduleName = 'buildium.angular-elements.popover';
  * @module popover
  */
 angular.module(moduleName, [])
-.directive('bdPopover', ['$rootScope', '$element', 'BdSubmenu', function BdPopover($rootScope, $element, BdSubmenu) {
+/**
+* @ngdoc directive
+* @name bdPopover
+* @module popover
+* 
+* @description
+*
+* Attaches a popover tooltip to an element with custom content.
+* 
+* @param {boolean} selected 
+*
+* @param {string} title
+*
+* @param {boolean} pointer
+*
+* @param {string} popoverContainerClass
+*
+* @param {string} popoverLinkClass 
+*
+* @param {string} pointerClass 
+*
+* @param {boolean} showOnHover
+*
+* @param {function} onLinkClick 
+*
+*
+* @example
+* ```
+* <bd-popover selected="false" title="Ygritte" pointer="true" show-on-hover="true" link-class="popover-link" container-class="'popover'" pointer-class="'popover__pointer'" show-on-hover="true" on-link-click="controller.onClick()">
+*    <popover-link>
+*        <span class="tooltip">
+*            Ygritte quotes
+*        </span>
+*    </popover-link>
+*    <popover-body>
+*      <h1>You know nothing, Jon Snow</h1>
+*   </popover-body>
+* </bd-popover>
+```
+*
+*
+*/
+.directive('bdPopover', ['$rootScope', 'BdSubmenu', function BdPopover($rootScope, BdSubmenu) {
     let directive = {};
 
     directive.restrict = 'E';
@@ -47,7 +89,7 @@ angular.module(moduleName, [])
     directive.bindToController = true;
 
     /* @ngInject */
-    directive.controller = [$rootScope, $element, function PopoverCtrl($rootScope, $element) {
+    directive.controller = ['$rootScope', '$element', 'BdSubmenu', function PopoverCtrl($rootScope, $element, BdSubmenu) {
         let ctrl = this;
 
         ctrl.isOpen = false;
@@ -90,7 +132,7 @@ angular.module(moduleName, [])
 
     return directive;
 
-}]).service('BdSubmenu', [$rootScope, $timeout, $document, require('./submenu')]);
+}]).service('BdSubmenu', ['$rootScope', '$timeout', '$document', require('./submenu')]);
 
 
 module.exports = moduleName;

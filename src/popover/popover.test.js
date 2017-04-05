@@ -3,10 +3,9 @@
 var $ = require('jquery');
 var angular = require('angular');
 require('angular-mocks');
-require('../../../test/mocks');
 require('./index.js');
 
-describe('Directive: buildium.components.popover.BdSubMenu', function () {
+describe('Directive: buildium.angular-elements.popover', function () {
     var elem,
         $compile,
         scope,
@@ -15,7 +14,7 @@ describe('Directive: buildium.components.popover.BdSubMenu', function () {
         mockPopUps,
         mockFilter;
 
-    beforeEach(angular.mock.module('buildium.components.popovers', function ($provide) {
+    beforeEach(angular.mock.module('buildium.angular-elements.popover', function ($provide) {
         mockSubmenuSvc = {
             display : function display() {},
             startTimer : function startTimer() {},
@@ -41,8 +40,8 @@ describe('Directive: buildium.components.popover.BdSubMenu', function () {
         spyOn(mockSubmenuSvc, 'stopTimer').and.callThrough();
     }));
 
-    beforeEach(angular.mock.inject(function ($rootScope, _$compile_) {
-        scope = $rootScope;
+    beforeEach(angular.mock.inject(function (_$rootScope_, _$compile_) {
+        scope = _$rootScope_;
         $compile = _$compile_;
 
         elem = angular.element(

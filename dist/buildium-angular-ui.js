@@ -1,27 +1,22 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-let moduleName = 'buildium.angular-ui';
+let moduleName = 'buildium.angular-elements';
 
 /**
  * @ndgoc module
- * @name angular-ui
- * @module angular-ui
+ * @name angular-elements
+ * @module angular-elements
  */
 angular.module(moduleName, [
-    require('./src/compile-dynamic-html'),
-    require('./src/scroll-into-view'),
-    require('./src/event'),
-    require('./src/copy-to-clipboard'),
-    require('./src/loading-src'),
-    require('./src/compile-template')
+    require('./src/popover')
 ]);
 
 module.exports = moduleName;
 
-},{"./src/compile-dynamic-html":4,"./src/compile-template":5,"./src/copy-to-clipboard":6,"./src/event":7,"./src/loading-src":8,"./src/scroll-into-view":9}],2:[function(require,module,exports){
+},{"./src/popover":3}],2:[function(require,module,exports){
 /*!
- * jQuery JavaScript Library v2.2.4
+ * jQuery JavaScript Library v2.2.3
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -31,7 +26,7 @@ module.exports = moduleName;
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-05-20T17:23Z
+ * Date: 2016-04-05T19:26Z
  */
 
 (function( global, factory ) {
@@ -87,7 +82,7 @@ var support = {};
 
 
 var
-	version = "2.2.4",
+	version = "2.2.3",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -5028,14 +5023,13 @@ jQuery.Event.prototype = {
 	isDefaultPrevented: returnFalse,
 	isPropagationStopped: returnFalse,
 	isImmediatePropagationStopped: returnFalse,
-	isSimulated: false,
 
 	preventDefault: function() {
 		var e = this.originalEvent;
 
 		this.isDefaultPrevented = returnTrue;
 
-		if ( e && !this.isSimulated ) {
+		if ( e ) {
 			e.preventDefault();
 		}
 	},
@@ -5044,7 +5038,7 @@ jQuery.Event.prototype = {
 
 		this.isPropagationStopped = returnTrue;
 
-		if ( e && !this.isSimulated ) {
+		if ( e ) {
 			e.stopPropagation();
 		}
 	},
@@ -5053,7 +5047,7 @@ jQuery.Event.prototype = {
 
 		this.isImmediatePropagationStopped = returnTrue;
 
-		if ( e && !this.isSimulated ) {
+		if ( e ) {
 			e.stopImmediatePropagation();
 		}
 
@@ -5983,6 +5977,19 @@ function getWidthOrHeight( elem, name, extra ) {
 		val = name === "width" ? elem.offsetWidth : elem.offsetHeight,
 		styles = getStyles( elem ),
 		isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
+
+	// Support: IE11 only
+	// In IE 11 fullscreen elements inside of an iframe have
+	// 100x too small dimensions (gh-1764).
+	if ( document.msFullscreenElement && window.top !== window ) {
+
+		// Support: IE11 only
+		// Running getBoundingClientRect on a disconnected node
+		// in IE throws an error.
+		if ( elem.getClientRects().length ) {
+			val = Math.round( elem.getBoundingClientRect()[ name ] * 100 );
+		}
+	}
 
 	// Some non-html elements return undefined for offsetWidth, so check for null/undefined
 	// svg - https://bugzilla.mozilla.org/show_bug.cgi?id=649285
@@ -7874,7 +7881,6 @@ jQuery.extend( jQuery.event, {
 	},
 
 	// Piggyback on a donor event to simulate a different one
-	// Used only for `focus(in | out)` events
 	simulate: function( type, elem, event ) {
 		var e = jQuery.extend(
 			new jQuery.Event(),
@@ -7882,10 +7888,27 @@ jQuery.extend( jQuery.event, {
 			{
 				type: type,
 				isSimulated: true
+
+				// Previously, `originalEvent: {}` was set here, so stopPropagation call
+				// would not be triggered on donor event, since in our own
+				// jQuery.event.stopPropagation function we had a check for existence of
+				// originalEvent.stopPropagation method, so, consequently it would be a noop.
+				//
+				// But now, this "simulate" function is used only for events
+				// for which stopPropagation() is noop, so there is no need for that anymore.
+				//
+				// For the 1.x branch though, guard for "click" and "submit"
+				// events is still used, but was moved to jQuery.event.stopPropagation function
+				// because `originalEvent` should point to the original event for the constancy
+				// with other events and for more focused logic
 			}
 		);
 
 		jQuery.event.trigger( e, null, elem );
+
+		if ( e.isDefaultPrevented() ) {
+			event.preventDefault();
+		}
 	}
 
 } );
@@ -9836,547 +9859,217 @@ return jQuery;
 }));
 
 },{}],3:[function(require,module,exports){
-(function (global){
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-/** Used as references for various `Number` constants. */
-var INFINITY = 1 / 0;
-
-/** `Object#toString` result references. */
-var symbolTag = '[object Symbol]';
-
-/** Detect free variable `global` from Node.js. */
-var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
-
-/** Detect free variable `self`. */
-var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-
-/** Used as a reference to the global object. */
-var root = freeGlobal || freeSelf || Function('return this')();
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to generate unique IDs. */
-var idCounter = 0;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
- * of values.
- */
-var objectToString = objectProto.toString;
-
-/** Built-in value references. */
-var Symbol = root.Symbol;
-
-/** Used to convert symbols to primitives and strings. */
-var symbolProto = Symbol ? Symbol.prototype : undefined,
-    symbolToString = symbolProto ? symbolProto.toString : undefined;
-
-/**
- * The base implementation of `_.toString` which doesn't convert nullish
- * values to empty strings.
- *
- * @private
- * @param {*} value The value to process.
- * @returns {string} Returns the string.
- */
-function baseToString(value) {
-  // Exit early for strings to avoid a performance hit in some environments.
-  if (typeof value == 'string') {
-    return value;
-  }
-  if (isSymbol(value)) {
-    return symbolToString ? symbolToString.call(value) : '';
-  }
-  var result = (value + '');
-  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
-}
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return !!value && typeof value == 'object';
-}
-
-/**
- * Checks if `value` is classified as a `Symbol` primitive or object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
- * @example
- *
- * _.isSymbol(Symbol.iterator);
- * // => true
- *
- * _.isSymbol('abc');
- * // => false
- */
-function isSymbol(value) {
-  return typeof value == 'symbol' ||
-    (isObjectLike(value) && objectToString.call(value) == symbolTag);
-}
-
-/**
- * Converts `value` to a string. An empty string is returned for `null`
- * and `undefined` values. The sign of `-0` is preserved.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to process.
- * @returns {string} Returns the string.
- * @example
- *
- * _.toString(null);
- * // => ''
- *
- * _.toString(-0);
- * // => '-0'
- *
- * _.toString([1, 2, 3]);
- * // => '1,2,3'
- */
-function toString(value) {
-  return value == null ? '' : baseToString(value);
-}
-
-/**
- * Generates a unique ID. If `prefix` is given, the ID is appended to it.
- *
- * @static
- * @since 0.1.0
- * @memberOf _
- * @category Util
- * @param {string} [prefix=''] The value to prefix the ID with.
- * @returns {string} Returns the unique ID.
- * @example
- *
- * _.uniqueId('contact_');
- * // => 'contact_104'
- *
- * _.uniqueId();
- * // => '105'
- */
-function uniqueId(prefix) {
-  var id = ++idCounter;
-  return toString(prefix) + id;
-}
-
-module.exports = uniqueId;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],4:[function(require,module,exports){
-let moduleName = 'buildium.angular-ui.compiledynamichtml';
+let moduleName = 'buildium.angular-elements.popover';
 
 /**
  * @ngdoc module
- * @name compile-dynamic-html
- * @module compile-dynamic-html
+ * @name popover
+ * @module popover
  */
 angular.module(moduleName, [])
-
 /**
- * @ngdoc directive
- * @name bdCompileDynamicHtml
- * @module  compile-dynamic-html
- *
- * @restrict A
- *
- * @description
- * Replaces the contents of the element with the result of compiling the html string.
- * Updates on changes to any contained scope variables.
- *
- * @param {string} bdCompileDynamicHtml AngularJS expression evaluating to the html
- *                                      that should be rendered in this container.
- *
- * @example
-    <example module="compileDynamicHtmlExample" name="bd-compile-dynamic-html">
-        <file name="index.html">
-            <div ng-controller="ExampleController">
-                <label>Title
-                    <input type="text" ng-model="title" />
-                </label>
-                <label>Dynamic Template
-                    <textarea ng-model="dynamicHtml" style="display: block"></textarea>
-                </label>
-                <h2>Result</h2>
-                <div bd-compile-dynamic-html="dynamicHtml"></div>
+* @ngdoc directive
+* @name bdPopover
+* @module popover
+* 
+* @description
+*
+* Attaches a popover tooltip to an element with custom content.
+* 
+* @param {boolean} selected 
+*
+* @param {string} title
+*
+* @param {boolean} pointer
+*
+* @param {string} popoverContainerClass
+*
+* @param {string} popoverLinkClass 
+*
+* @param {string} pointerClass 
+*
+* @param {boolean} showOnHover
+*
+* @param {function} onLinkClick 
+*
+*
+* @example
+* ```
+* <bd-popover selected="false" title="Ygritte" pointer="true" show-on-hover="true" link-class="popover-link" container-class="'popover'" pointer-class="'popover__pointer'" show-on-hover="true" on-link-click="controller.onClick()">
+*    <popover-link>
+*        <span class="tooltip">
+*            Ygritte quotes
+*        </span>
+*    </popover-link>
+*    <popover-body>
+*      <h1>You know nothing, Jon Snow</h1>
+*   </popover-body>
+* </bd-popover>
+```
+*
+*
+*/
+.directive('bdPopover', ['$rootScope', 'BdSubmenu', function BdPopover($rootScope, BdSubmenu) {
+    let directive = {};
+
+    directive.restrict = 'E';
+    directive.template = `
+        <a href
+           id="bd-popover-{{:: ctrl.title}}"
+           insert-point="popover-link"
+           ng-click="!ctrl.showOnHover && ctrl.linkClicked()"
+           ng-mouseover="ctrl.showOnHover && ctrl.linkClicked()"
+           ng-mouseleave="ctrl.mouseLeave($event)"
+           ng-class="{ 'popover__link--selected' : ctrl.selected }"
+           class="popover__link {{ctrl.popoverLinkClass}}">
+            <!-- anything within <popover-link> will appear here -->
+        </a>
+        <div class="popover__container popover__right" ng-class="ctrl.popoverContainerClass">
+            <div insert-point="popover-body"
+                 ng-class="{ 'pointer': ctrl.pointer }"
+                 ng-show="ctrl.isOpen"
+                 ng-mouseenter="ctrl.mouseEnter($event)"
+                 ng-mouseleave="ctrl.mouseLeave($event)">
+                <span class="popover__pointer" ng-class="ctrl.pointerClass" ng-if="::ctrl.pointer"></span>
+
+                <!-- anything within <popover-body> will appear here -->
             </div>
-        </file>
-        <file name="script.js">
-            angular.module('compileDynamicHtmlExample', [])
-                .controller('ExampleController', ['$scope', function($scope) {
-                    $scope.title = 'Hello world';
-                    $scope.dynamicHtml = '<b>{{title}}</b>'
-                }]);
-        </file>
-    </example>
- *
- */
-.directive('bdCompileDynamicHtml', function CompileDynamicHtml() {
-    let directive = {};
-
-    directive.restrict = 'A';
-    directive.replace = true;
-
-    directive.link = function link(scope, ele, attrs) {
-        scope.$watch(attrs.bdCompileDynamicHtml, function(html) {
-            ele.html(html);
-            $compile(ele.contents())(scope);
-        });
+        </div>`;
+    directive.scope = {
+        selected: '=',
+        title: '=',
+        pointer: '=',
+        popoverContainerClass: '=containerClass',
+        popoverLinkClass: '=linkClass',
+        pointerClass: '=',
+        showOnHover: '=',
+        onLinkClick: '&?'
     };
+    directive.controllerAs = 'ctrl';
+    directive.transclude = true;
+    directive.bindToController = true;
 
-    return directive;
-});
+    /* @ngInject */
+    directive.controller = ['$rootScope', '$element', 'BdSubmenu', function PopoverCtrl($rootScope, $element, BdSubmenu) {
+        let ctrl = this;
 
-module.exports = moduleName;
-},{}],5:[function(require,module,exports){
-'use strict';
+        ctrl.isOpen = false;
 
-let moduleName = 'buildium.angular-ui.compiletemplate';
-
-angular.module(moduleName, [])
-.directive('bdCompileTemplate', ['$compile', '$parse', function BdCompileTemplate($compile, $parse) {
-    let directive = {};
-
-    directive.restrict = 'A';
-    directive.link = function link(scope, element, attr) {
-        let parsed = $parse(attr.ngBindHtml);
-        function getStringValue() {
-            return (parsed(scope) || '').toString();
-        }
-
-        //Recompile if the template changes
-        scope.$watch(getStringValue, function stringValueChanged() {
-            $compile(element, null, -9999)(scope);  //The -9999 makes it skip directives so that we do not recompile ourselves
-        });
-    };
-
-    return directive;
-}]);
-
-module.exports = moduleName;
-},{}],6:[function(require,module,exports){
-'use strict';
-
-let uniqueId = require('lodash.uniqueid');
-let component = {};
-
-component.restrict = 'E';
-component.template = '<a class="{{:: vm.buttonClasses}}" ng-click="vm.copyTextToClipboard()">{{:: vm.buttonLabel}}</a>' +
-    '<div id="{{:: vm.clipBoardTextId}}" class="copy-to-clipboard-text">{{:: vm.copyText}}</div>';
-component.controllerAs = 'vm';
-component.bindToController = true;
-component.bindings = {
-    copyText: '<',
-    buttonLabel: '@',
-    buttonClasses: '@?',
-    successCallback: '&?',
-    errorCallback: '&?'
-};
-
-component.controller = function BdCopyToClipboard() {
-    let vm = this;
-
-    function clearSelection() {
-        let selection = window.getSelection ? window.getSelection() : document.selection;
-        if (selection) {
-            if (selection.removeAllRanges && typeof selection.removeAllRanges === 'function') {
-                selection.removeAllRanges();
-            } else if (selection.empty && typeof selection.empty === 'function') {
-                selection.empty();
+        ctrl.linkClicked = function linkClicked() {
+            BdSubmenu.display($element);
+            $rootScope.$broadcast('bd.popover.clicked', $element);
+            if (ctrl.onLinkClick) {
+                ctrl.onLinkClick();
             }
-        }
-    }
+        };
 
-    function selectText(containerid) {
-        let range;
-        clearSelection();
-        if (document.selection) {
-            range = document.body.createTextRange();
-            range.moveToElementText(document.getElementById(containerid));
-            range.select();
-        } else if (window.getSelection) {
-            range = document.createRange();
-            range.selectNode(document.getElementById(containerid));
-            window.getSelection().addRange(range);
-        }
-    }
+        ctrl.mouseEnter = BdSubmenu.stopTimer;
+        ctrl.mouseLeave = BdSubmenu.startTimer;
+    }];
 
-    function handleError() {
-        if (vm.errorCallback) {
-            vm.errorCallback('Oops, this is not supported in your browser');
-        }
-    }
-
-    vm.$onInit = function onInit() {
-        vm.clipBoardTextId = uniqueId('clipboard-text-');
-    };
-
-    vm.copyTextToClipboard = function copyTextToClipboard() {
-        let wasCopySuccessful;
-        selectText(vm.clipBoardTextId);
-        try {
-            wasCopySuccessful = document.execCommand('copy');
-            if (!wasCopySuccessful) {
-                handleError();
-            }
-            if (wasCopySuccessful && vm.successCallback) {
-                vm.successCallback();
-            }
-        } catch (err) {
-            handleError();
-        }
-        clearSelection();
-    };
-};
-
-let moduleName = 'buildium.angular-ui.copytoclipboard';
-
-angular.module(moduleName, [])
-.component('bdCopyToClipboard', component)
-
-module.exports = moduleName;
-
-},{"lodash.uniqueid":3}],7:[function(require,module,exports){
-'use strict';
-
-
-
-let moduleName = 'buildium.angular-ui.event';
-let $ = require('jquery');
-
-/**
- * @ngdoc module
- * @name event
- * @module event
- */
-angular.module(moduleName, [])
-
-/**
- * @ngdoc directive
- * @name bdEvent
- * @module event
- *
- * @description
- *
- * Attach callbacks to arbitray DOM events.
- *
- * @param {object} bdEvent A map of event names to functions on the scope to execute
- *                         when that event is fired
- *
- * @example
- * ```html
- * <div bd-event="{ scroll: onScroll }"></div>
- * ```
- */
-.directive('bdEvent', function bdEvent() {
-   let directive = {};
-
-    directive.restrict = 'A';
-    directive.link = function link(scope, element, attrs) {
-        let eventObject = scope.$eval(attrs.bdEvent),
-            $el = $(element);
-
-        Object.keys(eventObject).forEach(function(key) {
-            $el.on(key + '.bd-event', eventObject[key]);
+    directive.link = function link(scope, elem, attrs, ctrl, transclude) {
+        scope.$watch(function() {
+            return BdSubmenu.currentElement === elem;
+        }, function(isOpen) {
+            ctrl.isOpen = isOpen;
         });
 
-        // destory listeners when this directive is destroyed
-        scope.$on('$destroy', function() {
-            Object.keys(eventObject).forEach(function(key) {
-                $el.off(key + '.bd-event');
+        transclude(scope.$parent, function(clone) {
+            angular.forEach(clone, function(cloneElem) {
+                let insertId,
+                    target;
+
+                if (!cloneElem.attributes) {
+                    return;
+                }
+
+                insertId = cloneElem.tagName.toLowerCase();
+                target = $(elem).find('[insert-point="' + insertId + '"]');
+
+                target.append(cloneElem);
             });
         });
     };
 
     return directive;
-});
+
+}]).service('BdSubmenu', ['$rootScope', '$timeout', '$document', require('./submenu')]);
+
 
 module.exports = moduleName;
-},{"jquery":2}],8:[function(require,module,exports){
+},{"./submenu":4}],4:[function(require,module,exports){
 'use strict';
 
 let $ = require('jquery');
 
-let moduleName = 'buildium.angular-ui.loadingsrc';
+// @ngInject
+module.exports = function BdSubmenu($rootScope, $timeout, $document) {
+    let submenuService = this,
+        mouseOutDelay = 250,
+        $currentElement,
+        mouseoutTimer;
 
-/**
- * @ngdoc module
- * @name loading-src
- * @module loading-src
- */
-angular.module(moduleName, [])
+    function unsetCurrentElement() {
+        $currentElement = null;
 
-/**
- * @ngdoc directive
- * @name bdLoadingSrc
- * @module loading-src
- *
- * @description
- * This directive will show a spinner and the message "Loading image" while an
- * image is being downloaded. This is also useful when we are dynamically
- * switching an images "src" attribute. If you use `<img ng-src="{{some_src}}" />`,
- * there is odd behavior when you switch the image source. Specifically, the
- * old image will display until the new one is loaded.
- *
- * @param {string} bdLoadingSrc An angular expression that evaluates to the image url
- *
- * @example
- * ```html
- * <img title="Some Image" alt="Some Image" bd-loading-src="vm.image_src" />
- * ```
- */
-.directive('bdLoadingSrc', function LoadingSrc() {
-    let directive = {};
+        $document.find('body').off('click.submenu');
+    }
 
-    directive.restrict = 'A';
-    directive.transclude = 'element';
-
-    directive.link = function link(scope, element, attrs, controller, transclude) {
-        // Within the directive `element` refers to a comment in place of the transcluded directive.
-
-        let previousImg,
-            spinner = $('<div class="form-actions"><button disabled class="wait">Loading image...</button></div>');
-
-        scope.$watch(attrs.bdLoadingSrc, function(newSrc) {
-            if (!newSrc) {
-                return;
+    Object.defineProperties(submenuService, {
+        currentElement: {
+            get: function get() {
+                return $currentElement;
             }
+        }
+    });
 
-            if (previousImg) {
-                previousImg.remove();
-            }
+    submenuService.display = function display(elem) {
+        $currentElement = elem;
 
-            element.after(spinner);
+        submenuService.positionPopoverBody($currentElement);
+        submenuService.stopTimer();
 
-            transclude(scope, function(img) {
-                previousImg = img;
+        // If a link w/i a submenu is clicked close that submenu immediately (don't do the fade-out animation)
+        $document.find('.sub-menu').one('click', function(event) {
+            if ($(event.target).is('a')) {
+                $rootScope.$apply(function() {
+                    unsetCurrentElement();
 
-                img.attr('src', newSrc);
-                img.on('load', function() {
-                    scope.$apply(function() {
-                        spinner.remove();
-                        element.after(img);
-                    });
+                    // This variable will be read by the animation code in the SubMenuContainerAnimation
+                    submenuService.hideImmediately = true;
                 });
-            });
-        });
-    };
-
-    return directive;
-});
-
-module.exports = moduleName;
-
-},{"jquery":2}],9:[function(require,module,exports){
-'use strict';
-
-let $ = require('jquery');
-
-
-
-function scrollToElement(element, fn, duration) {
-    let target = element.length ? element : $(element);
-    let callback = (fn && typeof fn === 'function') ? fn : function emptyFn() {};
-    let speed = duration || 750;
-
-    if (target.length) {
-        $('html,body').animate({
-            scrollTop: target.offset().top
-        }, speed)
-            .promise()
-            .then(callback);
-    }
-};
-
-let moduleName = 'buildium.angular-ui.scrollintoview';
-
-/**
- * @ngdoc module
- * @name scroll-into-view
- * @module scroll-into-view
- */
-angular.module(moduleName, [])
-
-/**
- * @ngdoc directive
- * @name bdScrollIntoView
- * @module scroll-into-view
- *
- * @restrict A
- *
- * @description
- *
- * If this directive's property evalutes to true, the element will be scrolled into view.
- *
- * @param {Boolean} bdScrollIntoView Whether this directive should be active on the element
- * @param {Number} bdScrollIntoViewSpeed How fast the content is scrolled
- *
- * @example
- * ```html
- * <input bd-scroll-into-view="true" />
- * ```
- *
- * @example
- * ```html
- * <input bd-scroll-into-view="vm.someVariable" bd-scroll-into-view-speed="1500" />
- * ```
- */
-.directive('bdScrollIntoView', ['$timeout', function bdScrollIntoView($timeout) {
-    var directive = {};
-
-    directive.restrict = 'A';
-
-    directive.link = function bdScrollIntoViewLink(scope, element, attrs) {
-        var speed = scope.$eval(attrs.bdScrollIntoViewSpeed);
-
-        scope.$watch(attrs.bdScrollIntoView, function(newValue) {
-            if (newValue) {
-                $timeout(scrollToElement.bind(null, element, null, speed));
             }
         });
     };
 
-    return directive;
-}]);
+    submenuService.startTimer = function startTimer() {
+        // Only start the timer if there is an element that the BdSubmenu service considers open. This ignores the mouseLeave event that may be fired on a submenu as it is in the process of fading out.
+        if ($currentElement) {
+            mouseoutTimer = $timeout(submenuService.closeAll, mouseOutDelay);
+        }
+    };
 
-module.exports = moduleName;
+    submenuService.stopTimer = function stopTimer() {
+        $timeout.cancel(mouseoutTimer);
+    };
 
+    submenuService.closeAll = unsetCurrentElement;
+
+    submenuService.positionPopoverBody = function positionPopoverBody(elem) {
+        let popoverContainer,
+            popoverBody,
+            containerOffsetLeft;
+
+        popoverContainer   = $(elem).find('.popover__container');
+        popoverBody        = $(elem).find('.popover__body');
+        containerOffsetLeft = popoverContainer.offset().left;
+        
+        if (containerOffsetLeft < 0) {
+            popoverBody.css({
+                'position': 'relative',
+                'left': Math.abs(containerOffsetLeft) + 'px'
+            });
+        }
+    };
+};
 },{"jquery":2}]},{},[1]);
