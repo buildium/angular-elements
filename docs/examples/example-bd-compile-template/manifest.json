@@ -1,7 +1,0 @@
-{
-  "name": "example-bd-compile-template",
-  "files": [
-    "index-production.html",
-    "script.js"
-  ]
-}
