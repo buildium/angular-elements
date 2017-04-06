@@ -1,6 +1,6 @@
 {
   "name": "@buildium/angular-elements",
-  "version": "1.0.0-0",
+  "version": "1.0.0-1",
   "description": "A collection of directives for building angular applications",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "angular": ">=1.5",
+    "angular-mocks": "1.5.9",
     "browserify": "14.1.0",
     "dgeni-alive": "0.3.5",
     "electron": "1.6.2",

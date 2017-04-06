@@ -2,20 +2,15 @@
   'use strict';
 'use strict';
 
-let moduleName = 'buildium.angular-ui';
+let moduleName = 'buildium.angular-elements';
 
 /**
  * @ndgoc module
- * @name angular-ui
- * @module angular-ui
+ * @name angular-elements
+ * @module angular-elements
  */
 angular.module(moduleName, [
-    require('./src/compile-dynamic-html'),
-    require('./src/scroll-into-view'),
-    require('./src/event'),
-    require('./src/copy-to-clipboard'),
-    require('./src/loading-src'),
-    require('./src/compile-template')
+    require('./src/popover')
 ]);
 
 module.exports = moduleName;
