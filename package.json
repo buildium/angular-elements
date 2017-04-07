@@ -1,8 +1,8 @@
 {
   "name": "@buildium/angular-elements",
-  "version": "1.0.0-3",
+  "version": "1.0.0-4",
   "description": "A collection of directives for building angular applications",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "karma start --single-run",
     "compile": "babel src --out-dir lib/ --presets=es2015",
