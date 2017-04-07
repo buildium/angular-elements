@@ -2,7 +2,6 @@
 
 let $ = require('jquery');
 
-// @ngInject
 module.exports = function BdSubmenu($rootScope, $timeout, $document) {
     let submenuService = this,
         mouseOutDelay = 250,
@@ -63,7 +62,7 @@ module.exports = function BdSubmenu($rootScope, $timeout, $document) {
         popoverContainer   = $(elem).find('.popover__container');
         popoverBody        = $(elem).find('.popover__body');
         containerOffsetLeft = popoverContainer.offset().left;
-        
+
         if (containerOffsetLeft < 0) {
             popoverBody.css({
                 'position': 'relative',

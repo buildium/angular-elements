@@ -22,8 +22,7 @@
   },
   "homepage": "https://github.com/buildium/angular-elements#readme",
   "dependencies": {
-    "lodash.uniqueid": "4.0.1",
-    "ng-annotate": "1.2.1"
+    "lodash.uniqueid": "4.0.1"
   },
   "peerDependencies": {
     "angular": ">=1.5",
