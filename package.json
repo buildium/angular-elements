@@ -7,7 +7,7 @@
     "test": "karma start --single-run",
     "dist": "browserify index.js -o dist/buildium-angular-elements.js",
     "docs": "node .build/docs.js",
-    "preversion": "npm run dist",
+    "prepublish": "npm run dist",
     "version": "npm run docs -- --gh-pages"
   },
   "repository": {
