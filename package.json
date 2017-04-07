@@ -7,7 +7,8 @@
     "test": "karma start --single-run",
     "dist": "browserify index.js -o dist/buildium-angular-ui.js",
     "docs": "node .build/docs.js",
-    "preversion": "npm run dist && npm run docs"
+    "preversion": "npm run dist",
+    "version": "npm run docs -- --gh-pages"
   },
   "repository": {
     "type": "git",
@@ -29,10 +30,10 @@
     "jquery": "^2.2.3"
   },
   "devDependencies": {
-    "angular": ">=1.5",
+    "@buildium/angular-docs": "github:buildium/angular-docs",
+    "angular": "1.5.9",
     "angular-mocks": "1.5.9",
     "browserify": "14.1.0",
-    "dgeni-alive": "0.3.5",
     "electron": "1.6.2",
     "jasmine": "2.5.3",
     "karma": "1.5.0",
