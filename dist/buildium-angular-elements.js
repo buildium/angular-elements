@@ -1,20 +1,210 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-let moduleName = 'buildium.angular-elements';
+var moduleName = 'buildium.angular-elements';
 
 /**
  * @ndgoc module
  * @name angular-elements
  * @module angular-elements
  */
-angular.module(moduleName, [
-    require('./src/popover')
-]);
+angular.module(moduleName, [require('./popover')]);
 
 module.exports = moduleName;
+},{"./popover":2}],2:[function(require,module,exports){
+'use strict';
 
-},{"./src/popover":3}],2:[function(require,module,exports){
+var moduleName = 'buildium.angular-elements.popover';
+
+/**
+ * @ngdoc module
+ * @name popover
+ * @module popover
+ */
+angular.module(moduleName, [])
+/**
+* @ngdoc directive
+* @name bdPopover
+* @module popover
+* 
+* @description
+*
+* Attaches a popover tooltip to an element with custom content.
+* 
+* @param {boolean} selected 
+*
+* @param {string} title
+*
+* @param {boolean} pointer
+*
+* @param {string} popoverContainerClass
+*
+* @param {string} popoverLinkClass 
+*
+* @param {string} pointerClass 
+*
+* @param {boolean} showOnHover
+*
+* @param {function} onLinkClick 
+*
+*
+* @example
+* ```
+* <bd-popover selected="false" title="Ygritte" pointer="true" show-on-hover="true" link-class="popover-link" container-class="'popover'" pointer-class="'popover__pointer'" show-on-hover="true" on-link-click="controller.onClick()">
+*    <popover-link>
+*        <span class="tooltip">
+*            Ygritte quotes
+*        </span>
+*    </popover-link>
+*    <popover-body>
+*      <h1>You know nothing, Jon Snow</h1>
+*   </popover-body>
+* </bd-popover>
+```
+*
+*
+*/
+.directive('bdPopover', ['$rootScope', 'BdSubmenu', function BdPopover($rootScope, BdSubmenu) {
+    var directive = {};
+
+    directive.restrict = 'E';
+    directive.template = '\n        <a href\n           id="bd-popover-{{:: ctrl.title}}"\n           insert-point="popover-link"\n           ng-click="!ctrl.showOnHover && ctrl.linkClicked()"\n           ng-mouseover="ctrl.showOnHover && ctrl.linkClicked()"\n           ng-mouseleave="ctrl.mouseLeave($event)"\n           ng-class="{ \'popover__link--selected\' : ctrl.selected }"\n           class="popover__link {{ctrl.popoverLinkClass}}">\n            <!-- anything within <popover-link> will appear here -->\n        </a>\n        <div class="popover__container popover__right" ng-class="ctrl.popoverContainerClass">\n            <div insert-point="popover-body"\n                 ng-class="{ \'pointer\': ctrl.pointer }"\n                 ng-show="ctrl.isOpen"\n                 ng-mouseenter="ctrl.mouseEnter($event)"\n                 ng-mouseleave="ctrl.mouseLeave($event)">\n                <span class="popover__pointer" ng-class="ctrl.pointerClass" ng-if="::ctrl.pointer"></span>\n\n                <!-- anything within <popover-body> will appear here -->\n            </div>\n        </div>';
+    directive.scope = {
+        selected: '=',
+        title: '=',
+        pointer: '=',
+        popoverContainerClass: '=containerClass',
+        popoverLinkClass: '=linkClass',
+        pointerClass: '=',
+        showOnHover: '=',
+        onLinkClick: '&?'
+    };
+    directive.controllerAs = 'ctrl';
+    directive.transclude = true;
+    directive.bindToController = true;
+
+    /* @ngInject */
+    directive.controller = ['$rootScope', '$element', 'BdSubmenu', function PopoverCtrl($rootScope, $element, BdSubmenu) {
+        var ctrl = this;
+
+        ctrl.isOpen = false;
+
+        ctrl.linkClicked = function linkClicked() {
+            BdSubmenu.display($element);
+            $rootScope.$broadcast('bd.popover.clicked', $element);
+            if (ctrl.onLinkClick) {
+                ctrl.onLinkClick();
+            }
+        };
+
+        ctrl.mouseEnter = BdSubmenu.stopTimer;
+        ctrl.mouseLeave = BdSubmenu.startTimer;
+    }];
+
+    directive.link = function link(scope, elem, attrs, ctrl, transclude) {
+        scope.$watch(function () {
+            return BdSubmenu.currentElement === elem;
+        }, function (isOpen) {
+            ctrl.isOpen = isOpen;
+        });
+
+        transclude(scope.$parent, function (clone) {
+            angular.forEach(clone, function (cloneElem) {
+                var insertId = void 0,
+                    target = void 0;
+
+                if (!cloneElem.attributes) {
+                    return;
+                }
+
+                insertId = cloneElem.tagName.toLowerCase();
+                target = $(elem).find('[insert-point="' + insertId + '"]');
+
+                target.append(cloneElem);
+            });
+        });
+    };
+
+    return directive;
+}]).service('BdSubmenu', ['$rootScope', '$timeout', '$document', require('./submenu')]);
+
+module.exports = moduleName;
+},{"./submenu":3}],3:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery');
+
+// @ngInject
+module.exports = function BdSubmenu($rootScope, $timeout, $document) {
+    var submenuService = this,
+        mouseOutDelay = 250,
+        $currentElement = void 0,
+        mouseoutTimer = void 0;
+
+    function unsetCurrentElement() {
+        $currentElement = null;
+
+        $document.find('body').off('click.submenu');
+    }
+
+    Object.defineProperties(submenuService, {
+        currentElement: {
+            get: function get() {
+                return $currentElement;
+            }
+        }
+    });
+
+    submenuService.display = function display(elem) {
+        $currentElement = elem;
+
+        submenuService.positionPopoverBody($currentElement);
+        submenuService.stopTimer();
+
+        // If a link w/i a submenu is clicked close that submenu immediately (don't do the fade-out animation)
+        $document.find('.sub-menu').one('click', function (event) {
+            if ($(event.target).is('a')) {
+                $rootScope.$apply(function () {
+                    unsetCurrentElement();
+
+                    // This variable will be read by the animation code in the SubMenuContainerAnimation
+                    submenuService.hideImmediately = true;
+                });
+            }
+        });
+    };
+
+    submenuService.startTimer = function startTimer() {
+        // Only start the timer if there is an element that the BdSubmenu service considers open. This ignores the mouseLeave event that may be fired on a submenu as it is in the process of fading out.
+        if ($currentElement) {
+            mouseoutTimer = $timeout(submenuService.closeAll, mouseOutDelay);
+        }
+    };
+
+    submenuService.stopTimer = function stopTimer() {
+        $timeout.cancel(mouseoutTimer);
+    };
+
+    submenuService.closeAll = unsetCurrentElement;
+
+    submenuService.positionPopoverBody = function positionPopoverBody(elem) {
+        var popoverContainer = void 0,
+            popoverBody = void 0,
+            containerOffsetLeft = void 0;
+
+        popoverContainer = $(elem).find('.popover__container');
+        popoverBody = $(elem).find('.popover__body');
+        containerOffsetLeft = popoverContainer.offset().left;
+
+        if (containerOffsetLeft < 0) {
+            popoverBody.css({
+                'position': 'relative',
+                'left': Math.abs(containerOffsetLeft) + 'px'
+            });
+        }
+    };
+};
+},{"jquery":4}],4:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.2.3
  * http://jquery.com/
@@ -9858,218 +10048,4 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-},{}],3:[function(require,module,exports){
-let moduleName = 'buildium.angular-elements.popover';
-
-/**
- * @ngdoc module
- * @name popover
- * @module popover
- */
-angular.module(moduleName, [])
-/**
-* @ngdoc directive
-* @name bdPopover
-* @module popover
-* 
-* @description
-*
-* Attaches a popover tooltip to an element with custom content.
-* 
-* @param {boolean} selected 
-*
-* @param {string} title
-*
-* @param {boolean} pointer
-*
-* @param {string} popoverContainerClass
-*
-* @param {string} popoverLinkClass 
-*
-* @param {string} pointerClass 
-*
-* @param {boolean} showOnHover
-*
-* @param {function} onLinkClick 
-*
-*
-* @example
-* ```
-* <bd-popover selected="false" title="Ygritte" pointer="true" show-on-hover="true" link-class="popover-link" container-class="'popover'" pointer-class="'popover__pointer'" show-on-hover="true" on-link-click="controller.onClick()">
-*    <popover-link>
-*        <span class="tooltip">
-*            Ygritte quotes
-*        </span>
-*    </popover-link>
-*    <popover-body>
-*      <h1>You know nothing, Jon Snow</h1>
-*   </popover-body>
-* </bd-popover>
-```
-*
-*
-*/
-.directive('bdPopover', ['$rootScope', 'BdSubmenu', function BdPopover($rootScope, BdSubmenu) {
-    let directive = {};
-
-    directive.restrict = 'E';
-    directive.template = `
-        <a href
-           id="bd-popover-{{:: ctrl.title}}"
-           insert-point="popover-link"
-           ng-click="!ctrl.showOnHover && ctrl.linkClicked()"
-           ng-mouseover="ctrl.showOnHover && ctrl.linkClicked()"
-           ng-mouseleave="ctrl.mouseLeave($event)"
-           ng-class="{ 'popover__link--selected' : ctrl.selected }"
-           class="popover__link {{ctrl.popoverLinkClass}}">
-            <!-- anything within <popover-link> will appear here -->
-        </a>
-        <div class="popover__container popover__right" ng-class="ctrl.popoverContainerClass">
-            <div insert-point="popover-body"
-                 ng-class="{ 'pointer': ctrl.pointer }"
-                 ng-show="ctrl.isOpen"
-                 ng-mouseenter="ctrl.mouseEnter($event)"
-                 ng-mouseleave="ctrl.mouseLeave($event)">
-                <span class="popover__pointer" ng-class="ctrl.pointerClass" ng-if="::ctrl.pointer"></span>
-
-                <!-- anything within <popover-body> will appear here -->
-            </div>
-        </div>`;
-    directive.scope = {
-        selected: '=',
-        title: '=',
-        pointer: '=',
-        popoverContainerClass: '=containerClass',
-        popoverLinkClass: '=linkClass',
-        pointerClass: '=',
-        showOnHover: '=',
-        onLinkClick: '&?'
-    };
-    directive.controllerAs = 'ctrl';
-    directive.transclude = true;
-    directive.bindToController = true;
-
-    /* @ngInject */
-    directive.controller = ['$rootScope', '$element', 'BdSubmenu', function PopoverCtrl($rootScope, $element, BdSubmenu) {
-        let ctrl = this;
-
-        ctrl.isOpen = false;
-
-        ctrl.linkClicked = function linkClicked() {
-            BdSubmenu.display($element);
-            $rootScope.$broadcast('bd.popover.clicked', $element);
-            if (ctrl.onLinkClick) {
-                ctrl.onLinkClick();
-            }
-        };
-
-        ctrl.mouseEnter = BdSubmenu.stopTimer;
-        ctrl.mouseLeave = BdSubmenu.startTimer;
-    }];
-
-    directive.link = function link(scope, elem, attrs, ctrl, transclude) {
-        scope.$watch(function() {
-            return BdSubmenu.currentElement === elem;
-        }, function(isOpen) {
-            ctrl.isOpen = isOpen;
-        });
-
-        transclude(scope.$parent, function(clone) {
-            angular.forEach(clone, function(cloneElem) {
-                let insertId,
-                    target;
-
-                if (!cloneElem.attributes) {
-                    return;
-                }
-
-                insertId = cloneElem.tagName.toLowerCase();
-                target = $(elem).find('[insert-point="' + insertId + '"]');
-
-                target.append(cloneElem);
-            });
-        });
-    };
-
-    return directive;
-
-}]).service('BdSubmenu', ['$rootScope', '$timeout', '$document', require('./submenu')]);
-
-
-module.exports = moduleName;
-},{"./submenu":4}],4:[function(require,module,exports){
-'use strict';
-
-let $ = require('jquery');
-
-// @ngInject
-module.exports = function BdSubmenu($rootScope, $timeout, $document) {
-    let submenuService = this,
-        mouseOutDelay = 250,
-        $currentElement,
-        mouseoutTimer;
-
-    function unsetCurrentElement() {
-        $currentElement = null;
-
-        $document.find('body').off('click.submenu');
-    }
-
-    Object.defineProperties(submenuService, {
-        currentElement: {
-            get: function get() {
-                return $currentElement;
-            }
-        }
-    });
-
-    submenuService.display = function display(elem) {
-        $currentElement = elem;
-
-        submenuService.positionPopoverBody($currentElement);
-        submenuService.stopTimer();
-
-        // If a link w/i a submenu is clicked close that submenu immediately (don't do the fade-out animation)
-        $document.find('.sub-menu').one('click', function(event) {
-            if ($(event.target).is('a')) {
-                $rootScope.$apply(function() {
-                    unsetCurrentElement();
-
-                    // This variable will be read by the animation code in the SubMenuContainerAnimation
-                    submenuService.hideImmediately = true;
-                });
-            }
-        });
-    };
-
-    submenuService.startTimer = function startTimer() {
-        // Only start the timer if there is an element that the BdSubmenu service considers open. This ignores the mouseLeave event that may be fired on a submenu as it is in the process of fading out.
-        if ($currentElement) {
-            mouseoutTimer = $timeout(submenuService.closeAll, mouseOutDelay);
-        }
-    };
-
-    submenuService.stopTimer = function stopTimer() {
-        $timeout.cancel(mouseoutTimer);
-    };
-
-    submenuService.closeAll = unsetCurrentElement;
-
-    submenuService.positionPopoverBody = function positionPopoverBody(elem) {
-        let popoverContainer,
-            popoverBody,
-            containerOffsetLeft;
-
-        popoverContainer   = $(elem).find('.popover__container');
-        popoverBody        = $(elem).find('.popover__body');
-        containerOffsetLeft = popoverContainer.offset().left;
-        
-        if (containerOffsetLeft < 0) {
-            popoverBody.css({
-                'position': 'relative',
-                'left': Math.abs(containerOffsetLeft) + 'px'
-            });
-        }
-    };
-};
-},{"jquery":2}]},{},[1]);
+},{}]},{},[1]);
