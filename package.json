@@ -1,6 +1,6 @@
 {
   "name": "@buildium/angular-elements",
-  "version": "1.0.0-1",
+  "version": "1.0.0-2",
   "description": "A collection of directives for building angular applications",
   "main": "index.js",
   "scripts": {
