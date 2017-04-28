@@ -1,13 +1,15 @@
 {
   "name": "@buildium/angular-elements",
-  "version": "1.0.0-2",
+  "version": "1.0.0",
   "description": "A collection of directives for building angular applications",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "karma start --single-run",
-    "dist": "mkdirp dist && browserify index.js -o dist/buildium-angular-elements.js",
+    "compile": "babel src --out-dir lib/ --presets=es2015",
+    "dist": "mkdirp dist && browserify lib/index.js -o dist/buildium-angular-elements.js",
+    "build": "npm run compile && npm run dist",
+    "prepublish": "npm run build",
     "docs": "node .build/docs.js",
-    "prepublish": "npm run dist",
     "version": "npm run docs -- --gh-pages"
   },
   "repository": {
@@ -32,6 +34,8 @@
     "@buildium/angular-docs": "github:buildium/angular-docs",
     "angular": "1.5.9",
     "angular-mocks": "1.5.9",
+    "babel-cli": "6.24.0",
+    "babel-preset-es2015": "6.24.0",
     "browserify": "14.1.0",
     "electron": "1.6.2",
     "jasmine": "2.5.3",

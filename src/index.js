@@ -8,7 +8,7 @@ let moduleName = 'buildium.angular-elements';
  * @module angular-elements
  */
 angular.module(moduleName, [
-    require('./src/popover')
+    require('./popover')
 ]);
 
 module.exports = moduleName;

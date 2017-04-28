@@ -1,3 +1,5 @@
 .build/
-karma.conf.js
+docs/
 !dist/
+src/
+karma.conf.js
