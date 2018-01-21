@@ -18,7 +18,7 @@ angular.module('app', [
 
 ## Documentation
 
-See [documentation](https://buildium.github.io/angular-docs/) for options and examples 
+See [documentation](https://buildium.github.io/angular-elements/) for options and examples 
 
 ## Contribute
 
