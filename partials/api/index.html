@@ -1,0 +1,46 @@
+
+<h1 id="buildium-angular-elements-library">Buildium Angular Elements Library</h1>
+<blockquote>
+<p>A companion library of bespoke custom elements built by Buildium for use with AngularJS applications</p>
+</blockquote>
+<h2 id="installation">Installation</h2>
+<pre><code>npm install @buildium/angular-elements
+</code></pre>
+<h2 id="using-elements-from-the-library">Using elements from the library</h2>
+<p>Gain access to all the elements in this library by including the file distributed with this package </p>
+<pre><code class="lang-html">&lt;body ng-app=&quot;app&quot;&gt;
+ &lt;script src=&quot;@buildium/angular-elements/dist/buildium-angular-elements.js&quot;&gt;&lt;/script&gt;
+ &lt;script&gt;
+     angular.module(&#39;app&#39;, [&#39;buildium.angular-elements&#39;])
+ &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<p>It can also be imported by any <code>require</code>-compatible module bundler, such as 
+<a href="https://webpack.js.org/">webpack</a> or <a href="https://browserify.org/">browserify</a></p>
+<pre><code class="lang-html">&lt;body ng-app=&quot;app&quot;&gt;
+ &lt;script&gt;
+     angular.module(&#39;app&#39;, [
+         require(&#39;@buildium/angular-elements&#39;)
+     ])
+ &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<p>Or, import individual elements</p>
+<pre><code class="lang-html">&lt;body ng-app=&quot;app&quot;&gt;
+ &lt;script&gt;
+     angular.module(&#39;app&#39;, [
+         require(&#39;@buildium/angular-elements/lib/popover&#39;)
+     ])
+ &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<h2 id="element-styles">Element styles</h2>
+<p>The elements in this package are unstyled for easier integration into existing applications.</p>
+<p>For a default set of styles, the Buildium theme library can be installed alongside this package</p>
+<pre><code>npm install @buildium/theme
+</code></pre>
+<p>and the distributed file included with your application&#39;s styles</p>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;@buildium/theme/dist/theme-styles.css&quot;&gt;
+</code></pre>
+
+

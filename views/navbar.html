@@ -1,20 +1,20 @@
-<nav
-  class="md-toolbar-tools"
-  flex
-  layout="row"
-  layout-align="space-between center"
-  ng-controller="NavbarCtrl as navbar">
-  <div
-    flex="grow"
-    layout="row"
-    layout-align="start center"
-    >
-    <div flex="none">Buildium : Angular Elements </div>
-    <md-button
-      ng-class="{'md-active': isActive(area)}"
-      ng-repeat="area in navbar.areas"
-      ng-href="{{area.href}}"
-      aria-label="{{area.title}}">{{area.title}}</md-button>
+<nav class="global-nav" ng-controller="NavbarCtrl as navbar">
+  <div class="global-nav__container">
+    <ul class="global-nav__main-menu">
+      <li class="global-nav__main-menu-item">
+        <a class="global-nav__main-menu-link global-nav__main-menu-link--home"></a>
+      </li>
+      <li class="global-nav__main-menu-item">
+        <a class="global-nav__main-menu-link">Buildium : Angular Elements </a>
+      </li>
+      <li class="global-nav__main-menu-item" ng-repeat="area in navbar.areas" aria-label="{{area.title}}">
+        <a class="global-nav__main-menu-link" ng-class="{'popover__link--selected': isActive(area)}" ng-href="{{area.href}}">{{area.title}}</a>
+      </li>
+    </ul>
+    <div class="global-nav__secondary-menu">
+      <div class="global-nav__secondary-nav">
+        <div ng-include="'views/searchbox.html'"></div>
+      </div>
+    </div>
   </div>
-  <div ng-include="'views/searchbox.html'"></div>
 </nav>

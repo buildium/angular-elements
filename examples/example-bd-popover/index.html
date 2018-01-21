@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-bd-popover</title>
+  
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
+  <script src="../../examples-dep/default/dist/buildium-angular-elements.js"></script>
+  <script src="/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+  
+
+  
+</head>
+<body ng-app="buildium.angular-elements.popover">
+  <bd-popover selected="false" 
+            title="Ygritte" 
+            pointer="true" 
+            show-on-hover="true" 
+            link-class="popover-link" 
+            container-class="'popover'" 
+            pointer-class="'popover__pointer'" 
+            show-on-hover="true" 
+            on-link-click="controller.onClick()">
+    <popover-link>
+        <span class="tooltip">Ygritte quotes</span>
+    </popover-link>
+    <popover-body>
+        <h1>You know nothing, Jon Snow</h1>
+    </popover-body>
+</bd-popover>
+</body>
+</html>

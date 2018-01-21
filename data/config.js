@@ -1,5 +1,5 @@
 angular.module('docApp').constant('CONFIG', {
-  "TITLE": "",
+  "TITLE": "Buildium : Angular Elements",
   "ROOT": "api",
   "VERSION": ""
 });
