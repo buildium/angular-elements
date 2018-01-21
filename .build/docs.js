@@ -5,14 +5,13 @@ var buildiumAngularDocs = require('@buildium/angular-docs');
 var ghPages = process.argv.indexOf('--gh-pages') !== -1;
 
 buildiumAngularDocs({
-    scripts: [
-        '//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js',
-        'index.js'
-    ],
+    angularVersion: '1.5.9',
     title: 'Buildium : Angular Elements',
+    scripts: [
+        path.join(__dirname, '../dist/buildium-angular-elements.js')
+    ],
     sourceFiles: [
-        path.join(__dirname, '../src/**/*.js'),
-        path.join(__dirname, '../index.js')
+        path.join(__dirname, '../src/**/*.js')
     ],
     destination: path.join(__dirname, '../docs'),
     ghPages: ghPages
