@@ -149,6 +149,8 @@ angular.module(moduleName, [])
     </example>
  */
 .component('bdMediaGallery', require('./media-gallery.js'));
+
+module.exports = moduleName;
 },{"./media-gallery.js":3}],3:[function(require,module,exports){
 'use strict';
 
