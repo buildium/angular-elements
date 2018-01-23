@@ -46,7 +46,7 @@
     
       <li>as element:
       
-      <pre><code>&lt;bd-media-gallery&#10;  media=&quot;&quot;&#10;  allow-remove=&quot;Boolean&quot;&#10;  on-remove=&quot;&quot;&#10;  on-select=&quot;&quot;&gt;&#10;...&#10;&lt;/bd-media-gallery&gt;</code></pre>
+      <pre><code>&lt;bd-media-gallery&#10;  media=&quot;&quot;&#10;  on-remove=&quot;&quot;&#10;  on-select=&quot;&quot;&gt;&#10;...&#10;&lt;/bd-media-gallery&gt;</code></pre>
       </li>
     
   </div>
@@ -76,26 +76,11 @@
       <td>
         <p>media elements to display in the gallery. Expected keys are:</p>
 <ul>
-<li><code>fileName</code> the name of the file, recognized by the user</li>
-<li><code>title</code> a title to display for this media as <em>alt</em> text</li>
-<li><code>src</code> the source url for this media</li>
+<li><em>string</em><code>fileName</code> the name of the file, recognized by the user</li>
+<li><em>string</em><code>title</code> a title to display for this media as <em>alt</em> text</li>
+<li><em>string</em><code>src</code> the source url for this media</li>
+<li>[<em>boolean</em>]<code>isRemovable=true</code> whether to show option to remove this item from gallery</li>
 </ul>
-
-        
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        allowRemove
-        
-        
-      </td>
-      <td>
-        <a href="" class="label type-hint type-hint-boolean">Boolean</a>
-      </td>
-      <td>
-        <p>whether to show option to remove an item from gallery</p>
 
         
       </td>

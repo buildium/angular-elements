@@ -106,11 +106,10 @@ angular.module(moduleName, [])
  * Displays a gallery of media items (images, etc...)
  * 
  * @param {Object[]} media media elements to display in the gallery. Expected keys are:
- * - `fileName` the name of the file, recognized by the user
- * - `title` a title to display for this media as _alt_ text
- * - `src` the source url for this media
- * 
- * @param {Boolean} allowRemove whether to show option to remove an item from gallery
+ * - _string_`fileName` the name of the file, recognized by the user
+ * - _string_`title` a title to display for this media as _alt_ text
+ * - _string_`src` the source url for this media
+ * - [_boolean_]`isRemovable=true` whether to show option to remove this item from gallery
  * 
  * @param {Function} onRemove callback to be executed when user removes an item
  * 
@@ -165,7 +164,7 @@ component.bindings = {
     onSelect: '&?'
 };
 
-component.template = '\n<div class="media-gallery">\n    <div class="media-gallery__media-container"\n        ng-repeat="media in vm.media track by media.fileName">\n        <a href\n            ng-show="vm.allowRemove"\n            class="media-gallery__image-delete-icon svgicon svgicon--delete"\n            ng-click="vm.removeMedia(media)"></a>\n        <img class="media-gallery__image" \n            ng-click="vm.selectMedia(media)" \n            ng-if="media.fileName" \n            ng-src="{{:: media.src}}" \n            alt="{{:: media.title}}"/>\n    </div>\n</div>\n';
+component.template = '\n<div class="media-gallery">\n    <div class="media-gallery__media-container"\n        ng-repeat="media in vm.media track by media.fileName">\n        <a href\n            ng-hide="media.isRemovable === false"\n            class="media-gallery__image-delete-icon svgicon svgicon--delete"\n            ng-click="vm.removeMedia(media)"></a>\n        <img class="media-gallery__image" \n            ng-click="vm.selectMedia(media)" \n            ng-if="media.fileName" \n            ng-src="{{:: media.src}}" \n            alt="{{:: media.title}}"/>\n    </div>\n</div>\n';
 
 component.controller = function MediaGalleryController() {
     var vm = this;
