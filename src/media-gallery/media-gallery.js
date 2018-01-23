@@ -16,7 +16,7 @@ component.template = `
     <div class="media-gallery__media-container"
         ng-repeat="media in vm.media track by media.fileName">
         <a href
-            ng-show="vm.allowRemove"
+            ng-hide="media.isRemovable === false"
             class="media-gallery__image-delete-icon svgicon svgicon--delete"
             ng-click="vm.removeMedia(media)"></a>
         <img class="media-gallery__image" 
