@@ -63,3 +63,5 @@ angular.module(moduleName, [])
     </example>
  */
 .component('bdMediaGallery', require('./media-gallery.js'));
+
+module.exports = moduleName;
