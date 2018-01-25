@@ -20,7 +20,11 @@
  * 
  * @param {Function} [onRemove] callback to be executed when user removes an item
  * 
- * @param {Function} [onSelect] callback to be executed when user selects an item
+ * @param {Function} [onSelect] callback to be executed when user selects an item 
+ * 
+ * @param {Boolean} [allowEnlarge=false] whether to show prompt to enlarge image
+ * 
+ * @param {Function} [onEnlarge] callback to be executed when user clicks enlarge prompt
  * 
  * @example
     <example name="bd-media-gallery" module="buildium.angular-elements.media-gallery">
@@ -48,7 +52,7 @@
                     })
             </script>
             <section ng-controller="ExampleController as vm">
-                <bd-media-gallery media="vm.media" allow-remove="true"></bd-media-gallery>
+                <bd-media-gallery media="vm.media" allow-remove="true" allow-enlarge="true"></bd-media-gallery>
             </section>
         </file>
     </example>
@@ -61,25 +65,30 @@ component.bindings = {
     media: '<',
     allowRemove: '<?',
     onRemove: '&?',
-    onSelect: '&?'
+    onSelect: '&?',
+    allowEnlarge: '<?',
+    onEnlarge: '&?'
 };
 
 component.template = `
 <div class="media-gallery">
     <div class="media-gallery__media-container"
         ng-repeat="media in vm.media track by media.fileName">
-        <a href
-            ng-hide="!vm.allowRemove || media.isRemovable === false"
-            class="media-gallery__image-delete-icon svgicon svgicon--delete"
-            ng-click="vm.removeMedia(media)"></a>
-        <div class="media-gallery__image"
-            ng-style="{'background-image': 'url(' + media.imageUrl + ')' }">
+        <div class="media-gallery__image" 
+            ng-style="{'background-image': 'url(' + media.imageUrl + ')' }"
+            ng-click="vm.selectMedia(media)"> 
             <img class="media-gallery__screen-reader-image" 
-                ng-click="vm.selectMedia(media)" 
-                ng-if="media.fileName" 
                 ng-src="{{:: media.imageUrl}}" 
                 alt="{{:: media.title}}">
         </div>
+        <a class="media-gallery__view-larger-link"
+            href
+            ng-if="vm.allowEnlarge"
+            ng-click="vm.viewLarger()">View larger</a>
+        <a class="media-gallery__image-delete-icon svgicon svgicon--delete"
+            href
+            ng-if="media.isRemovable || (media.isRemovable !== false && vm.allowRemove)"
+            ng-click="vm.removeMedia(media)"></a>
     </div>
 </div>
 `;
@@ -102,6 +111,12 @@ component.controller = function MediaGalleryController() {
     vm.removeMedia = function removeMedia(item) {
         if (typeof vm.onRemove !== 'function' || vm.onRemove({ item: item }) !== false) {
             vm.media.splice(vm.media.indexOf(item), 1);
+        }
+    };
+
+    vm.viewLarger = function viewLarger(item) {
+        if (typeof vm.onEnlarge === 'function') {
+            vm.onEnlarge({ item: item });
         }
     };
 };
