@@ -1,6 +1,6 @@
 
 
-<a href='https://github.com///tree//src/media-gallery/index.js#L12' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com///tree//src/media-gallery/media-gallery.js#L3' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -46,7 +46,7 @@
     
       <li>as element:
       
-      <pre><code>&lt;bd-media-gallery&#10;  media=&quot;&quot;&#10;  on-remove=&quot;&quot;&#10;  on-select=&quot;&quot;&gt;&#10;...&#10;&lt;/bd-media-gallery&gt;</code></pre>
+      <pre><code>&lt;bd-media-gallery&#10;  media=&quot;&quot;&#10;  allow-remove=&quot;Boolean&quot;&#10;  on-remove=&quot;&quot;&#10;  on-select=&quot;&quot;&gt;&#10;...&#10;&lt;/bd-media-gallery&gt;</code></pre>
       </li>
     
   </div>
@@ -71,15 +71,15 @@
         
       </td>
       <td>
-        <a href="" class="label type-hint type-hint-object">Object[]</a>
+        <a href="" class="label type-hint type-hint-object">object[]</a>
       </td>
       <td>
         <p>media elements to display in the gallery. Expected keys are:</p>
 <ul>
-<li><em>string</em><code>fileName</code> the name of the file, recognized by the user</li>
-<li><em>string</em><code>title</code> a title to display for this media as <em>alt</em> text</li>
-<li><em>string</em><code>src</code> the source url for this media</li>
-<li>[<em>boolean</em>]<code>isRemovable=true</code> whether to show option to remove this item from gallery</li>
+<li><a class="label type-hint type-hint-string">string</a> <code>fileName</code> the name of the file, recognized by the user</li>
+<li><a class="label type-hint type-hint-string">string</a> <code>title</code> a title to display for this media as <em>alt</em> text</li>
+<li><a class="label type-hint type-hint-string">string</a> <code>imageUrl</code> the url for an image to display for this media</li>
+<li><a class="label type-hint type-hint-boolean">boolean</a> <code>isRemovable=true</code> whether to show option to remove this item from gallery, takes precedence over <code>allowRemove</code></li>
 </ul>
 
         
@@ -88,9 +88,25 @@
     
     <tr>
       <td>
+        allowRemove
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-boolean">Boolean</a>
+      </td>
+      <td>
+        <p>whether to show option to remove on items in gallery</p>
+
+        <p><em>(default: true)</em></p>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
         onRemove
         
-        
+        <div><em>(optional)</em></div>
       </td>
       <td>
         <a href="" class="label type-hint type-hint-function">Function</a>
@@ -106,7 +122,7 @@
       <td>
         onSelect
         
-        
+        <div><em>(optional)</em></div>
       </td>
       <td>
         <a href="" class="label type-hint type-hint-function">Function</a>
@@ -140,7 +156,7 @@
       name="index.html"
       language="html"
       type="html">
-      <pre><code>&lt;script&gt;&#10;    angular.module(&#39;buildium.angular-elements.media-gallery&#39;)&#10;        .controller(&#39;ExampleController&#39;, function() {&#10;            this.media = [&#10;                {&#10;                    fileName: &#39;sunset-beach-people-sunrise.jpeg&#39;,&#10;                    title: &#39;Sunset Beach People&#39;,&#10;                    src: &#39;https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?h=350&amp;dpr=2&amp;auto=compress&amp;cs=tinysrgb&#39;&#10;                },&#10;                {&#10;                    fileName: &#39;woman-blowing-pink-powder.jpeg&#39;,&#10;                    title: &#39;Woman Blowing Pink Powder&#39;,&#10;                    src: &#39;https://images.pexels.com/photos/612977/pexels-photo-612977.jpeg?h=350&amp;dpr=2&amp;auto=compress&amp;cs=tinysrgb&#39;&#10;                },&#10;                {&#10;                    fileName: &#39;super-mario-action-figure.jpeg&#39;,&#10;                    title: &#39;Super Mario Action Figure&#39;,&#10;                    src: &#39;https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?h=350&amp;dpr=2&amp;auto=compress&amp;cs=tinysrgb&#39;&#10;                },&#10;            ]&#10;        })&#10;&lt;/script&gt;&#10;&lt;section ng-controller=&quot;ExampleController as vm&quot;&gt;&#10;    &lt;bd-media-gallery media=&quot;vm.media&quot; allow-remove=&quot;true&quot;&gt;&lt;/bd-media-gallery&gt;&#10;&lt;/section&gt;</code></pre>
+      <pre><code>&lt;script&gt;&#13;&#10;    angular.module(&#39;buildium.angular-elements.media-gallery&#39;)&#13;&#10;        .controller(&#39;ExampleController&#39;, function() {&#13;&#10;            this.media = [&#13;&#10;                {&#13;&#10;                    fileName: &#39;sunset-beach-people-sunrise.jpeg&#39;,&#13;&#10;                    title: &#39;Sunset Beach People&#39;,&#13;&#10;                    imageUrl: &#39;https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?h=350&amp;dpr=2&amp;auto=compress&amp;cs=tinysrgb&#39;&#13;&#10;                },&#13;&#10;                {&#13;&#10;                    fileName: &#39;woman-blowing-pink-powder.jpeg&#39;,&#13;&#10;                    title: &#39;Woman Blowing Pink Powder&#39;,&#13;&#10;                    imageUrl: &#39;https://images.pexels.com/photos/612977/pexels-photo-612977.jpeg?h=350&amp;dpr=2&amp;auto=compress&amp;cs=tinysrgb&#39;&#13;&#10;                },&#13;&#10;                {&#13;&#10;                    fileName: &#39;super-mario-action-figure.jpeg&#39;,&#13;&#10;                    title: &#39;Super Mario Action Figure&#39;,&#13;&#10;                    imageUrl: &#39;https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?h=350&amp;dpr=2&amp;auto=compress&amp;cs=tinysrgb&#39;&#13;&#10;                },&#13;&#10;            ]&#13;&#10;        })&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;section ng-controller=&quot;ExampleController as vm&quot;&gt;&#13;&#10;    &lt;bd-media-gallery media=&quot;vm.media&quot; allow-remove=&quot;true&quot;&gt;&lt;/bd-media-gallery&gt;&#13;&#10;&lt;/section&gt;&#13;</code></pre>
     </div>
   
 

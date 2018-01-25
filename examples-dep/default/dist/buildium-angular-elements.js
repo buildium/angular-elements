@@ -93,7 +93,11 @@ var moduleName = 'buildium.angular-elements.media-gallery';
  * @name buildium.angular-elements.media-gallery
  * @module buildium.angular-elements.media-gallery
  */
-angular.module(moduleName, [])
+angular.module(moduleName, []).component('bdMediaGallery', require('./media-gallery.js'));
+
+module.exports = moduleName;
+},{"./media-gallery.js":3}],3:[function(require,module,exports){
+'use strict';
 
 /**
  * @ngdoc directive
@@ -105,16 +109,17 @@ angular.module(moduleName, [])
  * 
  * Displays a gallery of media items (images, etc...)
  * 
- * @param {Object[]} media media elements to display in the gallery. Expected keys are:
- * - _string_`fileName` the name of the file, recognized by the user
- * - _string_`title` a title to display for this media as _alt_ text
- * - _string_`src` the source url for this media
- * - [_boolean_]`isRemovable=true` whether to show option to remove this item from gallery
+ * @param {object[]} media media elements to display in the gallery. Expected keys are:
+ * - <a class="label type-hint type-hint-string">string</a> `fileName` the name of the file, recognized by the user
+ * - <a class="label type-hint type-hint-string">string</a> `title` a title to display for this media as _alt_ text
+ * - <a class="label type-hint type-hint-string">string</a> `imageUrl` the url for an image to display for this media
+ * - <a class="label type-hint type-hint-boolean">boolean</a> `isRemovable=true` whether to show option to remove this item from gallery, takes precedence over `allowRemove`
  * 
- * @param {Function} onRemove callback to be executed when user removes an item
+ * @param {Boolean} [allowRemove=true] whether to show option to remove on items in gallery
  * 
- * @param {Function} onSelect callback to be executed when user selects an item
-
+ * @param {Function} [onRemove] callback to be executed when user removes an item
+ * 
+ * @param {Function} [onSelect] callback to be executed when user selects an item
  * 
  * @example
     <example name="bd-media-gallery" module="buildium.angular-elements.media-gallery">
@@ -126,17 +131,17 @@ angular.module(moduleName, [])
                             {
                                 fileName: 'sunset-beach-people-sunrise.jpeg',
                                 title: 'Sunset Beach People',
-                                src: 'https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
+                                imageUrl: 'https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
                             },
                             {
                                 fileName: 'woman-blowing-pink-powder.jpeg',
                                 title: 'Woman Blowing Pink Powder',
-                                src: 'https://images.pexels.com/photos/612977/pexels-photo-612977.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
+                                imageUrl: 'https://images.pexels.com/photos/612977/pexels-photo-612977.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
                             },
                             {
                                 fileName: 'super-mario-action-figure.jpeg',
                                 title: 'Super Mario Action Figure',
-                                src: 'https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
+                                imageUrl: 'https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
                             },
                         ]
                     })
@@ -147,11 +152,6 @@ angular.module(moduleName, [])
         </file>
     </example>
  */
-.component('bdMediaGallery', require('./media-gallery.js'));
-
-module.exports = moduleName;
-},{"./media-gallery.js":3}],3:[function(require,module,exports){
-'use strict';
 
 var component = {};
 
@@ -164,10 +164,16 @@ component.bindings = {
     onSelect: '&?'
 };
 
-component.template = '\n<div class="media-gallery">\n    <div class="media-gallery__media-container"\n        ng-repeat="media in vm.media track by media.fileName">\n        <a href\n            ng-hide="media.isRemovable === false"\n            class="media-gallery__image-delete-icon svgicon svgicon--delete"\n            ng-click="vm.removeMedia(media)"></a>\n        <img class="media-gallery__image" \n            ng-click="vm.selectMedia(media)" \n            ng-if="media.fileName" \n            ng-src="{{:: media.src}}" \n            alt="{{:: media.title}}"/>\n    </div>\n</div>\n';
+component.template = '\n<div class="media-gallery">\n    <div class="media-gallery__media-container"\n        ng-repeat="media in vm.media track by media.fileName">\n        <a href\n            ng-hide="!vm.allowRemove || media.isRemovable === false"\n            class="media-gallery__image-delete-icon svgicon svgicon--delete"\n            ng-click="vm.removeMedia(media)"></a>\n        <div class="media-gallery__image"\n            ng-style="{\'background-image\': \'url(\' + media.imageUrl + \')\' }">\n            <img class="media-gallery__screen-reader-image" \n                ng-click="vm.selectMedia(media)" \n                ng-if="media.fileName" \n                ng-src="{{:: media.imageUrl}}" \n                alt="{{:: media.title}}">\n        </div>\n    </div>\n</div>\n';
 
 component.controller = function MediaGalleryController() {
     var vm = this;
+
+    vm.$onInit = function onInit() {
+        if (vm.allowRemove === undefined) {
+            vm.allowRemove = true;
+        }
+    };
 
     vm.selectMedia = function selectMedia(item) {
         if (typeof vm.onSelect === 'function') {
