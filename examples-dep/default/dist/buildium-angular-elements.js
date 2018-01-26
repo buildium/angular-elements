@@ -219,6 +219,12 @@ component.controller = function MediaGalleryController() {
             vm.onEnlarge({ item: item });
         }
     };
+
+    vm.viewAll = function viewAll() {
+        if (typeof vm.onViewAll === 'function') {
+            vm.onViewAll();
+        }
+    };
 };
 
 module.exports = component;
