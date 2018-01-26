@@ -125,6 +125,10 @@ module.exports = moduleName;
  * 
  * @param {Function} [onEnlarge] callback to be executed when user clicks enlarge prompt
  * 
+ * @param {Number} [limitTo] limits the number of items visible in the gallery
+ * 
+ * @param {Function} [onViewAll] if `limitTo` provided, callback to be executed when user chooses to view all items 
+ * 
  * @example
     <example name="bd-media-gallery" module="buildium.angular-elements.media-gallery">
         <file name="index.html">
@@ -147,11 +151,26 @@ module.exports = moduleName;
                                 title: 'Super Mario Action Figure',
                                 imageUrl: 'https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
                             },
+                            {
+                                fileName: 'sunset-beach-people-sunrise2.jpeg',
+                                title: 'Sunset Beach People',
+                                imageUrl: 'https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
+                            },
+                            {
+                                fileName: 'woman-blowing-pink-powder2.jpeg',
+                                title: 'Woman Blowing Pink Powder',
+                                imageUrl: 'https://images.pexels.com/photos/612977/pexels-photo-612977.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
+                            },
+                            {
+                                fileName: 'super-mario-action-figure2.jpeg',
+                                title: 'Super Mario Action Figure',
+                                imageUrl: 'https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
+                            },
                         ]
                     })
             </script>
             <section ng-controller="ExampleController as vm">
-                <bd-media-gallery media="vm.media" allow-remove="true" allow-enlarge="true"></bd-media-gallery>
+                <bd-media-gallery media="vm.media" allow-remove="true" allow-enlarge="true" limit-to="3"></bd-media-gallery>
             </section>
         </file>
     </example>
@@ -167,10 +186,12 @@ component.bindings = {
     onRemove: '&?',
     onSelect: '&?',
     allowEnlarge: '<?',
-    onEnlarge: '&?'
+    onEnlarge: '&?',
+    limitTo: '<?',
+    onViewAll: '&?'
 };
 
-component.template = '\n<div class="media-gallery">\n    <div class="media-gallery__media-container"\n        ng-repeat="media in vm.media track by media.fileName">\n        <div class="media-gallery__image" \n            ng-style="{\'background-image\': \'url(\' + media.imageUrl + \')\' }"\n            ng-click="vm.selectMedia(media)"> \n            <img class="media-gallery__screen-reader-only" \n                ng-src="{{:: media.imageUrl}}" \n                alt="{{:: media.title}}">\n        </div>\n        <button class="media-gallery__view-larger"\n            ng-if="vm.allowEnlarge"\n            ng-click="vm.viewLarger()">\n            View larger\n        </button>\n        <button class="media-gallery__image-delete svgicon svgicon--delete"\n            ng-if="media.isRemovable || (media.isRemovable !== false && vm.allowRemove)"\n            ng-click="vm.removeMedia(media)">\n            <span class="media-gallery__screen-reader-only">Remove</span>\n        </button>\n    </div>\n</div>\n';
+component.template = '\n<div class="media-gallery">\n    <div class="media-gallery__media-container"\n        ng-repeat="media in vm.media | limitTo:vm.limitTo track by media.fileName">\n        <div class="media-gallery__image" \n            ng-style="{\'background-image\': \'url(\' + media.imageUrl + \')\' }"\n            ng-click="vm.selectMedia(media)"> \n            <img class="media-gallery__screen-reader-only" \n                ng-src="{{:: media.imageUrl}}" \n                alt="{{:: media.title}}">\n        </div>\n        <button class="media-gallery__view-larger"\n            ng-if="vm.allowEnlarge"\n            ng-click="vm.viewLarger()">\n            View larger\n        </button>\n        <button class="media-gallery__image-delete svgicon svgicon--delete"\n            ng-if="media.isRemovable || (media.isRemovable !== false && vm.allowRemove)"\n            ng-click="vm.removeMedia(media)">\n            <span class="media-gallery__screen-reader-only">Remove</span>\n        </button>\n        <button class="media-gallery__view-all"\n            ng-if="vm.limitTo < vm.media.length"\n            ng-show="$last"\n            ng-click="vm.viewAll()">\n            +{{ vm.media.length - vm.limitTo }}\n        </button>\n    </div>\n</div>\n';
 
 component.controller = function MediaGalleryController() {
     var vm = this;

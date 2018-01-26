@@ -32,11 +32,26 @@
                     title: 'Super Mario Action Figure',
                     imageUrl: 'https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
                 },
+                {
+                    fileName: 'sunset-beach-people-sunrise2.jpeg',
+                    title: 'Sunset Beach People',
+                    imageUrl: 'https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
+                },
+                {
+                    fileName: 'woman-blowing-pink-powder2.jpeg',
+                    title: 'Woman Blowing Pink Powder',
+                    imageUrl: 'https://images.pexels.com/photos/612977/pexels-photo-612977.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
+                },
+                {
+                    fileName: 'super-mario-action-figure2.jpeg',
+                    title: 'Super Mario Action Figure',
+                    imageUrl: 'https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb'
+                },
             ]
         })
 </script>
 <section ng-controller="ExampleController as vm">
-    <bd-media-gallery media="vm.media" allow-remove="true" allow-enlarge="true"></bd-media-gallery>
+    <bd-media-gallery media="vm.media" allow-remove="true" allow-enlarge="true" limit-to="3"></bd-media-gallery>
 </section>
 </body>
 </html>
