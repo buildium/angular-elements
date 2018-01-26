@@ -77,18 +77,20 @@ component.template = `
         <div class="media-gallery__image" 
             ng-style="{'background-image': 'url(' + media.imageUrl + ')' }"
             ng-click="vm.selectMedia(media)"> 
-            <img class="media-gallery__screen-reader-image" 
+            <img class="media-gallery__screen-reader-only" 
                 ng-src="{{:: media.imageUrl}}" 
                 alt="{{:: media.title}}">
         </div>
-        <a class="media-gallery__view-larger-link"
-            href
+        <button class="media-gallery__view-larger"
             ng-if="vm.allowEnlarge"
-            ng-click="vm.viewLarger()">View larger</a>
-        <a class="media-gallery__image-delete-icon svgicon svgicon--delete"
-            href
+            ng-click="vm.viewLarger()">
+            View larger
+        </button>
+        <button class="media-gallery__image-delete svgicon svgicon--delete"
             ng-if="media.isRemovable || (media.isRemovable !== false && vm.allowRemove)"
-            ng-click="vm.removeMedia(media)"></a>
+            ng-click="vm.removeMedia(media)">
+            <span class="media-gallery__screen-reader-only">Remove</span>
+        </button>
     </div>
 </div>
 `;
