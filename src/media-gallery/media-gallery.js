@@ -104,7 +104,7 @@ component.template = `
         </div>
         <button class="media-gallery__view-larger"
             ng-if="vm.allowEnlarge"
-            ng-click="vm.viewLarger()">
+            ng-click="vm.viewLarger(media)">
             View larger
         </button>
         <button class="media-gallery__image-delete svgicon svgicon--delete"
