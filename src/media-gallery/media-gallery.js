@@ -116,7 +116,7 @@ component.template = `
             ng-if="vm.limitTo < vm.media.length"
             ng-show="$last"
             ng-click="vm.viewAll()">
-            +{{ vm.media.length - vm.limitTo }}
+            +{{ vm.media.length - vm.limitTo + 1 }}
         </button>
     </div>
 </div>
