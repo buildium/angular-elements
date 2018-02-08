@@ -2,3 +2,4 @@
 docs/
 !dist/
 src/
+karma.conf.js

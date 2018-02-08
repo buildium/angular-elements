@@ -1,1 +1,0 @@
-[{"name":"popover","path":"api/popover","type":"module","size":17},{"name":"bdPopover","path":"api/popover/directive/bdPopover","type":"directive","size":16},{"path":"../../examples-dep/default/index.js","type":"example-dependency","size":10},{"name":"data/config.js","type":"config-data","size":5}]

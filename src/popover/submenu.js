@@ -1,8 +1,19 @@
 'use strict';
 
-let $ = require('jquery');
+const $ = require('jquery');
 
-// @ngInject
+/**
+ * @ngdoc service
+ * @name BdSubmenu
+ * @module buildium.angular-elements.popover
+ * @kind function 
+ * @require $rootScope
+ * @require $timeout
+ * @require $document
+ * 
+ * @description
+ * Control the positioning and display of the popover element
+ */
 module.exports = function BdSubmenu($rootScope, $timeout, $document) {
     let submenuService = this,
         mouseOutDelay = 250,
@@ -23,6 +34,13 @@ module.exports = function BdSubmenu($rootScope, $timeout, $document) {
         }
     });
 
+    /**
+     * @ngdoc method
+     * @name BdSubmenu#display
+     * @description
+     * Positions popover against the given element (`elem`) and displays it on the page
+     * @param {DOMElement} elem 
+     */
     submenuService.display = function display(elem) {
         $currentElement = elem;
 
@@ -42,19 +60,45 @@ module.exports = function BdSubmenu($rootScope, $timeout, $document) {
         });
     };
 
+    /**
+     * @ngdoc method
+     * @name BdSubmenu#startTimer
+     * @description
+     * Start the timer if there is an element that the BdSubmenu service considers open. 
+     * At the end of the time, the popover is closed. 
+     * This ignores the mouseLeave event that may be fired on a submenu as it is in the process of fading out.
+     */
     submenuService.startTimer = function startTimer() {
-        // Only start the timer if there is an element that the BdSubmenu service considers open. This ignores the mouseLeave event that may be fired on a submenu as it is in the process of fading out.
         if ($currentElement) {
             mouseoutTimer = $timeout(submenuService.closeAll, mouseOutDelay);
         }
     };
 
+    /**
+     * @ngdoc method
+     * @name BdSubmenu#stopTimer
+     * @description
+     * Cancels any timer started by `startTimer`
+     */
     submenuService.stopTimer = function stopTimer() {
         $timeout.cancel(mouseoutTimer);
     };
 
+    /**
+     * @ngdoc method
+     * @name BdSubmenu#closeAll
+     * @description
+     * Closes any active popover elements
+     */
     submenuService.closeAll = unsetCurrentElement;
 
+    /**
+     * @ngdoc method
+     * @name BdSubmenu#positionPopoverBody
+     * @description
+     * Positions popover against the given element (`elem`)
+     * @param {DOMElement} elem 
+     */
     submenuService.positionPopoverBody = function positionPopoverBody(elem) {
         let popoverContainer,
             popoverBody,
@@ -63,7 +107,7 @@ module.exports = function BdSubmenu($rootScope, $timeout, $document) {
         popoverContainer   = $(elem).find('.popover__container');
         popoverBody        = $(elem).find('.popover__body');
         containerOffsetLeft = popoverContainer.offset().left;
-        
+
         if (containerOffsetLeft < 0) {
             popoverBody.css({
                 'position': 'relative',

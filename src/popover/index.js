@@ -1,55 +1,64 @@
-let moduleName = 'buildium.angular-elements.popover';
+const moduleName = 'buildium.angular-elements.popover';
+const $ = require('jquery');
 
 /**
  * @ngdoc module
- * @name popover
- * @module popover
+ * @name buildium.angular-elements.popover
+ * @module buildium.angular-elements.popover
  */
 angular.module(moduleName, [])
+
 /**
-* @ngdoc directive
-* @name bdPopover
-* @module popover
-* 
-* @description
-*
-* Attaches a popover tooltip to an element with custom content.
-* 
-* @param {boolean} selected 
-*
-* @param {string} title
-*
-* @param {boolean} pointer
-*
-* @param {string} popoverContainerClass
-*
-* @param {string} popoverLinkClass 
-*
-* @param {string} pointerClass 
-*
-* @param {boolean} showOnHover
-*
-* @param {function} onLinkClick 
-*
-*
-* @example
-* ```
-* <bd-popover selected="false" title="Ygritte" pointer="true" show-on-hover="true" link-class="popover-link" container-class="'popover'" pointer-class="'popover__pointer'" show-on-hover="true" on-link-click="controller.onClick()">
-*    <popover-link>
-*        <span class="tooltip">
-*            Ygritte quotes
-*        </span>
-*    </popover-link>
-*    <popover-body>
-*      <h1>You know nothing, Jon Snow</h1>
-*   </popover-body>
-* </bd-popover>
-```
-*
-*
-*/
+ * @ngdoc directive
+ * @name bdPopover
+ * @module buildium.angular-elements.popover
+ * @restrict E
+ * 
+ * @description
+ *
+ * Attaches a popover tooltip to an element with custom content.
+ * 
+ * @param {boolean} selected 
+ *
+ * @param {string} title
+ * 
+ * @param {boolean} pointer
+ *
+ * @param {string} popoverContainerClass
+ *
+ * @param {string} popoverLinkClass 
+ *
+ * @param {string} pointerClass 
+ *
+ * @param {boolean} showOnHover
+ *
+ * @param {function} onLinkClick 
+ *
+ * @example
+    <example name="bd-popover" module="buildium.angular-elements.popover">
+        <file name="index.html">
+            <bd-popover selected="false" 
+                        title="Ygritte" 
+                        pointer="true" 
+                        show-on-hover="true" 
+                        link-class="popover-link" 
+                        container-class="'popover'" 
+                        pointer-class="'popover__pointer'" 
+                        show-on-hover="true" 
+                        on-link-click="controller.onClick()">
+                <popover-link>
+                    <span class="tooltip">Ygritte quotes</span>
+                </popover-link>
+                <popover-body>
+                    <h1>You know nothing, Jon Snow</h1>
+                </popover-body>
+            </bd-popover>
+        </file>
+    </example>
+ *
+ */
 .directive('bdPopover', ['$rootScope', 'BdSubmenu', function BdPopover($rootScope, BdSubmenu) {
-    let directive = {};
+    const directive = {};
 
     directive.restrict = 'E';
     directive.template = `
@@ -88,9 +97,8 @@ angular.module(moduleName, [])
     directive.transclude = true;
     directive.bindToController = true;
 
-    /* @ngInject */
     directive.controller = ['$rootScope', '$element', 'BdSubmenu', function PopoverCtrl($rootScope, $element, BdSubmenu) {
-        let ctrl = this;
+        const ctrl = this;
 
         ctrl.isOpen = false;
 
@@ -115,8 +123,8 @@ angular.module(moduleName, [])
 
         transclude(scope.$parent, function(clone) {
             angular.forEach(clone, function(cloneElem) {
-                let insertId,
-                    target;
+                let insertId;
+                let target;
 
                 if (!cloneElem.attributes) {
                     return;
@@ -131,8 +139,9 @@ angular.module(moduleName, [])
     };
 
     return directive;
+}])
 
-}]).service('BdSubmenu', ['$rootScope', '$timeout', '$document', require('./submenu')]);
+.service('BdSubmenu', ['$rootScope', '$timeout', '$document', require('./submenu')]);
 
 
 module.exports = moduleName;
