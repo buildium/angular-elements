@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/buildium/angular-elements#readme",
   "dependencies": {
-    "angular-animate": "1.6.9",
     "lodash.uniqueid": "4.0.1"
   },
   "peerDependencies": {
