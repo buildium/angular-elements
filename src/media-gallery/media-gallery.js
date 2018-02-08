@@ -93,7 +93,7 @@ component.bindings = {
 
 component.template = `
 <div class="media-gallery">
-    <div class="media-gallery__media-container fade"
+    <div class="media-gallery__media-container"
         ng-repeat="media in vm.media | limitTo:vm.limitTo track by media.fileName">
         <div class="media-gallery__image" 
             ng-style="{'background-image': 'url(' + media.imageUrl + ')' }"
@@ -122,7 +122,7 @@ component.template = `
 </div>
 `;
 
-component.controller = function MediaGalleryController(ngAnimate) {
+component.controller = function MediaGalleryController() {
     const vm = this;
 
     vm.$onInit = function onInit() {
