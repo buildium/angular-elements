@@ -1,41 +1,7 @@
-![long.js - A Long class for representing a 64 bit two's-complement integer ](https://raw.github.com/dcodeIO/long.js/master/long.png)
-=======
-A Long class for representing a 64 bit two's-complement integer value derived from the [Closure Library](https://github.com/google/closure-library)
-for stand-alone use and extended with unsigned support.
+## Class Long
 
-[![Build Status](https://travis-ci.org/dcodeIO/long.js.svg)](https://travis-ci.org/dcodeIO/long.js)
-[![Donate](https://raw.githubusercontent.com/dcodeIO/long.js/master/donate.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=dcode%40dcode.io&item_name=%3C3%20long.js)
+A Long class for representing a 64 bit two's-complement integer value.
 
-Background
-----------
-As of [ECMA-262 5th Edition](http://ecma262-5.com/ELS5_HTML.htm#Section_8.5), "all the positive and negative integers
-whose magnitude is no greater than 2<sup>53</sup> are representable in the Number type", which is "representing the
-doubleprecision 64-bit format IEEE 754 values as specified in the IEEE Standard for Binary Floating-Point Arithmetic".
-The [maximum safe integer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER)
-in JavaScript is 2<sup>53</sup>-1.
-
-Example: 2<sup>64</sup>-1 is 18446744073709551615 but in JavaScript it evaluates to `18446744073709552000`.
-
-Furthermore, bitwise operators in JavaScript "deal only with integers in the range −2<sup>31</sup> through
-2<sup>31</sup>−1, inclusive, or in the range 0 through 2<sup>32</sup>−1, inclusive. These operators accept any value of
-the Number type but first convert each such value to one of 2<sup>32</sup> integer values."
-
-In some use cases, however, it is required to be able to reliably work with and perform bitwise operations on the full
-64 bits. This is where long.js comes into play.
-
-Usage
------
-The class is compatible with CommonJS and AMD loaders and is exposed globally as `dcodeIO.Long` if neither is available.
-
-```javascript
-var Long = require("long");
-
-var longVal = new Long(0xFFFFFFFF, 0x7FFFFFFF);
-console.log(longVal.toString());
-...
-```
-
-API
 ---
 
 #### new Long(low, high=, unsigned=)
@@ -220,7 +186,7 @@ Returns the bitwise AND of this Long and the specified.
 | other           | *!Long &#124; number &#124; string* | Other Long 
 | **@returns**    | *!Long*         | 
 
-#### Long#compare/comp(other)
+#### Long#compare(other)
 
 Compares this Long's value with the specified's.
 
@@ -229,7 +195,7 @@ Compares this Long's value with the specified's.
 | other           | *!Long &#124; number &#124; string* | Other value 
 | **@returns**    | *number*        | 0 if they are the same, 1 if the this is greater and -1 if the given one is greater 
 
-#### Long#divide/div(divisor)
+#### Long#div(divisor)
 
 Returns this Long divided by the specified.
 
@@ -238,7 +204,7 @@ Returns this Long divided by the specified.
 | divisor         | *!Long &#124; number &#124; string* | Divisor 
 | **@returns**    | *!Long*         | Quotient 
 
-#### Long#equals/eq(other)
+#### Long#equals(other)
 
 Tests if this Long's value equals the specified's.
 
@@ -287,7 +253,7 @@ Gets the number of bits needed to represent the absolute value of this Long.
 |-----------------|-----------------|---------------
 | **@returns**    | *number*        | 
 
-#### Long#greaterThan/gt(other)
+#### Long#greaterThan(other)
 
 Tests if this Long's value is greater than the specified's.
 
@@ -296,7 +262,7 @@ Tests if this Long's value is greater than the specified's.
 | other           | *!Long &#124; number &#124; string* | Other value 
 | **@returns**    | *boolean*       | 
 
-#### Long#greaterThanOrEqual/gte(other)
+#### Long#greaterThanOrEqual(other)
 
 Tests if this Long's value is greater than or equal the specified's.
 
@@ -345,7 +311,7 @@ Tests if this Long's value equals zero.
 |-----------------|-----------------|---------------
 | **@returns**    | *boolean*       | 
 
-#### Long#lessThan/lt(other)
+#### Long#lessThan(other)
 
 Tests if this Long's value is less than the specified's.
 
@@ -354,7 +320,7 @@ Tests if this Long's value is less than the specified's.
 | other           | *!Long &#124; number &#124; string* | Other value 
 | **@returns**    | *boolean*       | 
 
-#### Long#lessThanOrEqual/lte(other)
+#### Long#lessThanOrEqual(other)
 
 Tests if this Long's value is less than or equal the specified's.
 
@@ -363,7 +329,7 @@ Tests if this Long's value is less than or equal the specified's.
 | other           | *!Long &#124; number &#124; string* | Other value 
 | **@returns**    | *boolean*       | 
 
-#### Long#modulo/mod(divisor)
+#### Long#modulo(divisor)
 
 Returns this Long modulo the specified.
 
@@ -372,7 +338,7 @@ Returns this Long modulo the specified.
 | divisor         | *!Long &#124; number &#124; string* | Divisor 
 | **@returns**    | *!Long*         | Remainder 
 
-#### Long#multiply/mul(multiplier)
+#### Long#multiply(multiplier)
 
 Returns the product of this and the specified Long.
 
@@ -381,7 +347,7 @@ Returns the product of this and the specified Long.
 | multiplier      | *!Long &#124; number &#124; string* | Multiplier 
 | **@returns**    | *!Long*         | Product 
 
-#### Long#negate/neg()
+#### Long#negate()
 
 Negates this Long's value.
 
@@ -397,7 +363,7 @@ Returns the bitwise NOT of this Long.
 |-----------------|-----------------|---------------
 | **@returns**    | *!Long*         | 
 
-#### Long#notEquals/neq(other)
+#### Long#notEquals(other)
 
 Tests if this Long's value differs from the specified's.
 
@@ -415,7 +381,7 @@ Returns the bitwise OR of this Long and the specified.
 | other           | *!Long &#124; number &#124; string* | Other Long 
 | **@returns**    | *!Long*         | 
 
-#### Long#shiftLeft/shl(numBits)
+#### Long#shiftLeft(numBits)
 
 Returns this Long with bits shifted to the left by the given amount.
 
@@ -424,7 +390,7 @@ Returns this Long with bits shifted to the left by the given amount.
 | numBits         | *number &#124; !Long* | Number of bits 
 | **@returns**    | *!Long*         | Shifted Long 
 
-#### Long#shiftRight/shr(numBits)
+#### Long#shiftRight(numBits)
 
 Returns this Long with bits arithmetically shifted to the right by the given amount.
 
@@ -433,7 +399,7 @@ Returns this Long with bits arithmetically shifted to the right by the given amo
 | numBits         | *number &#124; !Long* | Number of bits 
 | **@returns**    | *!Long*         | Shifted Long 
 
-#### Long#shiftRightUnsigned/shru(numBits)
+#### Long#shiftRightUnsigned(numBits)
 
 Returns this Long with bits logically shifted to the right by the given amount.
 
@@ -442,7 +408,7 @@ Returns this Long with bits logically shifted to the right by the given amount.
 | numBits         | *number &#124; !Long* | Number of bits 
 | **@returns**    | *!Long*         | Shifted Long 
 
-#### Long#subtract/sub(subtrahend)
+#### Long#subtract(subtrahend)
 
 Returns the difference of this and the specified Long.
 
@@ -502,12 +468,6 @@ Returns the bitwise XOR of this Long and the given one.
 | other           | *!Long &#124; number &#124; string* | Other Long 
 | **@returns**    | *!Long*         | 
 
-Downloads
----------
-* [Distributions](https://github.com/dcodeIO/long.js/tree/master/dist)
-* [ZIP-Archive](https://github.com/dcodeIO/long.js/archive/master.zip)
-* [Tarball](https://github.com/dcodeIO/long.js/tarball/master)
 
-License
--------
-Apache License, Version 2.0 - http://www.apache.org/licenses/LICENSE-2.0.html
+---
+*Generated with [doco](https://github.com/dcodeIO/doco) v0.3.0*

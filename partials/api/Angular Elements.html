@@ -1,0 +1,34 @@
+
+<h1 id="buildium-angular-elements-library">Buildium Angular Elements Library</h1>
+<blockquote>
+<p>A companion library of bespoke custom elements for use with AngularJS applications</p>
+</blockquote>
+<h2 id="using-elements-from-the-library">Using elements from the library</h2>
+<p>Gain access to all the elements in this library by including the file distributed with this package </p>
+<pre><code class="lang-html">&lt;body ng-app=&quot;app&quot;&gt;
+ &lt;script src=&quot;@buildium/angular-elements/dist/buildium-angular-elements.js&quot;&gt;&lt;/script&gt;
+ &lt;script&gt;
+     angular.module(&#39;app&#39;, [&#39;buildium.angular-elements&#39;])
+ &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<p>It can also be imported by any <code>require</code>-compatible module bundler, such as<br>webpack](<a href="https://webpack.js.org/">https://webpack.js.org/</a>) or <a href="browserify.org/">browserify</a></p>
+<pre><code class="lang-html">&lt;body ng-app=&quot;app&quot;&gt;
+ &lt;script&gt;
+     angular.module(&#39;app&#39;, [
+         require(&#39;@buildium/angular-elements&#39;)
+     ])
+ &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<p>Or, import individual elements</p>
+<pre><code class="lang-html">&lt;body ng-app=&quot;app&quot;&gt;
+ &lt;script&gt;
+     angular.module(&#39;app&#39;, [
+         require(&#39;@buildium/angular-elements/lib/popover&#39;)
+     ])
+ &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+
+

@@ -19,7 +19,8 @@
  *
  */
 
-goog.provide('goog.math.Long');
+// goog.provide('goog.math.Long');
+var goog = {}; goog.math = {};
 
 
 
@@ -311,6 +312,7 @@ goog.math.Long.prototype.toString = function(opt_radix) {
     while (true) {
         var remDiv = rem.div(radixToPower);
         var intval = rem.subtract(remDiv.multiply(radixToPower)).toInt() >>> 0; // wraps around for base 36 (dcode)
+        console.log(intval);
         var digits = intval.toString(radix);
 
         rem = remDiv;
@@ -801,3 +803,5 @@ goog.math.Long.prototype.shiftRightUnsigned = function(numBits) {
         }
     }
 };
+
+module.exports = goog.math.Long;
