@@ -122,7 +122,7 @@ component.template = `
 </div>
 `;
 
-component.controller = ['ngAnimate', function MediaGalleryController(ngAnimate) {
+component.controller = function MediaGalleryController(ngAnimate) {
     const vm = this;
 
     vm.$onInit = function onInit() {
@@ -154,6 +154,6 @@ component.controller = ['ngAnimate', function MediaGalleryController(ngAnimate) 
             vm.onViewAll();
         }
     };
-}];
+};
 
 module.exports = component;
