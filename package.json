@@ -8,7 +8,7 @@
     "compile": "babel src --out-dir lib/ --presets=es2015",
     "dist": "mkdirp dist && browserify lib/index.js -o dist/buildium-angular-elements.js",
     "build": "npm run compile && npm run dist",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "predocs": "npm run build",
     "docs": "node .build/docs.js",
     "postversion": "npm run docs -- --gh-pages"
