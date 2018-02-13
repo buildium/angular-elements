@@ -1,5 +1,3 @@
-'use strict';
-
 const moduleName = 'buildium.angular-elements.media-gallery';
 
 /**

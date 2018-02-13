@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name index
@@ -69,7 +67,7 @@
  * <link rel="stylesheet" href="@buildium/theme/dist/theme-styles.css">
  * ```
  */
-let moduleName = 'buildium.angular-elements';
+const moduleName = 'buildium.angular-elements';
 
 /**
  * @ndgoc module
