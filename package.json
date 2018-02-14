@@ -4,7 +4,7 @@
   "description": "A collection of directives for building angular applications",
   "main": "lib/index.js",
   "scripts": {
-    "pretest": "eslint --config buildium --global angular --env jasmine src/",
+    "pretest": "eslint src/",
     "test": "karma start --single-run",
     "compile": "babel src --out-dir lib/ --presets=es2015",
     "dist": "mkdirp dist && browserify lib/index.js -o dist/buildium-angular-elements.js",
@@ -54,5 +54,17 @@
     "karma-jasmine": "1.1.0",
     "mkdirp": "0.5.1",
     "watchify": "3.9.0"
+  },
+  "eslintConfig": {
+    "extends": "buildium",
+    "rules": {
+      "linebreak-style": ["warn", "unix"]
+    },
+    "env": {
+      "jasmine": true
+    },
+    "globals": {
+      "angular": true
+    }
   }
 }
