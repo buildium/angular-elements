@@ -13,6 +13,9 @@ buildiumAngularDocs({
     sourceFiles: [
         path.join(__dirname, '../src/**/*.js')
     ],
+    stylesheets: [
+        path.join(__dirname, '../node_modules/@buildium/theme/dist/theme-styles.css')
+    ],
     destination: path.join(__dirname, '../docs'),
     ghPages: ghPages
 });
