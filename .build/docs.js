@@ -14,6 +14,7 @@ buildiumAngularDocs({
         path.join(__dirname, '../src/**/*.js')
     ],
     stylesheets: [
+        "https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css",
         path.join(__dirname, '../node_modules/@buildium/theme/dist/theme-styles.css')
     ],
     destination: path.join(__dirname, '../docs'),
