@@ -1,0 +1,16 @@
+const moduleName = 'buildium.angular-elements.accordion';
+
+/**
+ * @ngdoc module
+ * @name buildium.angular-elements.accordion
+ * @module buildium.angular-elements.accordion
+ */
+module.exports = angular.module(moduleName, [])
+
+.component('bdAccordion', require( './accordion.js'))
+.component('bdAccordionSection', require( './accordion-section.js'))
+
+.directive('bdAccordionToggle', require('./accordion-toggle.js'))
+.directive('bdAccordionGroup', require('./accordion-group.js'));
+
+module.exports = moduleName;
