@@ -71,7 +71,7 @@ module.exports = function AccordionToggle() {
         disabledClass: '@?'
     };
 
-    directive.controller = ['$element', '$attrs', function AccordionToggleCtrl($element, $attrs) {
+    directive.controller = ['$element', function AccordionToggleCtrl($element) {
         const vm = this;
 
         vm.$onChanges = function onChanges(changes) {
