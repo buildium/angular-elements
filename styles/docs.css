@@ -926,9 +926,12 @@ svgicon--map - Map icon
 svgicon--message - Message icon
 svgicon--staff - Staff icon
 svgicon--wrench - Wrench icon
+svgicon--wrench-grey - Wrench icon (grey)
 svgicon--clock - Clock icon
 svgicon--bell - Bell icon
 svgicon--blank-profile-photo - Blank profile photo
+svgicon--message-bubble - SMS message bubble used in the header
+svgicon--info - SMS info icon that triggers slider
 
 Markup:
 <span class="svgicon {{modifier_class}}"></span>
@@ -1011,6 +1014,21 @@ Styleguide 1.3
 .svgicon--home-green-hover {
   background: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2214%22%20height%3D%2211%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3EShape%3C%2Ftitle%3E%3Cpath%20d%3D%22M11.48%204.274V1.18H9.52v1.225L7%200%200%206.679h1.68V11h4.34V7.464h1.96V11h4.34V6.679H14z%22%20fill-rule%3D%22nonzero%22%20fill%3D%22%2373B680%22%20opacity%3D%22.5%22%2F%3E%3C%2Fsvg%3E') no-repeat center;
 }
+.svgicon--sms-upload-image,
+.svgicon--sms-upload-disabled {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2215%22%20height%3D%2213%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Ctitle%3EIcons%2FPhotos%3C%2Ftitle%3E%3Cdefs%3E%3Cpath%20d%3D%22M5%205a1.5%201.5%200%201%201-3%200%201.5%201.5%200%200%201%203%200zm8%203v3.5H2V10l2.5-2.5%201.25%201.25%204-4L13%208zm.75-5.5H1.25a.257.257%200%200%200-.25.25v9.5c0%20.133.117.25.25.25h12.5c.133%200%20.25-.117.25-.25v-9.5a.257.257%200%200%200-.25-.25zm1.25.25v9.5c0%20.688-.563%201.25-1.25%201.25H1.25C.562%2013.5%200%2012.937%200%2012.25v-9.5C0%202.062.563%201.5%201.25%201.5h12.5c.688%200%201.25.563%201.25%201.25z%22%20id%3D%22a%22%2F%3E%3C%2Fdefs%3E%3Cg%20transform%3D%22translate%280%20-1%29%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cmask%20id%3D%22b%22%20fill%3D%22%23fff%22%3E%3Cuse%20xlink%3Ahref%3D%22%23a%22%2F%3E%3C%2Fmask%3E%3Cuse%20fill%3D%22%23A8ABB4%22%20xlink%3Ahref%3D%22%23a%22%2F%3E%3Cpath%20d%3D%22M0%200h15v15H0z%22%20mask%3D%22url%28%23b%29%22%20fill%3D%22%23A5A5A6%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+}
+.svgicon--sms-upload-image:hover {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2215%22%20height%3D%2213%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Ctitle%3EIcons%2FPhotos%3C%2Ftitle%3E%3Cdefs%3E%3Cpath%20d%3D%22M5%205a1.5%201.5%200%201%201-3%200%201.5%201.5%200%200%201%203%200zm8%203v3.5H2V10l2.5-2.5%201.25%201.25%204-4L13%208zm.75-5.5H1.25a.257.257%200%200%200-.25.25v9.5c0%20.133.117.25.25.25h12.5c.133%200%20.25-.117.25-.25v-9.5a.257.257%200%200%200-.25-.25zm1.25.25v9.5c0%20.688-.563%201.25-1.25%201.25H1.25C.562%2013.5%200%2012.937%200%2012.25v-9.5C0%202.062.563%201.5%201.25%201.5h12.5c.688%200%201.25.563%201.25%201.25z%22%20id%3D%22a%22%2F%3E%3C%2Fdefs%3E%3Cg%20transform%3D%22translate%280%20-1%29%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cmask%20id%3D%22b%22%20fill%3D%22%23fff%22%3E%3Cuse%20xlink%3Ahref%3D%22%23a%22%2F%3E%3C%2Fmask%3E%3Cuse%20fill%3D%22%23A8ABB4%22%20xlink%3Ahref%3D%22%23a%22%2F%3E%3Cpath%20d%3D%22M0%200h15v15H0z%22%20mask%3D%22url%28%23b%29%22%20fill%3D%22%2373B680%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+}
+.svgicon--info {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjVweCIgaGVpZ2h0PSIyNXB4IiB2aWV3Qm94PSIwIDAgMjUgMjUiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ4ICg0NzIzNSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+SWNvbnMvSW5mbzwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSIwMS4tU01TLUluYm94IiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTI0Ni4wMDAwMDAsIC0xODkuMDAwMDAwKSI+CiAgICAgICAgPGcgaWQ9Ikljb25zL0luZm8iIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyNDYuMDAwMDAwLCAxODkuMDAwMDAwKSIgZmlsbD0iI0E1QTVBNiI+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0xMi41LDI1IEM1LjU5NjQ0MDYzLDI1IDAsMTkuNDAzNTU5NCAwLDEyLjUgQzAsNS41OTY0NDA2MyA1LjU5NjQ0MDYzLDAgMTIuNSwwIEMxOS40MDM1NTk0LDAgMjUsNS41OTY0NDA2MyAyNSwxMi41IEMyNSwxOS40MDM1NTk0IDE5LjQwMzU1OTQsMjUgMTIuNSwyNSBaIE0xMi41LDIzLjk1ODMzMzMgQzE4LjgyODI2MjgsMjMuOTU4MzMzMyAyMy45NTgzMzMzLDE4LjgyODI2MjggMjMuOTU4MzMzMywxMi41IEMyMy45NTgzMzMzLDYuMTcxNzM3MjQgMTguODI4MjYyOCwxLjA0MTY2NjY3IDEyLjUsMS4wNDE2NjY2NyBDNi4xNzE3MzcyNCwxLjA0MTY2NjY3IDEuMDQxNjY2NjcsNi4xNzE3MzcyNCAxLjA0MTY2NjY3LDEyLjUgQzEuMDQxNjY2NjcsMTguODI4MjYyOCA2LjE3MTczNzI0LDIzLjk1ODMzMzMgMTIuNSwyMy45NTgzMzMzIFogTTEyLjUwMDk5MjEsMTAuODMzMzMyMyBDMTMuMjAyODU0LDEwLjgzMzMzMjMgMTMuNzcxODI1NSwxMS40MDIzMDM3IDEzLjc3MTgyNTUsMTIuMTA0MTY1NiBMMTMuNzcxODI1NSwxOC4xNzM2MDk3IEMxMy43NzE4MjU1LDE4Ljg3NTQ3MTYgMTMuMjAyODU0LDE5LjQ0NDQ0MzEgMTIuNTAwOTkyMSwxOS40NDQ0NDMxIEMxMS43OTkxMzAyLDE5LjQ0NDQ0MzEgMTEuMjMwMTU4NywxOC44NzU0NzE2IDExLjIzMDE1ODcsMTguMTczNjA5NyBMMTEuMjMwMTU4NywxMi4xMDQxNjU2IEMxMS4yMzAxNTg3LDExLjQwMjMwMzcgMTEuNzk5MTMwMiwxMC44MzMzMzIzIDEyLjUwMDk5MjEsMTAuODMzMzMyMyBaIE0xMi41LDkuNTgzMzMzMzEgQzExLjU3OTUyNTQsOS41ODMzMzMzMSAxMC44MzMzMzMzLDguODM3MTQxMjMgMTAuODMzMzMzMyw3LjkxNjY2NjY1IEMxMC44MzMzMzMzLDYuOTk2MTkyMDcgMTEuNTc5NTI1NCw2LjI0OTk5OTk4IDEyLjUsNi4yNDk5OTk5OCBDMTMuNDIwNDc0Niw2LjI0OTk5OTk4IDE0LjE2NjY2NjcsNi45OTYxOTIwNyAxNC4xNjY2NjY3LDcuOTE2NjY2NjUgQzE0LjE2NjY2NjcsOC44MzcxNDEyMyAxMy40MjA0NzQ2LDkuNTgzMzMzMzEgMTIuNSw5LjU4MzMzMzMxIFoiIGlkPSJDb21iaW5lZC1TaGFwZSI+PC9wYXRoPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+');
+  background-repeat: no-repeat;
+}
+.svgicon--info:hover {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2225%22%20height%3D%2225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3ECombined%20Shape%3C%2Ftitle%3E%3Cpath%20d%3D%22M12.5%2025C5.596%2025%200%2019.404%200%2012.5S5.596%200%2012.5%200%2025%205.596%2025%2012.5%2019.404%2025%2012.5%2025zm0-1.042c6.328%200%2011.458-5.13%2011.458-11.458S18.828%201.042%2012.5%201.042%201.042%206.172%201.042%2012.5%206.172%2023.958%2012.5%2023.958zm.001-13.125c.702%200%201.27.57%201.27%201.271v6.07a1.27%201.27%200%200%201-2.54%200v-6.07c0-.702.568-1.27%201.27-1.27zm-.001-1.25a1.667%201.667%200%201%201%200-3.333%201.667%201.667%200%200%201%200%203.333z%22%20fill%3D%22%2373B680%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E');
+}
 .svgicon--icons-chevron-down-white,
 .btn .svgicon--icons-chevron-down-white,
 .btn:hover .svgicon--icons-chevron-down-white {
@@ -1068,6 +1086,17 @@ Styleguide 1.3
 }
 .svgicon--bell:hover {
   background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2261%22%20height%3D%2266%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Ctitle%3EIcons%2FBell%20Copyempty_state%3C%2Ftitle%3E%3Cdefs%3E%3Cpath%20d%3D%22M24.7%2056.725c0%205.123%204.171%209.275%209.317%209.275%205.145%200%209.316-4.152%209.316-9.275H24.7zm9.573%207.318a.572.572%200%200%200-.581-.577c-2.87%200-5.197-2.275-5.961-5.137-.084-.315-.254-.578-.581-.578-.327%200-.638.258-.582.578.626%203.566%203.6%206.292%207.124%206.292a.572.572%200%200%200%20.58-.578zM62.617%2050.84c0%202.528-2.107%204.622-4.65%204.622H6.817c-2.543%200-4.65-2.094-4.65-4.622%205.376-4.513%2011.625-12.601%2011.625-30.042%200-6.932%205.776-14.515%2015.403-15.923a3.615%203.615%200%200%201-.29-1.409C28.904%201.553%2030.465%200%2032.391%200c1.925%200%203.487%201.553%203.487%203.466%200%20.506-.109.975-.29%201.409%209.626%201.408%2015.403%208.99%2015.403%2015.923%200%2017.44%206.248%2025.529%2011.625%2030.042z%22%20id%3D%22a%22%2F%3E%3C%2Fdefs%3E%3Cg%20transform%3D%22translate%28-2%29%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cmask%20id%3D%22b%22%20fill%3D%22%23fff%22%3E%3Cuse%20xlink%3Ahref%3D%22%23a%22%2F%3E%3C%2Fmask%3E%3Cuse%20fill%3D%22%23A8ABB4%22%20xlink%3Ahref%3D%22%23a%22%2F%3E%3Cpath%20d%3D%22M0%200h66v66H0z%22%20transform%3D%22translate%28-.65%29%22%20mask%3D%22url%28%23b%29%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+}
+.svgicon--message-bubble {
+  width: 22px;
+  height: 20px;
+  background-size: 22px;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2222%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3EMessages%3C%2Ftitle%3E%3Cpath%20d%3D%22M0%209.87C0%204.43%204.937-.03%2011.015%200%2017.063%200%2022%204.43%2022%209.9c0%205.471-4.908%209.9-10.985%209.9-1.987%200-3.886-.476-5.58-1.368a6.66%206.66%200%200%201-4.033.595.969.969%200%200%201-.847-.803%201.056%201.056%200%200%201%20.438-1.1c.496-.327.876-.803%201.168-1.368C.76%2014.062%200%2011.981%200%209.87zm8.33.345a1.415%201.415%200%201%200-2.83%200%201.415%201.415%200%200%200%202.83%200zm1.277%200a1.415%201.415%200%201%200%202.831%200%201.415%201.415%200%200%200-2.83%200zm4.153%200a1.415%201.415%200%201%200%202.83%200%201.415%201.415%200%200%200-2.83%200z%22%20fill%3D%22%23A5A5A6%22%20fill-rule%3D%22nonzero%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+.svgicon--message-bubble:hover {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2222%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3EMessages%3C%2Ftitle%3E%3Cpath%20d%3D%22M0%209.87C0%204.43%204.937-.03%2011.015%200%2017.063%200%2022%204.43%2022%209.9c0%205.471-4.908%209.9-10.985%209.9-1.987%200-3.886-.476-5.58-1.368a6.66%206.66%200%200%201-4.033.595.969.969%200%200%201-.847-.803%201.056%201.056%200%200%201%20.438-1.1c.496-.327.876-.803%201.168-1.368C.76%2014.062%200%2011.981%200%209.87zm8.33.345a1.415%201.415%200%201%200-2.83%200%201.415%201.415%200%200%200%202.83%200zm1.277%200a1.415%201.415%200%201%200%202.831%200%201.415%201.415%200%200%200-2.83%200zm4.153%200a1.415%201.415%200%201%200%202.83%200%201.415%201.415%200%200%200-2.83%200z%22%20fill%3D%22%23ffffff%22%20fill-rule%3D%22nonzero%22%2F%3E%3C%2Fsvg%3E');
 }
 .svgicon--blank-profile-photo {
   background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2240%22%20height%3D%2240%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3EEmpty%20Avatar%3C%2Ftitle%3E%3Cg%20stroke%3D%22%23F26B3B%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Ccircle%20stroke-width%3D%222%22%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2219%22%2F%3E%3Cpath%20d%3D%22M20.001%2021.34c2.56%200%204.642-2.45%204.642-5.463C24.643%2013.006%2022.733%2011%2020%2011c-2.733%200-4.642%202.005-4.642%204.877%200%203.012%202.082%205.464%204.642%205.464zm0-8.814c1.852%200%203.096%201.347%203.096%203.35%200%202.172-1.389%203.939-3.096%203.939s-3.096-1.767-3.096-3.938c0-2.004%201.244-3.35%203.096-3.35zm.474%2010.323h-.95c-4.5%200-7.525%202.567-7.525%206.388%200%20.422.346.763.773.763a.768.768%200%200%200%20.772-.763c0-3.588%203.221-4.862%205.98-4.862h.95c2.758%200%205.98%201.273%205.98%204.862%200%20.422.345.763.772.763a.768.768%200%200%200%20.773-.763c.001-3.82-3.023-6.388-7.525-6.388z%22%20stroke-width%3D%22.5%22%20fill%3D%22%23F36937%22%20fill-rule%3D%22nonzero%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
@@ -1188,14 +1217,19 @@ Styleguide 1.3
 .icon-filter-close:hover {
   background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%22300%22%20height%3D%22300%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Ctitle%3EIcons%2FClose%3C%2Ftitle%3E%3Cdefs%3E%3Cpath%20d%3D%22M242.456%209.972l-92.261%2093.302L57.058%209.972C44.069-2.14%2023.846-1.788%2011.29%2010.778c-12.545%2012.58-12.895%2032.84-.805%2045.85l93.137%2093.301-93.137%2092.426a33.075%2033.075%200%200%200-10.48%2023.568%2033.004%2033.004%200%200%200%209.651%2023.918%2032.914%2032.914%200%200%200%2023.877%209.668A32.929%2032.929%200%200%200%2057.059%20289l93.137-92.413%2092.261%2093.524c13.163%2013.187%2034.508%2013.187%2047.67%200%2013.163-13.187%2013.164-34.57%200-47.755l-93.357-92.426%2093.137-93.302c12.86-13.128%2012.661-34.207-.444-47.088-13.105-12.883-34.146-12.696-47.004.433h-.003z%22%20id%3D%22a%22%2F%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cmask%20id%3D%22b%22%20fill%3D%22%23fff%22%3E%3Cuse%20xlink%3Ahref%3D%22%23a%22%2F%3E%3C%2Fmask%3E%3Cuse%20fill%3D%22%23D13E2F%22%20fill-rule%3D%22nonzero%22%20xlink%3Ahref%3D%22%23a%22%2F%3E%3Cpath%20d%3D%22M0%200h300v300H0z%22%20mask%3D%22url%28%23b%29%22%20fill%3D%22%23D13E2F%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
 }
+.svgicon--calendar-plain,
+.svgicon--calendar,
+.icon-end-lease,
+.icon.endLease {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%22279%22%20height%3D%22300%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Ctitle%3EIcons%2FCalendar%3C%2Ftitle%3E%3Cdefs%3E%3Cpath%20d%3D%22M32.429%20278.571h48.214v-48.214H32.429v48.214zm58.928%200h53.572v-48.214H91.357v48.214zM32.43%20219.643h48.214V166.07H32.429v53.572zm58.928%200h53.572V166.07H91.357v53.572zM32.43%20155.357h48.214v-48.214H32.429v48.214zm123.214%20123.214h53.571v-48.214h-53.571v48.214zM91.357%20155.357h53.572v-48.214H91.357v48.214zM219.93%20278.571h48.214v-48.214h-48.214v48.214zm-64.286-58.928h53.571V166.07h-53.571v53.572zM96.714%2075V26.786c0-2.846-2.51-5.357-5.357-5.357H80.643c-2.846%200-5.357%202.51-5.357%205.357V75c0%202.846%202.51%205.357%205.357%205.357h10.714c2.846%200%205.357-2.511%205.357-5.357zM219.93%20219.643h48.214V166.07h-48.214v53.572zm-64.286-64.286h53.571v-48.214h-53.571v48.214zm64.286%200h48.214v-48.214h-48.214v48.214zM225.286%2075V26.786c0-2.846-2.511-5.357-5.357-5.357h-10.715c-2.846%200-5.357%202.51-5.357%205.357V75c0%202.846%202.511%205.357%205.357%205.357h10.715c2.846%200%205.357-2.511%205.357-5.357zm64.285-10.714V278.57c0%2011.72-9.71%2021.429-21.428%2021.429H32.429C20.709%20300%2011%20290.29%2011%20278.571V64.286c0-11.719%209.71-21.429%2021.429-21.429h21.428V26.786C53.857%2012.054%2065.911%200%2080.643%200h10.714c14.732%200%2026.786%2012.054%2026.786%2026.786v16.071h64.286V26.786C182.429%2012.054%20194.482%200%20209.214%200h10.715c14.732%200%2026.785%2012.054%2026.785%2026.786v16.071h21.429c11.719%200%2021.428%209.71%2021.428%2021.429z%22%20id%3D%22a%22%2F%3E%3C%2Fdefs%3E%3Cg%20transform%3D%22translate%28-11%29%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cmask%20id%3D%22b%22%20fill%3D%22%23fff%22%3E%3Cuse%20xlink%3Ahref%3D%22%23a%22%2F%3E%3C%2Fmask%3E%3Cuse%20fill%3D%22%23767676%22%20xlink%3Ahref%3D%22%23a%22%2F%3E%3Cpath%20d%3D%22M0%200h300v300H0z%22%20mask%3D%22url%28%23b%29%22%20fill%3D%22%23A5A5A6%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: left center;
+}
 .svgicon--calendar,
 .icon-end-lease,
 .icon.endLease {
   cursor: pointer;
   background-size: 14px;
-  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%22279%22%20height%3D%22300%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Ctitle%3EIcons%2FCalendar%3C%2Ftitle%3E%3Cdefs%3E%3Cpath%20d%3D%22M32.429%20278.571h48.214v-48.214H32.429v48.214zm58.928%200h53.572v-48.214H91.357v48.214zM32.43%20219.643h48.214V166.07H32.429v53.572zm58.928%200h53.572V166.07H91.357v53.572zM32.43%20155.357h48.214v-48.214H32.429v48.214zm123.214%20123.214h53.571v-48.214h-53.571v48.214zM91.357%20155.357h53.572v-48.214H91.357v48.214zM219.93%20278.571h48.214v-48.214h-48.214v48.214zm-64.286-58.928h53.571V166.07h-53.571v53.572zM96.714%2075V26.786c0-2.846-2.51-5.357-5.357-5.357H80.643c-2.846%200-5.357%202.51-5.357%205.357V75c0%202.846%202.51%205.357%205.357%205.357h10.714c2.846%200%205.357-2.511%205.357-5.357zM219.93%20219.643h48.214V166.07h-48.214v53.572zm-64.286-64.286h53.571v-48.214h-53.571v48.214zm64.286%200h48.214v-48.214h-48.214v48.214zM225.286%2075V26.786c0-2.846-2.511-5.357-5.357-5.357h-10.715c-2.846%200-5.357%202.51-5.357%205.357V75c0%202.846%202.511%205.357%205.357%205.357h10.715c2.846%200%205.357-2.511%205.357-5.357zm64.285-10.714V278.57c0%2011.72-9.71%2021.429-21.428%2021.429H32.429C20.709%20300%2011%20290.29%2011%20278.571V64.286c0-11.719%209.71-21.429%2021.429-21.429h21.428V26.786C53.857%2012.054%2065.911%200%2080.643%200h10.714c14.732%200%2026.786%2012.054%2026.786%2026.786v16.071h64.286V26.786C182.429%2012.054%20194.482%200%20209.214%200h10.715c14.732%200%2026.785%2012.054%2026.785%2026.786v16.071h21.429c11.719%200%2021.428%209.71%2021.428%2021.429z%22%20id%3D%22a%22%2F%3E%3C%2Fdefs%3E%3Cg%20transform%3D%22translate%28-11%29%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cmask%20id%3D%22b%22%20fill%3D%22%23fff%22%3E%3Cuse%20xlink%3Ahref%3D%22%23a%22%2F%3E%3C%2Fmask%3E%3Cuse%20fill%3D%22%23767676%22%20xlink%3Ahref%3D%22%23a%22%2F%3E%3Cpath%20d%3D%22M0%200h300v300H0z%22%20mask%3D%22url%28%23b%29%22%20fill%3D%22%23A5A5A6%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
-  background-repeat: no-repeat;
-  background-position: left center;
 }
 .svgicon--calendar:hover,
 .icon-end-lease:hover,
@@ -1508,6 +1542,10 @@ Styleguide 1.3
   background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%22300%22%20height%3D%22300%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Ctitle%3EIcons%2FWrench%3C%2Ftitle%3E%3Cdefs%3E%3Cpath%20d%3D%22M66.281%20245.405c0-6.391-5.295-11.686-11.686-11.686-6.39%200-11.686%205.295-11.686%2011.686%200%206.39%205.296%2011.686%2011.686%2011.686%206.391%200%2011.686-5.296%2011.686-11.686zm117.59-76.69L59.343%20293.246c-4.2%204.199-10.226%206.755-16.434%206.755s-12.233-2.556-16.616-6.756L6.94%20273.524C2.556%20269.324%200%20263.299%200%20257.091s2.556-12.234%206.939-16.616l124.345-124.346c9.495%2023.92%2028.667%2043.092%2052.587%2052.587zm115.764-79.427c0%206.025-2.191%2013.512-4.2%2019.355-11.503%2032.501-42.727%2054.96-77.237%2054.96-45.1%200-81.801-36.701-81.801-81.801S173.098%200%20218.198%200c13.33%200%2030.676%204.017%2041.814%2011.503%201.826%201.278%202.922%202.922%202.922%205.113%200%202.008-1.278%204.017-2.922%205.113l-53.5%2030.858v40.9l35.24%2019.538c6.026-3.47%2048.388-30.128%2052.04-30.128%203.652%200%205.843%202.739%205.843%206.39z%22%20id%3D%22a%22%2F%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cmask%20id%3D%22b%22%20fill%3D%22%23fff%22%3E%3Cuse%20xlink%3Ahref%3D%22%23a%22%2F%3E%3C%2Fmask%3E%3Cuse%20fill%3D%22%23FFF%22%20xlink%3Ahref%3D%22%23a%22%2F%3E%3Cpath%20d%3D%22M0%200h300v300H0z%22%20mask%3D%22url%28%23b%29%22%20fill%3D%22%23F26B3B%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
   background-repeat: no-repeat;
 }
+.svgicon--wrench-grey {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%22300%22%20height%3D%22300%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Ctitle%3EIcons%2FWrench%3C%2Ftitle%3E%3Cdefs%3E%3Cpath%20d%3D%22M66.281%20245.405c0-6.391-5.295-11.686-11.686-11.686-6.39%200-11.686%205.295-11.686%2011.686%200%206.39%205.296%2011.686%2011.686%2011.686%206.391%200%2011.686-5.296%2011.686-11.686zm117.59-76.69L59.343%20293.246c-4.2%204.199-10.226%206.755-16.434%206.755s-12.233-2.556-16.616-6.756L6.94%20273.524C2.556%20269.324%200%20263.299%200%20257.091s2.556-12.234%206.939-16.616l124.345-124.346c9.495%2023.92%2028.667%2043.092%2052.587%2052.587zm115.764-79.427c0%206.025-2.191%2013.512-4.2%2019.355-11.503%2032.501-42.727%2054.96-77.237%2054.96-45.1%200-81.801-36.701-81.801-81.801S173.098%200%20218.198%200c13.33%200%2030.676%204.017%2041.814%2011.503%201.826%201.278%202.922%202.922%202.922%205.113%200%202.008-1.278%204.017-2.922%205.113l-53.5%2030.858v40.9l35.24%2019.538c6.026-3.47%2048.388-30.128%2052.04-30.128%203.652%200%205.843%202.739%205.843%206.39z%22%20id%3D%22a%22%2F%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cmask%20id%3D%22b%22%20fill%3D%22%23fff%22%3E%3Cuse%20xlink%3Ahref%3D%22%23a%22%2F%3E%3C%2Fmask%3E%3Cuse%20fill%3D%22%23FFF%22%20xlink%3Ahref%3D%22%23a%22%2F%3E%3Cpath%20d%3D%22M0%200h300v300H0z%22%20mask%3D%22url%28%23b%29%22%20fill%3D%22%23A5A5A6%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+}
 .symbol.workOrder {
   background-position: left 13px;
 }
@@ -1661,6 +1699,16 @@ Styleguide 1.3.1
 .icon.enable {
   background-size: 18px;
 }
+.icon--circle-container {
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 100%;
+  border: 1px solid #A5A5A6;
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 15px;
+}
 .icon,
 .symbol {
   line-height: 20px;
@@ -1747,7 +1795,7 @@ Styleguide 1.3.1
   background-color: transparent;
 }
 .row--top-border {
-  border-bottom: 1px solid #E2E2E2;
+  border-top: 1px solid #E2E2E2;
 }
 .row--bottom-border {
   border-bottom: 1px solid #E2E2E2;
@@ -1757,6 +1805,33 @@ Styleguide 1.3.1
 }
 .cursor--pointer:hover {
   cursor: pointer !important;
+}
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
+.rounded-small {
+  border-radius: 3px;
+}
+.rounded-medium {
+  border-radius: 5px;
+}
+.rounded-medium-bottom {
+  border-radius: 0 0 5px 5px;
+}
+.no-border {
+  border: none !important;
+}
+.screen-reader-only {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  border: 0;
+  margin: -1px;
+  padding: 0;
 }
 /*
 Components
@@ -1843,9 +1918,9 @@ Styleguide 2.15
   padding: 15px 20px;
   border-radius: 5px;
   font-size: 14px;
-  color: #767676;
-  background-color: #F1F1F1;
-  border: 1px solid #E4E4E4;
+  color: #2A7AB0;
+  background-color: #EBf6F9;
+  border: 1px solid #7BB5D8;
   box-sizing: border-box;
 }
 .alert--success {
@@ -2622,7 +2697,7 @@ Styleguide 2.2
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.5px;
-  color: rgba(255, 255, 255, 0.35);
+  color: #A5A5A6;
   padding-bottom: 18px;
 }
 .utility-nav__link:hover,
@@ -2814,6 +2889,9 @@ Styleguide 2.13
 }
 .popover__container--help-menu {
   width: 255px;
+}
+.popover__container--medium {
+  width: 300px;
 }
 .popover__container--large {
   width: 600px;
@@ -3040,21 +3118,6 @@ Styleguide 2.13
   border-radius: 5px !important;
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.05) !important;
 }
-.rounded-small {
-  border-radius: 3px;
-}
-.rounded-medium {
-  border-radius: 5px;
-}
-.rounded-medium-bottom {
-  border-radius: 0 0 5px 5px;
-}
-.pull-left {
-  float: left;
-}
-.pull-right {
-  float: right;
-}
 .datePickerHolder,
 .datepicker__container {
   display: inline-block;
@@ -3136,7 +3199,7 @@ Styleguide 2.13
   visibility: hidden;
 }
 .ui-datepicker-prev {
-  float: left;
+  float: left !important;
 }
 .ui-datepicker-prev:hover {
   background: url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0A%3Csvg%20width%3D%226px%22%20height%3D%2210px%22%20viewBox%3D%220%200%206%2010%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3C%21--%20Generator%3A%20Sketch%2044%20%2841411%29%20-%20http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch%20--%3E%0A%20%20%20%20%3Ctitle%3EIcons%2FChevron%2FRight%20Grey%3C%2Ftitle%3E%0A%20%20%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C%2Fdesc%3E%0A%20%20%20%20%3Cdefs%3E%3C%2Fdefs%3E%0A%20%20%20%20%3Cg%20id%3D%22UI-Pattern-Library---Datepicker%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%0A%20%20%20%20%20%20%20%20%3Cg%20id%3D%2202.02.-Calendar-input-field---Open%22%20transform%3D%22translate%28-414.000000%2C%20-95.000000%29%22%20fill%3D%22%2373B680%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Calendar%22%20transform%3D%22translate%2810.000000%2C%2070.000000%29%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Icons%2FChevron%2FRight-Grey%22%20transform%3D%22translate%28404.000000%2C%2025.000000%29%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M7.50887596%2C2.49512874%20C7.29788761%2C2.29123173%206.95485089%2C2.29053584%206.74241741%2C2.49373695%20L2.66318881%2C6.40744607%20L-1.40827224%2C2.48625609%20C-1.61980251%2C2.28235908%20-1.96283923%2C2.28235908%20-2.17455015%2C2.48625609%20C-2.38626106%2C2.6901531%20-2.38626106%2C3.02035491%20-2.17455015%2C3.22425191%20L2.27932729%2C7.51374391%20C2.38518275%2C7.61569241%202.5242761%2C7.66666667%202.66264689%2C7.66666667%20C2.80083704%2C7.66666667%202.93920782%2C7.61569241%203.04506328%2C7.51443981%20L7.50743084%2C3.23312457%20C7.71914175%2C3.02992345%207.71986431%2C2.69885177%207.50887596%2C2.49512874%20Z%22%20id%3D%22Page-1-Copy-2%22%20transform%3D%22translate%282.666667%2C%205.000000%29%20rotate%2890.000000%29%20translate%28-2.666667%2C%20-5.000000%29%20%22%3E%3C%2Fpath%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E);
@@ -3144,7 +3207,7 @@ Styleguide 2.13
   background-position: 15px 25px;
 }
 .ui-datepicker-next {
-  float: right;
+  float: right !important;
   background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNnB4IiBoZWlnaHQ9IjEwcHgiIHZpZXdCb3g9IjAgMCA2IDEwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0NCAoNDE0MTEpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPkljb25zL0NoZXZyb24vUmlnaHQgR3JleTwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJVSS1QYXR0ZXJuLUxpYnJhcnktLS1EYXRlcGlja2VyIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0iMDIuMDIuLUNhbGVuZGFyLWlucHV0LWZpZWxkLS0tT3BlbiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQxNC4wMDAwMDAsIC05NS4wMDAwMDApIiBmaWxsPSIjQTVBNUE2Ij4KICAgICAgICAgICAgPGcgaWQ9IkNhbGVuZGFyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMC4wMDAwMDAsIDcwLjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPGcgaWQ9Ikljb25zL0NoZXZyb24vUmlnaHQtR3JleSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA0LjAwMDAwMCwgMjUuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTcuNTA4ODc1OTYsMi40OTUxMjg3NCBDNy4yOTc4ODc2MSwyLjI5MTIzMTczIDYuOTU0ODUwODksMi4yOTA1MzU4NCA2Ljc0MjQxNzQxLDIuNDkzNzM2OTUgTDIuNjYzMTg4ODEsNi40MDc0NDYwNyBMLTEuNDA4MjcyMjQsMi40ODYyNTYwOSBDLTEuNjE5ODAyNTEsMi4yODIzNTkwOCAtMS45NjI4MzkyMywyLjI4MjM1OTA4IC0yLjE3NDU1MDE1LDIuNDg2MjU2MDkgQy0yLjM4NjI2MTA2LDIuNjkwMTUzMSAtMi4zODYyNjEwNiwzLjAyMDM1NDkxIC0yLjE3NDU1MDE1LDMuMjI0MjUxOTEgTDIuMjc5MzI3MjksNy41MTM3NDM5MSBDMi4zODUxODI3NSw3LjYxNTY5MjQxIDIuNTI0Mjc2MSw3LjY2NjY2NjY3IDIuNjYyNjQ2ODksNy42NjY2NjY2NyBDMi44MDA4MzcwNCw3LjY2NjY2NjY3IDIuOTM5MjA3ODIsNy42MTU2OTI0MSAzLjA0NTA2MzI4LDcuNTE0NDM5ODEgTDcuNTA3NDMwODQsMy4yMzMxMjQ1NyBDNy43MTkxNDE3NSwzLjAyOTkyMzQ1IDcuNzE5ODY0MzEsMi42OTg4NTE3NyA3LjUwODg3NTk2LDIuNDk1MTI4NzQgWiIgaWQ9IlBhZ2UtMS1Db3B5LTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIuNjY2NjY3LCA1LjAwMDAwMCkgcm90YXRlKC05MC4wMDAwMDApIHRyYW5zbGF0ZSgtMi42NjY2NjcsIC01LjAwMDAwMCkgIj48L3BhdGg+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==);
   background-repeat: no-repeat;
   background-position: 10px 25px;
@@ -3248,7 +3311,7 @@ Styleguide 2.13
   border-radius: 0 0 5px 5px;
 }
 .ui-datepicker-close {
-  float: right;
+  float: right !important;
 }
 .ui-datepicker-trigger {
   height: 40px;
@@ -3849,6 +3912,9 @@ Styleguide 2.14
 .data-grid__cell--no-left-border {
   border-left: 0 !important;
 }
+.data-grid__cell--no-right-border {
+  border-right: 0 !important;
+}
 .data-grid__cell--border-left-style-solid {
   border-left-style: solid !important;
 }
@@ -4007,6 +4073,10 @@ Styleguide 2.14
 }
 .data-grid__header--no-top-border .data-grid__cell {
   border-top: 0 !important;
+}
+.data-grid__header--external-header .data-grid__cell {
+  border-top: 0 !important;
+  background: #FFFFFF !important;
 }
 .data-grid__header-text--checkbox {
   margin-top: 1px;
@@ -5233,16 +5303,72 @@ Buttons
 
 These are our buttons.
 
-.btn--primary - Button used for primary page actions
-.btn--disabled - This button is disabled
-.btn--marketing - Marketing button
-.btn--hidden - Shhhh, this button is hiding
-.btn--wait - Button shown when waiting for an action to complete
-.btn--waiting - Button shown when waiting for an action to complete with spinner
-.btn-loading--dark - Button shown when waiting for an action to complete with dark spinner
-
 Markup:
-<button class="btn {{modifier_class}}">Activate property</button>
+<div class="kss-modifier__default-name kss-style">Default styling</div>
+<div class="kss-modifier__example">
+    <button class="btn ">Activate property</button>
+    <div class="kss-modifier__example-footer"></div>
+</div>
+<div class="kss-modifier__name kss-style">.btn--primary</div>
+<div class="kss-modifier__description kss-style">Button used for primary page actions</div>
+<div class="kss-modifier__example">
+    <button class="btn btn--primary">Activate property</button>
+    <div class="kss-modifier__example-footer"></div>
+</div>
+<div class="kss-modifier__name kss-style">.btn--disabled</div>
+<div class="kss-modifier__description kss-style">This button is disabled</div>
+<div class="kss-modifier__example">
+    <button class="btn btn--disabled">Activate property</button>
+    <div class="kss-modifier__example-footer"></div>
+</div>
+<div class="kss-modifier__name kss-style">.btn--marketing</div>
+<div class="kss-modifier__description kss-style">Marketing button</div>
+<div class="kss-modifier__example">
+    <button class="btn btn--marketing">Activate property</button>
+    <div class="kss-modifier__example-footer"></div>
+</div>
+<div class="kss-modifier__name kss-style">.btn--hidden</div>
+<div class="kss-modifier__description kss-style">Shhhh, this button is hiding</div>
+<div class="kss-modifier__example">
+    <button class="btn btn--hidden">Activate property</button>
+    <div class="kss-modifier__example-footer"></div>
+</div>
+<div class="kss-modifier__name kss-style">.btn--wait</div>
+<div class="kss-modifier__description kss-style">Button shown when waiting for an action to complete</div>
+<div class="kss-modifier__example">
+    <button class="btn btn--wait">Activate property</button>
+    <div class="kss-modifier__example-footer"></div>
+</div>
+<div class="kss-modifier__name kss-style">.btn--waiting</div>
+<div class="kss-modifier__description kss-style">Button shown when waiting for an action to complete with spinner</div>
+<div class="kss-modifier__example">
+    <button class="btn btn--waiting">Activate property</button>
+    <div class="kss-modifier__example-footer"></div>
+</div>
+<div class="kss-modifier__name kss-style">.btn-loading--dark</div>
+<div class="kss-modifier__description kss-style">Button shown when waiting for an action to complete with dark spinner</div>
+<div class="kss-modifier__example">
+    <button class="btn btn-loading--dark">Activate property</button>
+    <div class="kss-modifier__example-footer"></div>
+</div>
+<div class="kss-modifier__name kss-style">.btn--send-sms</div>
+<div class="kss-modifier__description kss-style">Button used on SMS messages to send message</div>
+<div class="kss-modifier__example">
+    <button class="btn btn--primary btn--send-sms"></button>
+    <div class="kss-modifier__example-footer"></div>
+</div>
+<div class="kss-modifier__name kss-style">.btn--send-sms loading</div>
+<div class="kss-modifier__description kss-style">loading state on SMS button to indicate message is being sent</div>
+<div class="kss-modifier__example">
+    <button class="btn btn--send-sms" disabled></button>
+    <div class="kss-modifier__example-footer"></div>
+</div>
+<div class="kss-modifier__name kss-style">.btn--image-upload</div>
+<div class="kss-modifier__description kss-style">Button used on SMS messages to trigger file upload modal</div>
+<div class="kss-modifier__example">
+    <button class="btn btn--image-upload svgicon--sms-upload-image"></button>
+    <div class="kss-modifier__example-footer"></div>
+</div>
 
 Styleguide 2.8
 */
@@ -5358,6 +5484,7 @@ Styleguide 2.10
   border: 1px solid #E2E2E2;
   box-shadow: none;
   background-image: inherit;
+  background-color: #FFFFFF;
   color: #A5A5A6;
   cursor: not-allowed;
 }
@@ -5527,6 +5654,61 @@ Styleguide 2.10
   z-index: 1000;
   background: url('/Manager/static-images/spinner-medium.gif') center left no-repeat;
 }
+.btn--circle {
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 100%;
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 15px;
+}
+.btn--send-sms {
+  min-width: 75px;
+  color: #FFFFFF;
+  background-color: #73B680;
+  border: 1px solid #50975E;
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 100%;
+  background-position: 12px center;
+  background-size: 15px;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2215%22%20height%3D%2215%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3EShape%3C%2Ftitle%3E%3Cpath%20d%3D%22M14.819.178a.641.641%200%200%200-.649-.142L.385%205.551a.614.614%200%200%200-.344.79.579.579%200%200%200%20.344.345l5.737%202.19%202.19%205.74c.08.242.303.384.567.384a.611.611%200%200%200%20.568-.385L14.96.827c.081-.223.04-.487-.141-.65zM2.269%206.099l9.59-3.832-5.433%205.434L2.27%206.099zm6.63%206.63L7.297%208.573l5.433-5.435L8.9%2012.73z%22%20fill-rule%3D%22nonzero%22%20fill%3D%22%23FFF%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+}
+.btn--send-sms:hover {
+  color: #FFFFFF;
+  background-color: #50975E;
+}
+.btn--send-sms:active,
+.btn--send-sms:focus {
+  color: rgba(255, 255, 255, 0.5);
+  outline: none;
+  border: 1px solid #50975E;
+  background-color: #50975E;
+}
+.btn--send-sms[disabled] {
+  background-image: none;
+  background-color: #73B680;
+}
+.btn--image-upload {
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 100%;
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 15px;
+}
+.btn--image-upload:hover {
+  border: 1px solid #73B680;
+}
+.btn--image-upload-disabled:hover {
+  cursor: not-allowed;
+  box-shadow: none;
+  border: 1px solid #E2E2E2;
+}
 .btn--no-border-radius {
   border-radius: 0;
 }
@@ -5616,6 +5798,20 @@ Styleguide 2.10
 .btn--nps:focus {
   box-shadow: none;
 }
+.btn--ql:before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  display: block;
+  background: url('/Manager/static-images//shortcuts.png') no-repeat center;
+  background-size: 20px;
+}
+.btn--ql:hover:before,
+.btn--ql:focus:before,
+.btn--ql:active:before {
+  background: url('/Manager/static-images//shortcuts_hover.png') no-repeat center;
+  background-size: 20px;
+}
 .btn--neg-top-sm {
   margin-top: -10px;
 }
@@ -5650,6 +5846,28 @@ Styleguide 2.10
   vertical-align: middle;
   animation: rotation 1s infinite linear;
   background-size: 16px 16px;
+}
+.btn-loading--light:hover,
+.btn--send-sms[disabled]:hover {
+  box-shadow: none;
+}
+.btn-loading--light:before,
+.btn--send-sms[disabled]:before {
+  position: absolute;
+  top: 11px;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  content: "";
+  background: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2215%22%20height%3D%2215%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3EIcons%2FWaiting%2FWhite%3C%2Ftitle%3E%3Cdefs%3E%3ClinearGradient%20x1%3D%2255.568%25%22%20y1%3D%224.698%25%22%20y2%3D%2255.65%25%22%20id%3D%22a%22%3E%3Cstop%20stop-color%3D%22%23FFF%22%20stop-opacity%3D%22.09%22%20offset%3D%220%25%22%2F%3E%3Cstop%20stop-color%3D%22%23FFF%22%20offset%3D%22100%25%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M7.5%2014.983A7.483%207.483%200%200%200%2014.983%207.5a.747.747%200%200%200-.75-.75.747.747%200%200%200-.75.75c0%203.3-2.684%205.983-5.983%205.983A5.988%205.988%200%200%201%201.517%207.5c0-3.3%202.684-5.983%205.983-5.983.417%200%20.75-.333.75-.75a.747.747%200%200%200-.75-.75A7.482%207.482%200%200%200%20.017%207.5%207.482%207.482%200%200%200%207.5%2014.983z%22%20transform%3D%22matrix%28-1%200%200%201%2015%200%29%22%20fill-rule%3D%22nonzero%22%20fill%3D%22url%28%23a%29%22%2F%3E%3C%2Fsvg%3E') no-repeat;
+  vertical-align: middle;
+  animation: rotation 1s infinite linear;
+  background-size: 18px 18px;
+}
+.btn-loading--no-border {
+  margin: 0px !important;
+  border-width: 0px !important;
+  padding: 0px;
 }
 .report__form-actions-container .btn-loading--dark {
   float: right;
@@ -5726,6 +5944,9 @@ Styleguide 2.11
 .btn-toolbar > .input-group {
   margin-left: 5px;
 }
+.btn-toolbar--with-popover .popover__link .btn {
+  float: none;
+}
 .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
   border-radius: 0;
 }
@@ -5770,9 +5991,6 @@ Button Group
 .button-group li {
   float: left;
 }
-.button-group li:first-child .btn {
-  border-radius: 5px 0 0 5px;
-}
 .button-group li .btn {
   margin: 0;
   border-right: 1px solid transparent;
@@ -5799,28 +6017,51 @@ Button Group
 .button-group li .btn.btn--nps-selected:focus {
   color: #FFFFFF;
 }
+.button-group li:first-child .btn {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
 .button-group li:last-child .btn {
   border-right: 1px solid #E2E2E2;
-  border-width: 1px 1px 1px 1px;
-  border-radius: 0 5px 5px 0;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .button-group li:last-child .btn:hover {
-  border: 1px solid #73B680;
-  color: #73B680;
-  text-decoration: none;
+  border-right: 1px solid #73B680;
 }
-.button-group li:last-child .btn:active,
-.button-group li:last-child .btn:focus {
-  outline: none;
-  color: #50975E;
-  border: 1px solid #50975E;
+.button-group li .btn--disabled,
+.button-group li .btn[disabled],
+.button-group li:last-child .btn--disabled,
+.button-group li:last-child .btn[disabled] {
+  color: #A5A5A6;
+  background-color: #FFFFFF;
+  cursor: default;
+  border: 1px solid #E2E2E2;
 }
-.button-group li:last-child .btn.btn--nps-selected {
-  color: #FFFFFF;
+.button-group li .btn--disabled:hover,
+.button-group li .btn[disabled]:hover,
+.button-group li:last-child .btn--disabled:hover,
+.button-group li:last-child .btn[disabled]:hover,
+.button-group li .btn--disabled:active,
+.button-group li .btn[disabled]:active,
+.button-group li:last-child .btn--disabled:active,
+.button-group li:last-child .btn[disabled]:active,
+.button-group li .btn--disabled:focus,
+.button-group li .btn[disabled]:focus,
+.button-group li:last-child .btn--disabled:focus,
+.button-group li:last-child .btn[disabled]:focus {
+  border: 1px solid #E2E2E2;
+  box-shadow: none;
+  background-image: inherit;
+  background-color: #FFFFFF;
+  color: #A5A5A6;
+  cursor: not-allowed;
 }
-.button-group li:last-child .btn.btn--nps-selected:hover,
-.button-group li:last-child .btn.btn--nps-selected:focus {
-  color: #FFFFFF;
+.button-group li .btn--disabled:hover,
+.button-group li .btn[disabled]:hover,
+.button-group li:last-child .btn--disabled:hover,
+.button-group li:last-child .btn[disabled]:hover {
+  border-right: 1px solid #E2E2E2;
 }
 .button-group .sub-menu li {
   float: none;
@@ -5920,7 +6161,6 @@ Styleguide 2.7
   position: relative;
   width: 100%;
   top: -1px;
-  z-index: 100;
   padding: 15px;
   border: 1px solid #E2E2E2;
   border-radius: 5px;
@@ -5993,7 +6233,7 @@ Markup:
             <div class="icon-modal-close"></div>
         </a>
         <div class="file-upload__dropzone">
-            Drag & Drop files here or 
+            Drag & Drop files here or
             <label class="file-upload__button">
                 <input class="file-upload__input form-element--file-upload" type="file" name="files[]" id="file-upload-input"/>
                 <span class="btn-cancel btn--default file-upload__link">Browse.</span>
@@ -6008,7 +6248,7 @@ Markup:
             <div class="icon-modal-close"></div>
         </a>
         <div class="file-upload__dropzone file-upload__dropzone--hover">
-            Drag & Drop files here or 
+            Drag & Drop files here or
             <label class="file-upload__button">
                 <input class="file-upload__input form-element--file-upload" type="file" name="files[]" id="file-upload-input"/>
                 <span class="btn-cancel btn--default file-upload__link">Browse.</span>
@@ -6047,6 +6287,7 @@ Styleguide 2.16
   text-align: center;
   color: #73B680;
   text-decoration: underline;
+  font-size: 14px;
 }
 .file-upload__input {
   display: none;
@@ -6065,6 +6306,9 @@ Styleguide 2.16
 .file-upload__dropzone--hover {
   border: 1px dashed #73B680;
   box-shadow: 0 6px 12px 2px rgba(0, 0, 0, 0.15);
+}
+.file-upload__dropzone-text {
+  font-size: 14px;
 }
 .file-upload__progress-bar {
   height: 10px;
@@ -6085,15 +6329,29 @@ Styleguide 2.16
 }
 .files__modal-image {
   height: 300px;
+  margin: 15px 0;
   text-align: center;
   background-color: #FFFFFF;
   line-height: 300px;
   border: 1px solid #CFCFCF;
-  margin: 15px 0;
+}
+.files__modal-image:hover {
+  text-decoration: none;
+}
+.files__modal-image--image-preview {
+  height: auto;
+  max-height: 300px;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
 }
 .files__modal-image--file {
+  display: block;
   line-height: normal;
   padding-top: 50px;
+}
+.files__modal-image--small-padding {
+  padding-top: 38px;
 }
 .files__modal-image--preview {
   background-image: url("/Manager/static-images/file-preview-bg.png");
@@ -6102,6 +6360,17 @@ Styleguide 2.16
 }
 .files__modal-image--preview:hover {
   cursor: pointer;
+}
+.files__modal-image--enforce-image-size {
+  min-width: 100px;
+  min-height: 100px;
+  max-width: 500px;
+  max-height: 300px;
+}
+.files__cannot-preview-message {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #4F4F52;
 }
 .files__preview-icon-container {
   width: 145px;
@@ -6225,7 +6494,7 @@ Styleguide 2.25
 }
 .file-preview__header {
   background: linear-gradient(0deg, rgba(69, 69, 69, 0) 0%, #313131 100%);
-  height: 118px;
+  height: 100px;
 }
 .file-preview__header-content {
   max-width: 1175px;
@@ -6293,6 +6562,37 @@ Styleguide 2.25
 }
 .file-preview__preview--audio {
   width: 650px;
+}
+.file-preview__modal-container {
+  margin: 100px auto;
+  width: 570px;
+}
+.files__preview-icon-text {
+  font-size: 24px;
+  margin: 0 25px 25px 0;
+  font-weight: 500;
+  line-height: 22px;
+  color: #4F4F52;
+  word-wrap: break-word;
+}
+.file-preview__btn-download {
+  box-sizing: border-box;
+  width: 150px;
+  background-position: 30px;
+  text-indent: 15px;
+}
+.file-preview__btn-email {
+  box-sizing: border-box;
+  width: 150px;
+  background-position: 46px;
+  text-indent: 15px;
+}
+.file-preview__reload-text {
+  color: #FFFFFF;
+  font-size: 12px;
+}
+.file-preview__reload-text:hover {
+  color: #FFFFFF;
 }
 .modal--no-scroll {
   position: relative;
@@ -7284,11 +7584,17 @@ div.reorder-items-container ul.reorder-items > li.reorder-items-placeholder {
 .toggle-container {
   display: inline-block;
 }
+.toggle-container--disabled {
+  opacity: 0.6;
+}
+.toggle-container--disabled:hover,
+.toggle-container--disabled .toggle-slider-container:hover {
+  cursor: not-allowed;
+}
 .toggle-input {
   width: 35px;
   position: absolute;
   opacity: 0;
-  cursor: pointer;
 }
 .toggle-label {
   width: 60px;
@@ -7503,6 +7809,15 @@ Markup:
     <div class="card__text">Your plan should compliment your unique business. If your current plan isn't right, we may have a different one that better suits your needs.</div>
     <a class="btn btn--primary">Update your plan</a>
 </div>
+<h3>Card with header</h3>
+<div class="card card--with-header-content" style="width: 300px;">
+    <div class="card__header">
+        This is a header
+    </div>
+    <div class="card__content">
+        <div class="card__text">This is card text</div>
+    </div>
+</div>
 
 Styleguide 2.22
 */
@@ -7532,6 +7847,29 @@ Styleguide 2.22
   -ms-transform: translate(0px, -5px);
   transform: translate(0px, -5px);
 }
+.card--with-header-content {
+  padding: 0;
+  box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.05);
+}
+.card__header {
+  height: 48px;
+  border-radius: 5px 5px 0 0;
+  border-bottom: 1px solid #E2E2E2;
+  padding: 15px 20px;
+  color: #626265;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  box-sizing: border-box;
+  background-color: #F2F2F2;
+}
+.card__content {
+  padding: 20px;
+  box-sizing: border-box;
+}
+.card__content--no-padding {
+  padding: 0;
+}
 .card__large-icon {
   display: block;
   height: 50px;
@@ -7552,135 +7890,10 @@ Styleguide 2.22
   margin-bottom: 25px;
   line-height: 20px;
 }
-.product-updates-bell__link {
-  display: inline-block;
-  padding-top: 12px;
-  padding-bottom: 18px;
-}
 .product-updates-bell__icon {
   width: 20px;
   height: 21px;
   background-size: 20px;
-}
-.product-updates-bell__counter {
-  position: absolute;
-  display: block;
-  top: -1px;
-  right: 30px;
-  min-width: 20px;
-  padding: 3px 4px;
-  color: #FFFFFF;
-  background-color: #D13E2F;
-  text-align: center;
-  border-radius: 10px;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  line-height: 10px;
-  border: 2px solid #39404F;
-  box-sizing: border-box;
-}
-.product-updates-bell__container {
-  top: 45px;
-  right: 100px;
-}
-.product-updates-bell-menu {
-  width: 400px;
-  min-height: 100px;
-  background-color: #FFFFFF;
-  border: 1px solid #CFCFCF;
-  border-radius: 5px;
-  box-shadow: 0 6px 12px 2px rgba(0, 0, 0, 0.15);
-  box-sizing: border-box;
-}
-.product-updates-bell-menu * {
-  box-sizing: border-box;
-}
-.product-updates-bell-menu__header {
-  padding: 18px 20px;
-  border-bottom: 1px solid #E2E2E2;
-  background-color: rgba(242, 242, 242, 0.5);
-}
-.product-updates-bell-menu__title {
-  line-height: 14px;
-  color: #4F4F52;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  font-size: 12px;
-  text-align: left;
-  text-transform: uppercase;
-}
-.product-updates-bell-menu__footer {
-  padding: 10px 0;
-  border-radius: 0 0 5px 5px;
-}
-.product-updates-bell-menu__footer-link {
-  line-height: 14px;
-  color: #4F4F52;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  font-size: 12px;
-  text-align: left;
-  text-transform: uppercase;
-  padding: 12px 120px;
-}
-.product-update-blurb {
-  display: block;
-  position: relative;
-  width: 100%;
-  padding: 15px 20px 24px 20px;
-  border: 1px solid transparent;
-  border-bottom: 1px solid #E2E2E2;
-}
-.product-update-blurb:hover {
-  cursor: pointer;
-  background-color: #F2F2F2;
-}
-.product-update-blurb--unread {
-  background-color: #F2F2F2;
-}
-.product-update-blurb__image-container {
-  position: absolute;
-  left: 18px;
-  top: 15px;
-  padding: 2px;
-  background-color: #FFFFFF;
-  border: 0.5px solid #E2E2E2;
-}
-.product-update-blurb__image {
-  float: left;
-  display: inline-block;
-  width: 54px;
-  height: 44px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.product-update-blurb__tag {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-}
-.product-update-blurb__title {
-  width: 205px;
-  margin-top: 2px;
-  line-height: 18px;
-  font-size: 14px;
-  color: #4F4F52;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-align: left;
-}
-.product-update-blurb__item-content {
-  display: inline-block;
-  width: 85%;
-  padding-left: 17px;
-}
-.product-update-blurb__description {
-  color: #767676;
-  font-size: 12px;
-  line-height: 16px;
-  text-align: left;
 }
 /*
 Email search
@@ -7751,6 +7964,13 @@ Styleguide 2.23
 .email-search__list {
   display: inline-block;
 }
+.email-search__popover bd-popover .quick-menu-icon {
+  top: 10px;
+  right: 0;
+}
+.email-search__popover .popover__body {
+  margin-top: 11px;
+}
 .email-search__search-input {
   display: list-item;
   float: left;
@@ -7764,7 +7984,7 @@ Styleguide 2.23
 }
 .email-search__search-input-container {
   display: inline-block;
-  margin: 5px 2px;
+  margin: 8px 2px;
   padding: 0;
   background: #FFFFFF;
   border: none;
@@ -7830,7 +8050,7 @@ Styleguide 2.23
 }
 .email-search__recipient {
   display: inline-block;
-  margin: 5px 2px;
+  margin: 8px 2px 0 2px;
   padding: 5px;
   background: #FFFFFF;
   border: 1px solid #E2E2E2;
@@ -7852,6 +8072,14 @@ Styleguide 2.23
 }
 .email-search__recipient--invalid:hover {
   border-color: #DD6A5B;
+}
+.email-search__recipient--warning {
+  color: #744102;
+  background-color: #FFF7EA;
+  border-color: #FEBB44;
+}
+.email-search__recipient--warning:hover {
+  border-color: #FEBB44;
 }
 .email-search__remove-button {
   display: inline-block;
@@ -7896,6 +8124,9 @@ Markup:
 
 Styleguide 2.24
 */
+.profile-photo__main-container {
+  float: left;
+}
 .profile-photo__summary-container {
   float: left;
   margin-top: -20px;
@@ -7920,7 +8151,7 @@ Styleguide 2.24
 .profile-photo--medium {
   width: 50px;
   height: 50px;
-  border-width: 3px;
+  border-width: 2px;
 }
 .profile-photo--large {
   width: 100px;
@@ -7939,8 +8170,8 @@ Styleguide 2.24
   text-transform: uppercase;
 }
 .profile-photo__text--medium {
-  font-size: 20px;
-  line-height: 44px;
+  font-size: 16px;
+  line-height: 46px;
 }
 .profile-photo__text--large {
   font-size: 32px;
@@ -8058,6 +8289,716 @@ Styleguide 2.24
   position: absolute;
   top: 2px;
   right: 5px;
+}
+bd-accordion {
+  display: block;
+  width: 100%;
+}
+.accordion-list__section,
+.accordion-list-group__section-item {
+  border: 1px solid #E2E2E2;
+  border-width: 0px 0px 1px 0px;
+}
+.accordion-list__section--first,
+.accordion-list-group__section-item--first {
+  border-top-width: 1px;
+}
+.accordion-list-group__section-item--last {
+  border-bottom-width: 0px;
+}
+.accordion-list__section-heading,
+.accordion-list-group__section-heading {
+  background: white;
+  display: inline-block;
+  width: 545px;
+  min-height: 48px;
+}
+.accordion-list-group__section-heading {
+  padding-left: 55px;
+}
+.accordion-list-group__section-heading-title {
+  padding: 13px 0px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.accordion-list-group__section-heading-title-input {
+  padding-top: 4px;
+}
+.accordion-list__section-heading-title {
+  padding: 13px 7px 13px 15px;
+}
+.accordion-list__section-heading-title:hover {
+  cursor: pointer;
+}
+.accordion-list__section-heading-title-input {
+  padding: 4px 7px 0px 15px;
+}
+.accordion-list__form-input {
+  width: 505px !important;
+}
+.accordion-list-group__form-input {
+  width: 482px !important;
+}
+.accordion-list__section-sub-heading-title {
+  font-weight: normal;
+}
+.accordion-list__section-content {
+  display: none;
+  padding: 15px;
+  background: white;
+  border: none;
+}
+.accordion-list__toggle {
+  color: black;
+  font-size: 15px;
+}
+.accordion-list__toggle:hover,
+.accordion-list__toggle:active,
+.accordion-list__toggle:focus {
+  text-decoration: none !important;
+}
+.accordion-list__toggle--disabled {
+  color: #BBBBBB;
+}
+.accordion-list__toggle-icon {
+  height: 7px;
+  width: 7px;
+  vertical-align: middle;
+  margin-bottom: 2px;
+  margin-right: 10px;
+}
+.accordion-list__section-heading--disabled {
+  pointer-events: none;
+  cursor: default;
+}
+.accordion-list__quick-menu {
+  margin-top: 12px;
+}
+.accordion-list__save-cancel-btn {
+  margin-top: 7px;
+}
+/*
+Notification center
+
+Markup:
+    <div class="notification-center-menu">
+        <div class="notification-center-menu__header">
+            <p class="notification-center-menu__title">Messages</p>
+        </div>
+        <a class="notification-center-item">
+            <div class="notification-center-item__tag notification-center-item__tag--datetime-text">Tue</div>
+            <span class="notification-center-item__image-container">
+                <div class="utility-nav__avatar">
+                    <div class="utility-nav__avatar-text">BD</div>
+                </div>
+            </span>
+            <span class="notification-center-item__content" style="padding-left: 55px;">
+                <div class="notification-center-item__title ng-binding">Steve Sweeney</div>
+                <div class="form__vertical-spacer form__vertical-spacer--small"></div>
+                <div class="notification-center-item__description ng-binding">Hey, it's Steve.</div>
+            </span>
+        </a>
+        <div class="notification-center-menu__footer text-center">
+            <a class="btn-link notification-center-menu__footer-link">
+                View all messages
+            </a>
+        </div>
+    </div>
+
+Styleguide 2.27
+ */
+.notification-center__link {
+  display: inline-block;
+  padding-top: 12px;
+  padding-bottom: 18px;
+}
+.notification-center__counter {
+  position: absolute;
+  display: block;
+  top: -1px;
+  right: 30px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0px 4px;
+  color: #FFFFFF;
+  background-color: #D13E2F;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 16px;
+  border: 2px solid #39404F;
+  box-sizing: border-box;
+}
+.notification-center-menu {
+  width: 400px;
+  min-height: 100px;
+  background-color: #FFFFFF;
+  border: 1px solid #CFCFCF;
+  border-radius: 5px;
+  box-shadow: 0 6px 12px 2px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+.notification-center-menu * {
+  box-sizing: border-box;
+}
+.notification-center-menu__container {
+  top: 45px;
+  right: 100px;
+}
+.notification-center-menu__header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #E2E2E2;
+  background-color: rgba(242, 242, 242, 0.5);
+}
+.notification-center-menu__header-link {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 12px;
+  line-height: 14px;
+  color: #767676;
+}
+.notification-center-menu__header-link:active,
+.notification-center-menu__header-link:hover {
+  color: #767676;
+}
+.notification-center-menu__title {
+  margin: 0;
+  line-height: 14px;
+  color: #4F4F52;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 12px;
+  text-align: left;
+  text-transform: uppercase;
+}
+.notification-center-menu__footer {
+  padding: 10px 0;
+  border-radius: 0 0 5px 5px;
+}
+.notification-center-menu__footer-link {
+  margin: 0;
+  line-height: 14px;
+  color: #4F4F52;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 12px;
+  text-align: left;
+  text-transform: uppercase;
+  padding: 12px 120px;
+}
+.notification-center-item {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 15px 20px 15px 20px;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #E2E2E2;
+}
+.notification-center-item:hover {
+  cursor: pointer;
+  background-color: #F2F2F2;
+}
+.notification-center-item--unread {
+  background-color: #F2F2F2;
+}
+.notification-center-item__image-container {
+  position: absolute;
+  left: 18px;
+  top: 15px;
+}
+.notification-center-item__image-container--with-background {
+  padding: 2px;
+  background-color: #FFFFFF;
+  border: 0.5px solid #E2E2E2;
+}
+.notification-center-item__image {
+  float: left;
+  display: inline-block;
+  width: 54px;
+  height: 44px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.notification-center-item__tag {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+.notification-center-item__tag--aspx {
+  top: 17px;
+}
+.notification-center-item__tag--datetime-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #A5A5A6;
+  text-transform: uppercase;
+}
+.notification-center-item__content {
+  display: inline-block;
+  width: 85%;
+}
+.notification-center-item__content--pad-left {
+  padding-left: 17px;
+}
+.notification-center-item__title {
+  width: 205px;
+  margin-top: 2px;
+  line-height: 18px;
+  font-size: 14px;
+  color: #4F4F52;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+.notification-center-item__unread-count {
+  display: inline-block;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  margin-bottom: 3px;
+  vertical-align: middle;
+  color: #FFFFFF;
+  background-color: #D13E2F;
+  text-align: center;
+  border-radius: 10px;
+  line-height: 16px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+  box-sizing: border-box;
+}
+.notification-center-item__description {
+  color: #767676;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: left;
+  min-height: 22px;
+}
+.notification-center-item__description--unread {
+  color: #4F4F52;
+  font-weight: 600;
+}
+.notification-center-menu-empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 100%;
+  padding: 100px 0px;
+}
+.notification-center-menu-empty-state__message-icon {
+  display: block;
+  height: 65px;
+  width: 73px;
+  margin: 0 auto;
+  background-image: url("/Manager/static-images//messages.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.notification-center-menu-empty-state__title {
+  padding: 10px 0;
+  font-size: 20px;
+  color: #4F4F52;
+  font-weight: 500;
+}
+.notification-center-menu-empty-state__text {
+  width: 80%;
+  font-size: 16px;
+  line-height: 22px;
+  color: #A5A5A6;
+  text-align: center;
+}
+/*
+Drawer
+
+Markup:
+    <div style="display: block; width: 1200px; height: 500px;">
+        <div class="drawer drawer--open" style="position: relative;">
+          <div class="drawer__overlay" style="position: relative;"></div>
+          <div class="drawer__container">
+              <div class="drawer__close icon-modal-close" ng-click="vm.closeDrawer()"></div>
+              <div class="drawer__content">
+                  <h4>TEST CONTENT</h4>
+              </div>
+          </div>
+      </div>
+    </div>
+
+Styleguide 2.26
+ */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+.drawer__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+.drawer__container {
+  position: absolute;
+  right: -400px;
+  top: 0;
+  height: 100%;
+  width: 400px;
+  border: 1px solid #E2E2E2;
+  background-color: white;
+  box-shadow: -10px 0 10px 0 rgba(0, 0, 0, 0.15);
+  padding: 60px 30px 30px 30px;
+  z-index: 2001;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.drawer--open {
+  z-index: 2000;
+}
+.drawer--open .drawer__container {
+  transition: all linear 0.25s;
+  right: 0;
+}
+.drawer--open .drawer__overlay {
+  transition: all linear 0.25s;
+  background: rgba(0, 0, 0, 0.75);
+}
+.drawer__close {
+  top: 15px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  position: absolute;
+}
+/*
+Media gallery
+
+This component can be used to display a set of images. Use the bd-media-gallery component.
+
+Markup:
+<div class="media-gallery">
+    <label class="form__label">with close icon</label>
+    <div class="media-gallery__media-container">
+        <a href class="media-gallery__image-delete svgicon svgicon--delete"></a>
+        <img class="media-gallery__image" src="https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb">
+    </div>
+    <label class="form__label">with "View larger" hover action</label>
+    <div class="media-gallery__media-container">
+        <img class="media-gallery__image" src="https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb">
+        <button class="media-gallery__view-larger">View larger</button>
+    </div>
+    <label class="form__label">with gallery limit</label>
+    <div class="media-gallery__media-container">
+        <img class="media-gallery__image" src="https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb">
+        <button class="media-gallery__view-all">+3</button>
+    </div>
+    <label class="form__label">as background image</label>
+    <div class="media-gallery__media-container" style="height:200px;width:200px;">
+        <div class="media-gallery__image" style="background-image: url(https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb);">
+            <img class="media-gallery__screen-reader-only" src="https://images.pexels.com/photos/40815/youth-active-jump-happy-40815.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb">        
+        </div>
+    </div>
+</div>
+
+Styleguide 2.29
+*/
+.media-gallery__media-container {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+.media-gallery__image {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #CFCFCF;
+  border-radius: 5px;
+  background-size: cover;
+  background-position: center;
+}
+.media-gallery__image:hover {
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+.media-gallery__screen-reader-only {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  border: 0;
+  margin: -1px;
+  padding: 0;
+}
+.media-gallery__image-delete {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  height: 8px;
+  width: 8px;
+  padding: 10px;
+  border: 1px solid #BBBBBB;
+  border-radius: 1000px;
+  background-position: center;
+  background-size: 8px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+.media-gallery__view-larger,
+.media-gallery__view-all {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(25, 25, 25, 0.75);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+}
+.media-gallery__view-larger:hover,
+.media-gallery__view-all:hover {
+  opacity: 1;
+}
+.media-gallery__view-all {
+  opacity: 1;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+.media-gallery__view-all:hover {
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+/*
+Form step wizard
+
+The form step wizard is used to keep track of the step a user is on in a given form.  Use bd-form-step-wizard component.
+
+Markup:
+<div>
+    <div style="padding-top:15px;width:800px;position:relative;">
+        <nav class="form-step-wizard">
+            <ol class="form-step-wizard__steps" style="list-style: none;">
+                <li class="form-step-wizard__step-container">
+                    <div class="form-step-wizard__step form-step-wizard__step--active" style="box-sizing: border-box;">
+                        <div class="form-step-wizard__step-link form-step-wizard__step-link--active">1</div>
+                    </div>
+                    <div class="form-step-wizard__step-line"></div>
+                </li>
+                <li class="form-step-wizard__step-container">
+                    <div class="form-step-wizard__step" style="box-sizing: border-box;">
+                        <div class="form-step-wizard__step-link">2</div>
+                    </div>
+                    <div class="form-step-wizard__step-line"></div>
+                </li>
+                <li class="form-step-wizard__step-container">
+                    <div class="form-step-wizard__step" style="box-sizing: border-box;">
+                        <div class="form-step-wizard__step-link">3</div>
+                    </div>
+                    <div class="form-step-wizard__step-line"></div>
+                </li>
+                <li class="form-step-wizard__step-container">
+                    <div class="form-step-wizard__step" style="box-sizing: border-box;">
+                        <div class="form-step-wizard__step-link">4</div>
+                    </div>
+                </li>
+            </ol>
+            <ol class="form-step-wizard__step-label-container" style="list-style: none;">
+                <li class="form-step-wizard__step-label form-step-wizard__step-label--active">Bank account details</li>
+                <li class="form-step-wizard__step-label">Business details</li>
+                <li class="form-step-wizard__step-label">Contact info</li>
+                <li class="form-step-wizard__step-label">Review application</li>
+            </ol>
+        </nav>
+        </br>
+        <nav class="form-step-wizard">
+            <ol class="form-step-wizard__steps" style="list-style: none;">
+                <li class="form-step-wizard__step-container">
+                    <div class="form-step-wizard__step form-step-wizard__step--completed" style="box-sizing: border-box;">
+                        <div class="form-step-wizard__step-link form-step-wizard__step-link--completed svgicon svgicon--checkmark-green"></div>
+                    </div>
+                    <div class="form-step-wizard__step-line form-step-wizard__step-line--completed"></div>
+                </li>
+                <li class="form-step-wizard__step-container">
+                    <div class="form-step-wizard__step form-step-wizard__step--active" style="box-sizing: border-box;">
+                        <div class="form-step-wizard__step-link form-step-wizard__step-link--active">2</div>
+                    </div>
+                    <div class="form-step-wizard__step-line"></div>
+                </li>
+                <li class="form-step-wizard__step-container">
+                    <div class="form-step-wizard__step" style="box-sizing: border-box;">
+                        <div class="form-step-wizard__step-link">3</div>
+                    </div>
+                    <div class="form-step-wizard__step-line"></div>
+                </li>
+                <li class="form-step-wizard__step-container">
+                    <div class="form-step-wizard__step" style="box-sizing: border-box;">
+                        <div class="form-step-wizard__step-link">4</div>
+                    </div>
+                </li>
+            </ol>
+            <ol class="form-step-wizard__step-label-container" style="list-style: none;">
+                <li class="form-step-wizard__step-label form-step-wizard__step-label--completed">Bank account details</li>
+                <li class="form-step-wizard__step-label form-step-wizard__step-label--active">Business details</li>
+                <li class="form-step-wizard__step-label">Contact info</li>
+                <li class="form-step-wizard__step-label">Review application</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+Styleguide 2.28
+*/
+.form-step-wizard__steps {
+  display: flex;
+  justify-content: center;
+}
+.form-step-wizard__step-container {
+  display: flex;
+}
+.form-step-wizard__step {
+  width: 40px;
+  height: 40px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  line-height: 36px;
+  border: 2px solid #E2E2E2;
+  text-align: center;
+}
+.form-step-wizard__step--active {
+  border-color: #73B680;
+  background-color: #73B680;
+}
+.form-step-wizard__step--completed {
+  border-color: #73B680;
+  background-color: #FFFFFF;
+}
+.form-step-wizard__step-link {
+  color: #767676;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+}
+.form-step-wizard__step-link--active {
+  color: #FFFFFF;
+}
+.form-step-wizard__step-link--completed {
+  margin-top: 11px;
+}
+.form-step-wizard__step-line {
+  height: 0px;
+  width: 114px;
+  border: 1px solid #E2E2E2;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.form-step-wizard__step-line--completed {
+  border-color: #73B680;
+}
+.form-step-wizard__step-label-container {
+  display: flex;
+  justify-content: center;
+}
+.form-step-wizard__step-label {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #767676;
+  text-align: center;
+  width: 154px;
+}
+.form-step-wizard__step-label--active,
+.form-step-wizard__step-label--completed {
+  color: #73B680;
+}
+.form-step-wizard__step-label--active {
+  font-weight: bold;
+}
+/*
+Empty state panel
+
+This component can be used to show placeholder content for an empty state
+
+Markup:
+<div class="empty-state-panel empty-state-panel--min-height-450">
+    <div class="empty-state-panel__inner-content">
+        <div class="empty-state-panel__icon svgicon--wrench-grey"></div>
+        <div class="empty-state-panel__title">No work order yet</div>
+        <div class="empty-state-panel__text">Create a work for this task to assign a vendor, track parts or labor, and more!</div>
+        <div class="form__vertical-spacer form__vertical-spacer--large"></div>
+        <a class="btn btn--primary"
+           ng-if="vm.hasWorkOrderEditAccess">Add work order</a>
+    </div>
+</div>
+
+Styleguide 2.30
+*/
+.empty-state-panel {
+  display: flex;
+  width: auto;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.empty-state-panel--min-height-450 {
+  min-height: 450px;
+}
+.empty-state-panel__inner-content {
+  text-align: center;
+}
+.empty-state-panel__icon {
+  display: block;
+  height: 65px;
+  width: 65px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.empty-state-panel__title {
+  padding: 10px 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: #4F4F52;
+}
+.empty-state-panel__text {
+  width: 430px;
+  font-size: 16px;
+  line-height: 22px;
+  color: #A5A5A6;
+}
+.task-status-circle {
+  height: 15px;
+  width: 15px;
+  border-radius: 100%;
+  position: relative;
+  left: 11.5px;
+  top: 11.5px;
+}
+.task-status-circle--new {
+  background-color: #FBB03B;
+}
+.task-status-circle--in-progress {
+  background-color: #64B2D1;
+}
+.task-status-circle--completed {
+  background-color: #73B680;
+}
+.task-status-circle--deferred {
+  background-color: #A56BDA;
+}
+.task-status-circle--closed {
+  background-color: #A5A5A6;
 }
 /*
 Forms
@@ -8633,6 +9574,9 @@ input::-webkit-contacts-auto-fill-button {
 .less .form-element__input.form-element__input--postal-code {
   width: 120px;
 }
+.less label input[disabled]:hover {
+  cursor: not-allowed;
+}
 .ui-datepicker-month,
 .ui-datepicker-year {
   height: 40px;
@@ -8740,6 +9684,9 @@ Styleguide 3.4
 .dropdown__control--has-error:hover,
 .dropdown__control--has-error:focus {
   border-color: #D13E2F;
+}
+.dropdown__control--reduced-padding {
+  padding: 7px 30px 7px 20px;
 }
 .dropdown__arrow {
   position: absolute;
@@ -9290,6 +10237,8 @@ Styleguide 3.6
 .selectize-dropdown .optgroup-header {
   padding: 7px 20px;
   line-height: 16px;
+  min-height: 30px;
+  box-sizing: border-box;
 }
 .selectize-dropdown .optgroup-header {
   padding-top: 9px;

@@ -1,0 +1,196 @@
+
+
+<a href='https://github.com///tree//src/accordion/accordion-toggle.js#L1' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">bdAccordionToggle</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/buildium.angular-elements.accordion">buildium.angular-elements.accordion</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>Element responsible for toggling a <a href="api/buildium.angular-elements.accordion/directive/bdAccordionGroup">bdAccordionGroup</a> open or closed</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2>Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 0.</li>
+    
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <ul>
+    <li>as attribute:
+        <pre><code>&lt;ANY&#13;&#10;  is-open=&quot;Boolean&quot;&#13;&#10;  disabled=&quot;Boolean&quot;&#13;&#10;  on-change=&quot;&quot;&#13;&#10;  open-class=&quot;String&quot;&#13;&#10;  disabled-class=&quot;String&quot;&#13;&#10;  toggle-class-name=&quot;String&quot;&gt;&#13;&#10;...&#13;&#10;&lt;/ANY&gt;&#13;</code></pre>
+      </li>
+    
+  </div>
+  
+<section class="api-section">
+  <h3>Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        isOpen
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-boolean">Boolean</a>
+      </td>
+      <td>
+        <p>is toggle open by default</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        disabled
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-boolean">Boolean</a>
+      </td>
+      <td>
+        <p>is toggle disabled</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        onChange
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-function">Function</a>
+      </td>
+      <td>
+        <p>change event to fire when open state changes</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        openClass
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">String</a>
+      </td>
+      <td>
+        <p>class to add when toggle is open</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        disabledClass
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">String</a>
+      </td>
+      <td>
+        <p>class to add when toggle is disabled</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        toggleClassName
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">String</a>
+      </td>
+      <td>
+        <p>changes toggle trigger to element matching this class name</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+
+  
+  <h2 id="example">Examples</h2><p>
+
+<div>
+  <plnkr-opener example-path="examples/example-bd-accordion-toggle"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-bd-accordion-toggle"
+      name="bd-accordion-toggle"
+      module="buildium.angular-elements.accordion">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;style&gt;&#10;    .hide { display: none; }&#10;&lt;/style&gt;&#10;&lt;section class=&quot;page-content&quot;&gt;&#10;    &lt;bd-accordion&gt;&#10;        &lt;ul&gt;&#10;            &lt;li bd-accordion-toggle is-open=&quot;false&quot;&gt;&#10;                This accordion group starts closed&#10;                &lt;ul bd-accordion-group&gt;&#10;                    &lt;li class=&quot;list-item list-item--bulleted&quot;&gt;Hello world&lt;/li&gt;&#10;                    &lt;li class=&quot;list-item list-item--bulleted&quot;&gt;Foo Bar&lt;/li&gt;&#10;                &lt;/ul&gt;&#10;            &lt;/li&gt;&#10;            &lt;li bd-accordion-toggle is-open=&quot;true&quot;&gt;&#10;                This accordion group starts open&#10;                &lt;ul bd-accordion-group&gt;&#10;                    &lt;li class=&quot;list-item list-item--bulleted&quot;&gt;Hello world&lt;/li&gt;&#10;                    &lt;li class=&quot;list-item list-item--bulleted&quot;&gt;Foo Bar&lt;/li&gt;&#10;                &lt;/ul&gt;&#10;            &lt;/li&gt;&#10;            &lt;li bd-accordion-toggle is-open=&quot;false&quot;&gt;&#10;                This accordion group starts closed&#10;                &lt;ul bd-accordion-group&gt;&#10;                    &lt;li class=&quot;list-item list-item--bulleted&quot;&gt;Hello world&lt;/li&gt;&#10;                    &lt;li class=&quot;list-item list-item--bulleted&quot;&gt;Foo Bar&lt;/li&gt;&#10;                &lt;/ul&gt;&#10;            &lt;/li&gt;&#10;        &lt;/ul&gt;&#10;    &lt;/bd-accordion&gt;&#10;&lt;/section&gt;</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-bd-accordion-toggle/index.html" name="example-bd-accordion-toggle"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+

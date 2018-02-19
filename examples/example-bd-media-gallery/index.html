@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Example - example-bd-media-gallery</title>
+  <link href="https:/cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet" type="text/css">
+  <link href="../../examples-dep/default/node_modules/@buildium/theme/dist/theme-styles.css" rel="stylesheet" type="text/css">
   
 
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
@@ -13,7 +15,14 @@
   
 </head>
 <body ng-app="buildium.angular-elements.media-gallery">
-  <script>
+  <style>
+    .media-gallery__media-container {
+        height: 100px;
+        width: 100px;
+        margin: 10px;
+    }
+</style>
+<script>
     angular.module('buildium.angular-elements.media-gallery')
         .controller('ExampleController', function() {
             this.media = [

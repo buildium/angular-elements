@@ -5,6 +5,40 @@ angular.module('docApp').constant('DOCS_NAVIGATION', {
     "name": "API",
     "navGroups": [
       {
+        "name": "buildium.angular-elements.accordion",
+        "type": "groups",
+        "href": "api/buildium.angular-elements.accordion",
+        "navItems": [
+          {
+            "name": "directive",
+            "type": "section",
+            "href": "api/buildium.angular-elements.accordion/directive",
+            "navItems": [
+              {
+                "name": "bdAccordion",
+                "type": "directive",
+                "href": "api/buildium.angular-elements.accordion/directive/bdAccordion"
+              },
+              {
+                "name": "bdAccordionGroup",
+                "type": "directive",
+                "href": "api/buildium.angular-elements.accordion/directive/bdAccordionGroup"
+              },
+              {
+                "name": "bdAccordionSection",
+                "type": "directive",
+                "href": "api/buildium.angular-elements.accordion/directive/bdAccordionSection"
+              },
+              {
+                "name": "bdAccordionToggle",
+                "type": "directive",
+                "href": "api/buildium.angular-elements.accordion/directive/bdAccordionToggle"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "name": "buildium.angular-elements.media-gallery",
         "type": "groups",
         "href": "api/buildium.angular-elements.media-gallery",

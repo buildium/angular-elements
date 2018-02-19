@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-bd-accordion-toggle</title>
+  <link href="https:/cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet" type="text/css">
+  <link href="../../examples-dep/default/node_modules/@buildium/theme/dist/theme-styles.css" rel="stylesheet" type="text/css">
+  
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
+  <script src="../../examples-dep/default/dist/buildium-angular-elements.js"></script>
+  <script src="/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+  
+
+  
+</head>
+<body ng-app="buildium.angular-elements.accordion">
+  <style>
+    .hide { display: none; }
+</style>
+<section class="page-content">
+    <bd-accordion>
+        <ul>
+            <li bd-accordion-toggle is-open="false">
+                This accordion group starts closed
+                <ul bd-accordion-group>
+                    <li class="list-item list-item--bulleted">Hello world</li>
+                    <li class="list-item list-item--bulleted">Foo Bar</li>
+                </ul>
+            </li>
+            <li bd-accordion-toggle is-open="true">
+                This accordion group starts open
+                <ul bd-accordion-group>
+                    <li class="list-item list-item--bulleted">Hello world</li>
+                    <li class="list-item list-item--bulleted">Foo Bar</li>
+                </ul>
+            </li>
+            <li bd-accordion-toggle is-open="false">
+                This accordion group starts closed
+                <ul bd-accordion-group>
+                    <li class="list-item list-item--bulleted">Hello world</li>
+                    <li class="list-item list-item--bulleted">Foo Bar</li>
+                </ul>
+            </li>
+        </ul>
+    </bd-accordion>
+</section>
+</body>
+</html>

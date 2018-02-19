@@ -1,6 +1,400 @@
 (function(angular) {
   'use strict';
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name bdAccordionGroup
+ * @module buildium.angular-elements.accordion
+ * @restrict A
+ *
+ * @description
+ * 
+ * Encapsulates a section of content that can be toggled by <a href="api/buildium.angular-elements.accordion/directive/bdAccordionToggle">bdAccordionToggle</a>
+ *
+ * @param {String} openClass - class to add when accordion group is open
+ * 
+ * @example
+ *
+    <example name="bd-accordion-group" module="buildium.angular-elements.accordion">
+        <file name="index.html">
+            <style>
+                .hide { display: none; }
+            </style>
+            <section class="page-content">
+                <bd-accordion>
+                    <ul>
+                        <li bd-accordion-toggle>
+                            Click this to toggle
+                            <ul bd-accordion-group>
+                                <li class="list-item">link 1</li>
+                                <li class="list-item">link 2</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </bd-accordion>
+            </section>
+        </file>
+    </example>
+ *
+ */
+
+// @ngInject
+module.exports = function AccordionGroup() {
+    var SPACEBAR_KEYCODE = 32;
+    var directive = {};
+
+    directive.restrict = 'A';
+    directive.require = '^bdAccordionToggle';
+    directive.bindToController = true;
+    directive.controllerAs = 'vm';
+
+    directive.link = function link(scope, element, attrs, accordionToggleCtrl) {
+        scope.accordionToggleCtrl = accordionToggleCtrl;
+
+        element.on('click keypress', function (event) {
+            if (event.type === 'click' || event.keyCode === SPACEBAR_KEYCODE) {
+                event.stopPropagation();
+            }
+        });
+
+        function toggleOpen() {
+            element.toggleClass('hide', !accordionToggleCtrl.isOpen);
+            if (attrs.openClass) {
+                element.toggleClass(attrs.openClass, accordionToggleCtrl.isOpen);
+            }
+        }
+
+        toggleOpen();
+
+        scope.$watch('accordionToggleCtrl.isOpen', function () {
+            toggleOpen();
+        });
+    };
+
+    return directive;
+};
+},{}],2:[function(require,module,exports){
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name bdAccordionSection
+ * @module buildium.angular-elements.accordion
+ * @restrict E
+ * 
+ * @transclude true
+ *
+ * @description
+ * 
+ * Section to hold content in <a href="api/buildium.angular-elements.accordion/directive/bdAccordion">bdAccordion</a>
+ *
+ * @param {String} header - What will be shown in header
+ * @param {String} subHeading
+ * @param {Boolean} [isOpen] - Set to be initally open
+ * @param {Boolean} [disabled]
+ * 
+ * @example
+ *
+    <example name="bd-accordion-section" module="buildium.angular-elements.accordion">
+        <file name="index.html">
+            <section class="page-content">
+                <bd-accordion>
+                    <bd-accordion-section heading="Test">
+                        Test content
+                    </bd-accordion-section>
+                    <bd-accordion-section heading="Test 2" sub-heading="With subheading">
+                        Test content 2
+                    </bd-accordion-section>
+                </bd-accordion>
+            </section>
+        </file>
+    </example>
+ *
+ */
+var component = {};
+
+component.require = {
+    accordion: '^bdAccordion'
+};
+component.transclude = true;
+component.controllerAs = 'vm';
+
+component.bindings = {
+    heading: '@',
+    subHeading: '@',
+    isOpen: '<?',
+    disabled: '<?'
+};
+
+component.template = '\n<div bd-accordion-toggle\n    on-change="vm.toggleClass(isAccordionGroupOpen)"\n    is-open="vm.isOpen"\n    disabled="vm.disabled"\n    open-class="accordion__section--open"\n    ng-class="{\'accordion__section--first\': vm.$index === 0}">\n    <div class="accordion__section-heading"\n        ng-class="{\'accordion__section-heading--disabled\': vm.disabled}">\n        <h4 class="accordion__section-heading-title">\n            <a role="button" href="#" class="accordion__toggle" ng-class="{\'accordion__toggle--disabled\': vm.disabled}">\n                <span ng-hide="vm.isOpen" \n                    class="accordion__toggle-icon svgicon"\n                    ng-class="{\'svgicon--arrowhead-right\': !vm.disabled, \'svgicon--arrowhead-right-muted\': vm.disabled}">\n                </span>\n                <span ng-show="vm.isOpen" class="accordion__toggle-icon svgicon svgicon--arrowhead-down"></span>\n                <span>{{vm.heading}}</span>\n                <span class="accordion__section-sub-heading-title" ng-if="vm.subHeading">{{vm.subHeading}}</span>\n            </a>\n        </h4>\n    </div>\n    <div bd-accordion-group ng-if="!disabled" class="accordion__section-content" ng-transclude></div>\n</div>\n';
+
+component.controller = function AccordionSectionController() {
+    var vm = this;
+
+    vm.$onInit = function onInit() {
+        vm.$index = vm.accordion.$sectionIndex;
+    };
+
+    vm.toggleClass = function toggleClass(isAccordionGroupOpen) {
+        vm.isOpen = isAccordionGroupOpen;
+    };
+
+    vm.$onChanges = function onChanges(changes) {
+        if (changes.isOpen) {
+            vm.toggleClass(changes.isOpen.currentValue);
+        }
+    };
+};
+
+module.exports = component;
+},{}],3:[function(require,module,exports){
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name bdAccordionToggle
+ * @module buildium.angular-elements.accordion
+ * @restrict A
+ *
+ * @description
+ * 
+ * Element responsible for toggling a <a href="api/buildium.angular-elements.accordion/directive/bdAccordionGroup">bdAccordionGroup</a> open or closed
+ *
+ * @param {Boolean} [isOpen] - is toggle open by default
+ * @param {Boolean} [disabled] - is toggle disabled
+ * @param {Function} [onChange] - change event to fire when open state changes
+ * @param {String} [openClass] - class to add when toggle is open
+ * @param {String} [disabledClass] - class to add when toggle is disabled
+ * @param {String} [toggleClassName] - changes toggle trigger to element matching this class name
+ * 
+ * @example
+ *
+    <example name="bd-accordion-toggle" module="buildium.angular-elements.accordion">
+        <file name="index.html">
+            <style>
+                .hide { display: none; }
+            </style>
+            <section class="page-content">
+                <bd-accordion>
+                    <ul>
+                        <li bd-accordion-toggle is-open="false">
+                            This accordion group starts closed
+                            <ul bd-accordion-group>
+                                <li class="list-item list-item--bulleted">Hello world</li>
+                                <li class="list-item list-item--bulleted">Foo Bar</li>
+                            </ul>
+                        </li>
+                        <li bd-accordion-toggle is-open="true">
+                            This accordion group starts open
+                            <ul bd-accordion-group>
+                                <li class="list-item list-item--bulleted">Hello world</li>
+                                <li class="list-item list-item--bulleted">Foo Bar</li>
+                            </ul>
+                        </li>
+                        <li bd-accordion-toggle is-open="false">
+                            This accordion group starts closed
+                            <ul bd-accordion-group>
+                                <li class="list-item list-item--bulleted">Hello world</li>
+                                <li class="list-item list-item--bulleted">Foo Bar</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </bd-accordion>
+            </section>
+        </file>
+    </example>
+ */
+
+// @ngInject
+module.exports = function AccordionToggle() {
+    var SPACEBAR_KEYCODE = 32;
+    var directive = {};
+
+    directive.restrict = 'A';
+    directive.require = '^bdAccordion';
+    directive.bindToController = true;
+    directive.controllerAs = 'vm';
+
+    directive.scope = {
+        isOpen: '<?',
+        onChange: '&?',
+        disabled: '<?',
+        openClass: '@?',
+        disabledClass: '@?'
+    };
+
+    directive.controller = ['$element', function AccordionToggleCtrl($element) {
+        var vm = this;
+
+        vm.$onChanges = function onChanges(changes) {
+            if (typeof vm.onChange === 'function' && changes.isOpen) {
+                vm.onChange({ isAccordionGroupOpen: changes.isOpen.currentValue });
+            }
+
+            if (changes.disabled && vm.disabledClass) {
+                $element.toggleClass(vm.disabledClass, changes.disabled.currentValue);
+            }
+        };
+    }];
+
+    directive.link = function link(scope, element, attrs, accordionCtrl) {
+        var vm = scope.vm;
+        accordionCtrl.addSection(scope);
+
+        if (attrs.openClass) {
+            element.toggleClass(attrs.openClass, !!vm.isOpen);
+        }
+
+        if (attrs.disabledClass) {
+            element.toggleClass(attrs.disabledClass, vm.disabled);
+        }
+
+        function toggleAccordion() {
+            vm.isOpen = !vm.isOpen;
+
+            if (attrs.openClass) {
+                element.toggleClass(attrs.openClass, vm.isOpen);
+            }
+
+            if (typeof vm.onChange === 'function') {
+                vm.onChange({ isAccordionGroupOpen: vm.isOpen });
+            }
+        }
+
+        vm.handleAccordionEvent = function handleAccordionEvent(event) {
+            if (!vm.disabled) {
+                if (!event || event.type === 'click' || event.keyCode === SPACEBAR_KEYCODE.Space) {
+                    toggleAccordion();
+
+                    if (event && vm.isOpen) {
+                        accordionCtrl.closeAllBut(scope);
+                    }
+                }
+            }
+        };
+
+        var toggleElement = element;
+
+        if (attrs.toggleClassName) {
+            toggleElement = element.find('.' + attrs.toggleClassName);
+        }
+
+        toggleElement.on('click keypress', function (event) {
+            scope.$apply(function () {
+                vm.handleAccordionEvent(event);
+            });
+        });
+    };
+
+    return directive;
+};
+},{}],4:[function(require,module,exports){
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name bdAccordion
+ * @module buildium.angular-elements.accordion
+ * @restrict E
+ * 
+ * @transclude true
+ *
+ * @description
+ * 
+ * Collapsible content panels with configurable headings and triggers
+ * 
+ * @param {Boolean} [singleSectionOnly=false] whether to restrict accordion to one section open at a time
+ * 
+ * @example
+ *
+    <example name="bd-accordion" module="buildium.angular-elements.accordion">
+        <file name="index.html">
+            <section class="page-content">
+                <bd-accordion>
+                    <bd-accordion-section heading="Panel 1">
+                        Panel 1
+                    </bd-accordion-section>
+                    <bd-accordion-section heading="Panel 2">
+                        Panel 2
+                    </bd-accordion-section>
+                </bd-accordion>
+
+                <hr>
+                <label class="form__label">single section only</label>
+                <bd-accordion single-section-only="true">
+                    <bd-accordion-section heading="Panel 1">
+                        Panel 1
+                    </bd-accordion-section>
+                    <bd-accordion-section heading="Panel 2" is-open="false">
+                        Panel 2
+                    </bd-accordion-section>
+                </bd-accordion>
+            </section>
+        </file>
+    </example>
+ *
+ */
+var component = {};
+
+component.transclude = true;
+component.controllerAs = 'vm';
+
+component.bindings = {
+    singleSectionOnly: '<?'
+};
+
+component.template = '<div class="accordion" ng-transclude></div>';
+
+component.controller = function AccordionController() {
+    var vm = this;
+    var sections = [];
+    vm.$sectionIndex = 0;
+
+    vm.addSection = function addSection(sectionScope) {
+        sections.push(sectionScope);
+        vm.$sectionIndex += 1;
+
+        // Remove from sections if child section directive is removed
+        sectionScope.$on('$destroy', function () {
+            vm.deleteSection(sectionScope);
+        });
+    };
+
+    vm.closeAllBut = function closeAllBut(openSection) {
+        if (vm.singleSectionOnly) {
+            sections.forEach(function (section) {
+                if (section !== openSection && section.vm.isOpen) {
+                    section.vm.handleAccordionEvent();
+                }
+            });
+        }
+    };
+
+    vm.deleteSection = function deleteSection(section) {
+        var index = sections.indexOf(section);
+        if (index !== -1) {
+            sections.splice(index, 1);
+        }
+    };
+};
+
+module.exports = component;
+},{}],5:[function(require,module,exports){
+'use strict';
+
+var moduleName = 'buildium.angular-elements.accordion';
+
+/**
+ * @ngdoc module
+ * @name buildium.angular-elements.accordion
+ * @module buildium.angular-elements.accordion
+ */
+module.exports = angular.module(moduleName, []).component('bdAccordion', require('./accordion.js')).component('bdAccordionSection', require('./accordion-section.js')).directive('bdAccordionToggle', require('./accordion-toggle.js')).directive('bdAccordionGroup', require('./accordion-group.js'));
+
+module.exports = moduleName;
+},{"./accordion-group.js":1,"./accordion-section.js":2,"./accordion-toggle.js":3,"./accordion.js":4}],6:[function(require,module,exports){
 'use strict';
 
 /**
@@ -72,7 +466,6 @@
  * <link rel="stylesheet" href="@buildium/theme/dist/theme-styles.css">
  * ```
  */
-
 var moduleName = 'buildium.angular-elements';
 
 /**
@@ -80,10 +473,10 @@ var moduleName = 'buildium.angular-elements';
  * @name buildium.angular-elements
  * @module buildium.angular-elements
  */
-angular.module(moduleName, [require('./popover'), require('./media-gallery')]);
+angular.module(moduleName, [require('./popover'), require('./media-gallery'), require('./accordion')]);
 
 module.exports = moduleName;
-},{"./media-gallery":2,"./popover":4}],2:[function(require,module,exports){
+},{"./accordion":5,"./media-gallery":7,"./popover":9}],7:[function(require,module,exports){
 'use strict';
 
 var moduleName = 'buildium.angular-elements.media-gallery';
@@ -96,7 +489,7 @@ var moduleName = 'buildium.angular-elements.media-gallery';
 angular.module(moduleName, []).component('bdMediaGallery', require('./media-gallery.js'));
 
 module.exports = moduleName;
-},{"./media-gallery.js":3}],3:[function(require,module,exports){
+},{"./media-gallery.js":8}],8:[function(require,module,exports){
 'use strict';
 
 /**
@@ -132,6 +525,13 @@ module.exports = moduleName;
  * @example
     <example name="bd-media-gallery" module="buildium.angular-elements.media-gallery">
         <file name="index.html">
+            <style>
+                .media-gallery__media-container {
+                    height: 100px;
+                    width: 100px;
+                    margin: 10px;
+                }
+            </style>
             <script>
                 angular.module('buildium.angular-elements.media-gallery')
                     .controller('ExampleController', function() {
@@ -175,7 +575,6 @@ module.exports = moduleName;
         </file>
     </example>
  */
-
 var component = {};
 
 component.controllerAs = 'vm';
@@ -191,7 +590,7 @@ component.bindings = {
     onViewAll: '&?'
 };
 
-component.template = '\n<div class="media-gallery">\n    <div class="media-gallery__media-container"\n        ng-repeat="media in vm.media | limitTo:vm.limitTo track by media.fileName">\n        <div class="media-gallery__image" \n            ng-style="{\'background-image\': \'url(\' + media.imageUrl + \')\' }"\n            ng-click="vm.selectMedia(media)"> \n            <img class="media-gallery__screen-reader-only" \n                ng-src="{{:: media.imageUrl}}" \n                alt="{{:: media.title}}">\n        </div>\n        <button class="media-gallery__view-larger"\n            ng-if="vm.allowEnlarge"\n            ng-click="vm.viewLarger(media)">\n            View larger\n        </button>\n        <button class="media-gallery__image-delete svgicon svgicon--delete"\n            ng-if="media.isRemovable || (media.isRemovable !== false && vm.allowRemove)"\n            ng-click="vm.removeMedia(media)">\n            <span class="media-gallery__screen-reader-only">Remove</span>\n        </button>\n        <button class="media-gallery__view-all"\n            ng-if="vm.limitTo < vm.media.length"\n            ng-show="$last"\n            ng-click="vm.viewAll()">\n            +{{ vm.media.length - vm.limitTo + 1 }}\n        </button>\n    </div>\n</div>\n';
+component.template = '\n<div class="media-gallery">\n    <div class="media-gallery__media-container"\n        ng-repeat="media in vm.media | limitTo:vm.limitTo track by media.fileName">\n        <div class="media-gallery__image" \n            ng-style="{\'background-image\': \'url(\' + media.imageUrl + \')\' }"\n            ng-click="vm.selectMedia(media)"> \n            <img class="media-gallery__screen-reader-only" \n                ng-src="{{:: media.imageUrl}}" \n                alt="{{:: media.title}}">\n        </div>\n        <button class="media-gallery__view-larger"\n            ng-if="vm.allowEnlarge"\n            ng-click="vm.viewLarger(media)">\n            View larger\n        </button>\n        <button class="media-gallery__view-all"\n            ng-if="vm.limitTo < vm.media.length"\n            ng-show="$last"\n            ng-click="vm.viewAll()">\n            +{{ vm.media.length - vm.limitTo + 1 }}\n        </button>\n        <button class="media-gallery__image-delete svgicon svgicon--delete"\n            ng-if="media.isRemovable || (media.isRemovable !== false && vm.allowRemove)"\n            ng-click="vm.removeMedia(media)">\n            <span class="media-gallery__screen-reader-only">Remove</span>\n        </button>\n    </div>\n</div>\n';
 
 component.controller = function MediaGalleryController() {
     var vm = this;
@@ -228,7 +627,7 @@ component.controller = function MediaGalleryController() {
 };
 
 module.exports = component;
-},{}],4:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 var moduleName = 'buildium.angular-elements.popover';
@@ -290,7 +689,7 @@ angular.module(moduleName, [])
     </example>
  *
  */
-.directive('bdPopover', ['$rootScope', 'BdSubmenu', function BdPopover($rootScope, BdSubmenu) {
+.directive('bdPopover', ['BdSubmenu', function BdPopoverDirective(BdSubmenu) {
     var directive = {};
 
     directive.restrict = 'E';
@@ -309,7 +708,7 @@ angular.module(moduleName, [])
     directive.transclude = true;
     directive.bindToController = true;
 
-    directive.controller = ['$rootScope', '$element', 'BdSubmenu', function PopoverCtrl($rootScope, $element, BdSubmenu) {
+    directive.controller = ['$rootScope', '$element', function PopoverCtrl($rootScope, $element) {
         var ctrl = this;
 
         ctrl.isOpen = false;
@@ -335,15 +734,12 @@ angular.module(moduleName, [])
 
         transclude(scope.$parent, function (clone) {
             angular.forEach(clone, function (cloneElem) {
-                var insertId = void 0;
-                var target = void 0;
-
                 if (!cloneElem.attributes) {
                     return;
                 }
 
-                insertId = cloneElem.tagName.toLowerCase();
-                target = $(elem).find('[insert-point="' + insertId + '"]');
+                var insertId = cloneElem.tagName.toLowerCase();
+                var target = $(elem).find('[insert-point="' + insertId + '"]');
 
                 target.append(cloneElem);
             });
@@ -354,7 +750,7 @@ angular.module(moduleName, [])
 }]).service('BdSubmenu', ['$rootScope', '$timeout', '$document', require('./submenu')]);
 
 module.exports = moduleName;
-},{"./submenu":5,"jquery":6}],5:[function(require,module,exports){
+},{"./submenu":10,"jquery":11}],10:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -372,9 +768,10 @@ var $ = require('jquery');
  * Control the positioning and display of the popover element
  */
 module.exports = function BdSubmenu($rootScope, $timeout, $document) {
-    var submenuService = this,
-        mouseOutDelay = 250,
-        $currentElement = void 0,
+    var submenuService = this;
+    var mouseOutDelay = 250;
+
+    var $currentElement = void 0,
         mouseoutTimer = void 0;
 
     function unsetCurrentElement() {
@@ -457,23 +854,19 @@ module.exports = function BdSubmenu($rootScope, $timeout, $document) {
      * @param {DOMElement} elem 
      */
     submenuService.positionPopoverBody = function positionPopoverBody(elem) {
-        var popoverContainer = void 0,
-            popoverBody = void 0,
-            containerOffsetLeft = void 0;
-
-        popoverContainer = $(elem).find('.popover__container');
-        popoverBody = $(elem).find('.popover__body');
-        containerOffsetLeft = popoverContainer.offset().left;
+        var popoverContainer = $(elem).find('.popover__container');
+        var popoverBody = $(elem).find('.popover__body');
+        var containerOffsetLeft = popoverContainer.offset().left;
 
         if (containerOffsetLeft < 0) {
             popoverBody.css({
-                'position': 'relative',
-                'left': Math.abs(containerOffsetLeft) + 'px'
+                position: 'relative',
+                left: Math.abs(containerOffsetLeft) + 'px'
             });
         }
     };
 };
-},{"jquery":6}],6:[function(require,module,exports){
+},{"jquery":11}],11:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.2.4
  * http://jquery.com/
@@ -10289,6 +10682,6 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-},{}]},{},[1]);
+},{}]},{},[6]);
 
 })(window.angular);
