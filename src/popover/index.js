@@ -57,7 +57,7 @@ angular.module(moduleName, [])
     </example>
  *
  */
-.directive('bdPopover', ['$rootScope', 'BdSubmenu', function BdPopover($rootScope, BdSubmenu) {
+.directive('bdPopover', ['BdSubmenu', function BdPopoverDirective(BdSubmenu) {
     const directive = {};
 
     directive.restrict = 'E';
@@ -97,7 +97,7 @@ angular.module(moduleName, [])
     directive.transclude = true;
     directive.bindToController = true;
 
-    directive.controller = ['$rootScope', '$element', 'BdSubmenu', function PopoverCtrl($rootScope, $element, BdSubmenu) {
+    directive.controller = ['$rootScope', '$element', function PopoverCtrl($rootScope, $element) {
         const ctrl = this;
 
         ctrl.isOpen = false;
@@ -115,23 +115,18 @@ angular.module(moduleName, [])
     }];
 
     directive.link = function link(scope, elem, attrs, ctrl, transclude) {
-        scope.$watch(function() {
-            return BdSubmenu.currentElement === elem;
-        }, function(isOpen) {
+        scope.$watch(() => BdSubmenu.currentElement === elem, (isOpen) => {
             ctrl.isOpen = isOpen;
         });
 
-        transclude(scope.$parent, function(clone) {
-            angular.forEach(clone, function(cloneElem) {
-                let insertId;
-                let target;
-
+        transclude(scope.$parent, (clone) => {
+            angular.forEach(clone, (cloneElem) => {
                 if (!cloneElem.attributes) {
                     return;
                 }
 
-                insertId = cloneElem.tagName.toLowerCase();
-                target = $(elem).find('[insert-point="' + insertId + '"]');
+                const insertId = cloneElem.tagName.toLowerCase();
+                const target = $(elem).find(`[insert-point="${insertId}"]`);
 
                 target.append(cloneElem);
             });
@@ -142,6 +137,5 @@ angular.module(moduleName, [])
 }])
 
 .service('BdSubmenu', ['$rootScope', '$timeout', '$document', require('./submenu')]);
-
 
 module.exports = moduleName;

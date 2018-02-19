@@ -1,5 +1,3 @@
-'use strict';
-
 const $ = require('jquery');
 
 /**
@@ -15,9 +13,10 @@ const $ = require('jquery');
  * Control the positioning and display of the popover element
  */
 module.exports = function BdSubmenu($rootScope, $timeout, $document) {
-    let submenuService = this,
-        mouseOutDelay = 250,
-        $currentElement,
+    const submenuService = this;
+    const mouseOutDelay = 250;
+
+    let $currentElement,
         mouseoutTimer;
 
     function unsetCurrentElement() {
@@ -48,9 +47,9 @@ module.exports = function BdSubmenu($rootScope, $timeout, $document) {
         submenuService.stopTimer();
 
         // If a link w/i a submenu is clicked close that submenu immediately (don't do the fade-out animation)
-        $document.find('.sub-menu').one('click', function(event) {
+        $document.find('.sub-menu').one('click', (event) => {
             if ($(event.target).is('a')) {
-                $rootScope.$apply(function() {
+                $rootScope.$apply(() => {
                     unsetCurrentElement();
 
                     // This variable will be read by the animation code in the SubMenuContainerAnimation
@@ -100,18 +99,14 @@ module.exports = function BdSubmenu($rootScope, $timeout, $document) {
      * @param {DOMElement} elem 
      */
     submenuService.positionPopoverBody = function positionPopoverBody(elem) {
-        let popoverContainer,
-            popoverBody,
-            containerOffsetLeft;
-
-        popoverContainer   = $(elem).find('.popover__container');
-        popoverBody        = $(elem).find('.popover__body');
-        containerOffsetLeft = popoverContainer.offset().left;
+        const popoverContainer = $(elem).find('.popover__container');
+        const popoverBody = $(elem).find('.popover__body');
+        const containerOffsetLeft = popoverContainer.offset().left;
 
         if (containerOffsetLeft < 0) {
             popoverBody.css({
-                'position': 'relative',
-                'left': Math.abs(containerOffsetLeft) + 'px'
+                position: 'relative',
+                left: `${Math.abs(containerOffsetLeft)}px`
             });
         }
     };

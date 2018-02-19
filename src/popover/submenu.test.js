@@ -1,12 +1,13 @@
-'use strict';
-var $ = require('jquery');
-window.$ = $;
-var angular = require('angular');
+const $ = require('jquery');
+const angular = require('angular');
 require('angular-mocks');
 require('./index.js');
 
-describe('Service: buildium.angular-elements.popover.BdSubmenu', function () {
-    var $rootScope,
+/* global window */
+window.$ = $;
+
+describe('Service: buildium.angular-elements.popover.BdSubmenu', () => {
+    let $rootScope,
         $timeout,
         $document,
         $compile,
@@ -14,7 +15,7 @@ describe('Service: buildium.angular-elements.popover.BdSubmenu', function () {
 
     beforeEach(angular.mock.module('buildium.angular-elements.popover'));
 
-    beforeEach(angular.mock.inject(function (_$rootScope_, _$timeout_, _BdSubmenu_, _$document_, _$compile_) {
+    beforeEach(angular.mock.inject((_$rootScope_, _$timeout_, _BdSubmenu_, _$document_, _$compile_) => {
         $rootScope = _$rootScope_;
         $timeout = _$timeout_;
         $document = _$document_;
@@ -22,15 +23,15 @@ describe('Service: buildium.angular-elements.popover.BdSubmenu', function () {
         $compile = _$compile_;
     }));
 
-    afterEach(function () {
+    afterEach(() => {
         $document.find('body').off('click.submenu');
     });
 
-    it('should store the current element', function () {
-        var fakeElem = angular.element('<div><div class="popover__container"><div class="popover__body"></div></div></div>');
+    it('should store the current element', () => {
+        const fakeElem = angular.element('<div><div class="popover__container"><div class="popover__body"></div></div></div>');
 
         BdSubmenu.display(fakeElem);
-        var el = $compile(fakeElem)($rootScope);
+        const el = $compile(fakeElem)($rootScope);
         BdSubmenu.display(el);
         $rootScope.$digest();
 
@@ -38,12 +39,12 @@ describe('Service: buildium.angular-elements.popover.BdSubmenu', function () {
         expect(BdSubmenu.currentElement).toEqual(fakeElem);
     });
 
-    it('should start the timer if if the "startTimer()" method is called', function () {
+    it('should start the timer if if the "startTimer()" method is called', () => {
         // create a fake element being shown.
-    var fakeElem = angular.element('<div><div class="popover__container"><div class="popover__body"></div></div></div>');
+        const fakeElem = angular.element('<div><div class="popover__container"><div class="popover__body"></div></div></div>');
 
         BdSubmenu.display(fakeElem);
-        var el = $compile(fakeElem)($rootScope);
+        const el = $compile(fakeElem)($rootScope);
         BdSubmenu.display(el);
         $rootScope.$digest();
 
@@ -56,11 +57,11 @@ describe('Service: buildium.angular-elements.popover.BdSubmenu', function () {
         expect(BdSubmenu.currentElement).toBe(null);
     });
 
-    it('should cancel the timer if the "stopTimer()" method is called', function () {
-    var fakeElem = angular.element('<div><div class="popover__container"><div class="popover__body"></div></div></div>');
+    it('should cancel the timer if the "stopTimer()" method is called', () => {
+        const fakeElem = angular.element('<div><div class="popover__container"><div class="popover__body"></div></div></div>');
 
         BdSubmenu.display(fakeElem);
-        var el = $compile(fakeElem)($rootScope);
+        const el = $compile(fakeElem)($rootScope);
         BdSubmenu.display(el);
         BdSubmenu.stopTimer();
         $rootScope.$digest();

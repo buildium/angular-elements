@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name index
@@ -69,7 +67,7 @@
  * <link rel="stylesheet" href="@buildium/theme/dist/theme-styles.css">
  * ```
  */
-let moduleName = 'buildium.angular-elements';
+const moduleName = 'buildium.angular-elements';
 
 /**
  * @ndgoc module
@@ -78,7 +76,8 @@ let moduleName = 'buildium.angular-elements';
  */
 angular.module(moduleName, [
     require('./popover'),
-    require('./media-gallery')
+    require('./media-gallery'),
+    require('./accordion')
 ]);
 
 module.exports = moduleName;

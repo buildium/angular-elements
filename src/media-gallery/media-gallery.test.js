@@ -1,5 +1,3 @@
-﻿'use strict';
-
 const angular = require('angular');
 const faker = require('faker');
 require('angular-mocks');
@@ -15,20 +13,20 @@ describe('[Component] bdMediaGallery', () => {
 
     beforeEach(angular.mock.module('buildium.angular-elements.media-gallery'));
 
-    beforeEach(function createTestData() {
+    beforeEach(() => {
         onRemove = jasmine.createSpy('onRemove');
         onSelect = jasmine.createSpy('onSelect');
     });
 
     beforeEach(angular.mock.inject(($rootScope, $componentController) => {
         $scope = $rootScope.$new();
-        let locals = {};
+        const locals = {};
 
         bindings = {
             photos: []
         };
 
-        compile = function() {
+        compile = function compileComponent() {
             vm = $componentController('bdMediaGallery', locals, bindings);
             $scope.$digest();
         };
