@@ -5,9 +5,10 @@ const $ = require('jquery');
  * @name BdSubmenu
  * @module buildium.angular-elements.popover
  * @kind function 
- * @require $rootScope
- * @require $timeout
- * @require $document
+ * 
+ * @requires ng.service.$rootScope
+ * @requires ng.service.$timeout
+ * @requires ng.service.$document
  * 
  * @description
  * Control the positioning and display of the popover element
