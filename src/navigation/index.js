@@ -11,6 +11,7 @@ angular.module(moduleName, [
 
 .component('bdNavigation', require('./navigation'))
 .component('bdNavigationItem', require('./navigation-item'))
-.component('bdNavigationLink', require('./navigation-link'));
+.component('bdNavigationLink', require('./navigation-link'))
+.component('bdVerticalNavigation', require('./vertical-navigation'));
 
 module.exports = moduleName;

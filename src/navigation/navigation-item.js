@@ -36,9 +36,17 @@ const component = {};
   *
   */
 
+component.bindings = {
+    isActive: '<?'
+};
+
 component.template = `
-<div class="navigation__item" bd-accordion-toggle>
-    <div ng-transclude ng-transclude-slot="link" class="js-accordion-toggle"></div>
+<div class="navigation__item" 
+    bd-accordion-toggle 
+    is-open="$ctrl.isActive"
+    on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)"
+    ng-class="{'navigation__item--active': $ctrl.isActive}">
+    <div ng-transclude ng-transclude-slot="link"></div>
     <div bd-accordion-group>
         <ng-transclude ng-transclude-slot="menu"></ng-transclude>
     </div>
@@ -53,6 +61,14 @@ component.transclude = {
 
 component.require = {
     navigation: '^^bdNavigation'
+};
+
+component.controller = function NavigationItemController() {
+    const ctrl = this;
+
+    ctrl.onAccordionToggleChange = function onAccordionToggleChange(isAccordionGroupOpen) {
+        ctrl.isActive = isAccordionGroupOpen;
+    };
 };
 
 module.exports = component;

@@ -19,29 +19,9 @@ const component = {};
   * - <a class="label type-hint type-hint-string">string</a> `href` - Location that this navigation item points to
   * 
   * @example
-    <example name="bd-navigation" module="exampleModule">
+    <example name="bd-navigation" module="buildium.angular-elements.navigation">
         <file name="index.html">
-            <script>
-                angular.module('exampleModule', ['buildium.angular-elements.navigation'])
-                .controller('ExampleController', function () {
-                    this.navItems = [
-                        {
-                            title: 'Example',
-                            isEnabled: true,
-                            isActive: true,
-                            href: 'https://example.com'
-                        },
-                        {
-                            title: 'Secure Example',
-                            isEnabled: true,
-                            isActive: false,
-                            href: 'https://example.com'
-                        }
-                    ]
-                })
-            </script>
-
-            <div class="page-content" ng-controller="ExampleController as vm">
+            <div class="page-content">
                 <bd-navigation>
                     <bd-navigation-item>
                         <bd-navigation-link>
@@ -75,7 +55,7 @@ const component = {};
   */
 
 component.template = `
-<bd-accordion>
+<bd-accordion single-section-only="true">
     <nav class="navigation" ng-transclude></nav>
 </bd-accordion>
 `;
