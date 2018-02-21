@@ -9,9 +9,6 @@ const component = {};
   * @example
     <example name="bd-navigation" module="buildium.angular-elements.navigation">
         <file name="index.html">
-            <style>
-                .hide { display: none; }
-            </style>
             <div class="page-content">
                 <bd-navigation>
                     <bd-navigation-item>

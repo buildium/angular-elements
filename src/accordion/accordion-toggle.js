@@ -19,9 +19,6 @@
  *
     <example name="bd-accordion-toggle" module="buildium.angular-elements.accordion">
         <file name="index.html">
-            <style>
-                .hide { display: none; }
-            </style>
             <section class="page-content">
                 <bd-accordion>
                     <ul>
