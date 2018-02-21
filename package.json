@@ -20,7 +20,7 @@
     "url": "git+https://github.com/buildium/angular-elements.git"
   },
   "keywords": [],
-  "author": "Buildium <buidiumadmin@buildium.com",
+  "author": "Buildium <buidiumadmin@buildium.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/buildium/angular-elements/issues"
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@buildium/angular-docs": "1.1.0",
-    "@buildium/theme": "2.6.8",
+    "@buildium/theme": "2.8.0-navigation.1",
     "angular": "1.5.9",
     "angular-mocks": "1.5.9",
     "babel-cli": "6.24.0",

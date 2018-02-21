@@ -77,7 +77,8 @@ const moduleName = 'buildium.angular-elements';
 angular.module(moduleName, [
     require('./popover'),
     require('./media-gallery'),
-    require('./accordion')
+    require('./accordion'),
+    require('./navigation')
 ]);
 
 module.exports = moduleName;
