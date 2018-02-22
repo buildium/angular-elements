@@ -6,25 +6,24 @@ const component = {};
   * @module buildium.angular-elements.navigation
   * @restrict E
   * 
+  * @param {Boolean} isActive
+  * @param {Boolean} isDisabled
+  * 
   * @example
     <example name="bd-navigation" module="buildium.angular-elements.navigation">
         <file name="index.html">
             <div class="page-content">
                 <bd-navigation>
                     <bd-navigation-item>
-                        <navigation-link>
-                            <bd-navigation-link>
-                                <navigation-title>Settings</navigation-title>
-                            </bd-navigation-link>
-                        </navigation-link>
+                        <bd-navigation-link>
+                            <navigation-title>Settings</navigation-title>
+                        </bd-navigation-link>
                         <navigation-menu>
                             <bd-navigation>
                                 <bd-navigation-item>
-                                    <navigation-link>
-                                        <bd-navigation-link>
-                                            <navigation-title>Billing</navigation-title>
-                                        </bd-navigation-link>
-                                    </navigation-link>
+                                    <bd-navigation-link>
+                                        <navigation-title>Billing</navigation-title>
+                                    </bd-navigation-link>
                                 </bd-navigation-item>
                             </bd-navigation>
                         </navigation-menu>
@@ -37,25 +36,24 @@ const component = {};
   */
 
 component.bindings = {
-    isActive: '<?'
+    isActive: '<?',
+    isDisabled: '<?'
 };
 
 component.template = `
 <div class="navigation__item" 
     bd-accordion-toggle 
+    disabled="$ctrl.isDisabled"
     is-open="$ctrl.isActive"
     on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)"
     ng-class="{'navigation__item--active': $ctrl.isActive}">
-    <div ng-transclude ng-transclude-slot="link"></div>
-    <div bd-accordion-group>
-        <ng-transclude ng-transclude-slot="menu"></ng-transclude>
-    </div>
+
     <ng-transclude></ng-transclude>
+    <div bd-accordion-group ng-transclude ng-transclude-slot="menu"></div>
 </div>
 `;
 
 component.transclude = {
-    link: '?navigationLink',
     menu: '?navigationMenu'
 };
 
