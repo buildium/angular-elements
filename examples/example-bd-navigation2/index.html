@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Example - example-bd-accordion-group</title>
+  <title>Example - example-bd-navigation2</title>
   <link href="https:/cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet" type="text/css">
   <link href="../../examples-dep/default/node_modules/@buildium/theme/dist/theme-styles.css" rel="stylesheet" type="text/css">
   
@@ -10,23 +10,14 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
   <script src="../../examples-dep/default/dist/buildium-angular-elements.js"></script>
   <script src="/bower_components/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+  <script src="script.js"></script>
   
 
   
 </head>
-<body ng-app="buildium.angular-elements.accordion">
-  <section class="page-content">
-    <bd-accordion>
-        <ul>
-            <li bd-accordion-toggle>
-                Click this to toggle
-                <ul bd-accordion-group>
-                    <li class="list-item">link 1</li>
-                    <li class="list-item">link 2</li>
-                </ul>
-            </li>
-        </ul>
-    </bd-accordion>
-</section>
+<body ng-app="exampleModule">
+  <div class="page-content" ng-controller="ExampleController as vm">
+    <bd-vertical-navigation navigation-items="vm.navItems" class="navigation--large"></bd-vertical-navigation>
+</div>
 </body>
 </html>

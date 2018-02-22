@@ -19,9 +19,6 @@
  *
     <example name="bd-accordion-group" module="buildium.angular-elements.accordion">
         <file name="index.html">
-            <style>
-                .hide { display: none; }
-            </style>
             <section class="page-content">
                 <bd-accordion>
                     <ul>
@@ -173,9 +170,6 @@ module.exports = component;
  *
     <example name="bd-accordion-toggle" module="buildium.angular-elements.accordion">
         <file name="index.html">
-            <style>
-                .hide { display: none; }
-            </style>
             <section class="page-content">
                 <bd-accordion>
                     <ul>
@@ -391,7 +385,7 @@ var moduleName = 'buildium.angular-elements.accordion';
  * @name buildium.angular-elements.accordion
  * @module buildium.angular-elements.accordion
  */
-module.exports = angular.module(moduleName, []).component('bdAccordion', require('./accordion.js')).component('bdAccordionSection', require('./accordion-section.js')).directive('bdAccordionToggle', require('./accordion-toggle.js')).directive('bdAccordionGroup', require('./accordion-group.js'));
+angular.module(moduleName, []).component('bdAccordion', require('./accordion.js')).component('bdAccordionSection', require('./accordion-section.js')).directive('bdAccordionToggle', require('./accordion-toggle.js')).directive('bdAccordionGroup', require('./accordion-group.js'));
 
 module.exports = moduleName;
 },{"./accordion-group.js":1,"./accordion-section.js":2,"./accordion-toggle.js":3,"./accordion.js":4}],6:[function(require,module,exports){
@@ -473,10 +467,10 @@ var moduleName = 'buildium.angular-elements';
  * @name buildium.angular-elements
  * @module buildium.angular-elements
  */
-angular.module(moduleName, [require('./popover'), require('./media-gallery'), require('./accordion')]);
+angular.module(moduleName, [require('./popover'), require('./media-gallery'), require('./accordion'), require('./navigation')]);
 
 module.exports = moduleName;
-},{"./accordion":5,"./media-gallery":7,"./popover":9}],7:[function(require,module,exports){
+},{"./accordion":5,"./media-gallery":7,"./navigation":9,"./popover":14}],7:[function(require,module,exports){
 'use strict';
 
 var moduleName = 'buildium.angular-elements.media-gallery';
@@ -630,6 +624,350 @@ module.exports = component;
 },{}],9:[function(require,module,exports){
 'use strict';
 
+var moduleName = 'buildium.angular-elements.navigation';
+
+/**
+ * @ngdoc module
+ * @name buildium.angular-elements.navigation
+ * @module buildium.angular-elements.navigation
+ */
+angular.module(moduleName, [require('../accordion')]).component('bdNavigation', require('./navigation')).component('bdNavigationItem', require('./navigation-item')).component('bdNavigationLink', require('./navigation-link')).component('bdVerticalNavigation', require('./vertical-navigation'));
+
+module.exports = moduleName;
+},{"../accordion":5,"./navigation":12,"./navigation-item":10,"./navigation-link":11,"./vertical-navigation":13}],10:[function(require,module,exports){
+'use strict';
+
+var component = {};
+
+/**
+  * @ngdoc directive
+  * @name bdNavigationItem
+  * @module buildium.angular-elements.navigation
+  * @restrict E
+  * 
+  * @param {Boolean} isActive
+  * @param {Boolean} isDisabled
+  * 
+  * @example
+    <example name="bd-navigation" module="buildium.angular-elements.navigation">
+        <file name="index.html">
+            <div class="page-content">
+                <bd-navigation>
+                    <bd-navigation-item>
+                        <bd-navigation-link>
+                            <navigation-title>Settings</navigation-title>
+                        </bd-navigation-link>
+                        <navigation-menu>
+                            <bd-navigation>
+                                <bd-navigation-item>
+                                    <bd-navigation-link>
+                                        <navigation-title>Billing</navigation-title>
+                                    </bd-navigation-link>
+                                </bd-navigation-item>
+                            </bd-navigation>
+                        </navigation-menu>
+                    </bd-navigation-item>
+                </bd-navigation>
+            </div>
+        </file>
+    </example>
+  *
+  */
+
+component.bindings = {
+    isActive: '<?',
+    isDisabled: '<?'
+};
+
+component.template = '\n<div class="navigation__item" \n    bd-accordion-toggle \n    disabled="$ctrl.isDisabled"\n    is-open="$ctrl.isActive"\n    on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)"\n    ng-class="{\'navigation__item--active\': $ctrl.isActive}">\n\n    <ng-transclude></ng-transclude>\n    <div bd-accordion-group ng-transclude ng-transclude-slot="menu"></div>\n</div>\n';
+
+component.transclude = {
+    menu: '?navigationMenu'
+};
+
+component.require = {
+    navigation: '^^bdNavigation'
+};
+
+component.controller = function NavigationItemController() {
+    var ctrl = this;
+
+    ctrl.onAccordionToggleChange = function onAccordionToggleChange(isAccordionGroupOpen) {
+        ctrl.isActive = isAccordionGroupOpen;
+    };
+};
+
+module.exports = component;
+},{}],11:[function(require,module,exports){
+'use strict';
+
+var component = {};
+
+/**
+  * @ngdoc directive
+  * @name bdNavigationLink
+  * @module buildium.angular-elements.navigation
+  * @restrict E
+  * 
+  * @param {String} linkHref
+  * @param {Boolean} linkDisabled
+  * 
+  * @example
+    <example name="bd-navigation-link" module="buildium.angular-elements.navigation">
+        <file name="index.html">
+            <section class="page-content">
+                <bd-navigation>
+                    <bd-navigation-item>
+                        <bd-navigation-link>
+                            <navigation-title>Home</navigation-title>
+                        </bd-navigation-link>
+                    </bd-navigation-item>
+                </bd-navigation>
+            </section>
+        </file>
+    </example>
+**/
+
+component.bindings = {
+    linkHref: '<?',
+    linkDisabled: '<?'
+};
+
+component.template = '\n    <a class="navigation__item-link" \n        ng-class="{\'navigation__item-link--disabled\': $ctrl.linkDisabled}"\n        ng-href="{{$ctrl.linkHref}}" \n        ng-click="$ctrl.onClick($event)">\n\n        <div ng-transclude ng-transclude-slot="title" class="navigation__item-title"></div>\n    </a>\n';
+
+component.transclude = {
+    title: '?navigationTitle'
+};
+
+component.require = {
+    navigationItem: '^^bdNavigationItem'
+};
+
+component.controller = function NavigationLinkController() {
+    var ctrl = this;
+
+    ctrl.onClick = function onClick(event) {
+        if (!ctrl.linkEnabled) {
+            event.preventDefault();
+        }
+    };
+};
+
+module.exports = component;
+},{}],12:[function(require,module,exports){
+"use strict";
+
+var component = {};
+
+/**
+  * @ngdoc directive
+  * @name bdNavigation
+  * @module buildium.angular-elements.navigation
+  * @restrict E
+  * 
+  * @description
+  * 
+  * A flexible component for building all types of navigation elements. 
+  * CSS classes are generously added throughout to enable style overrides 
+  * for horizontal, tabbed, or vertical navigation bars.
+  *
+  * @param {Array} [navItems] - The collection of navigation items that should be added
+  * - <a class="label type-hint type-hint-string">string</a> `title` - <strong>Name to display for this navigation item</strong>
+  * - <a class="label type-hint type-hint-boolean">boolean</a> `isEnabled` - Whether user is able to interact with this navigation item 
+  * - <a class="label type-hint type-hint-boolean">boolean</a> `isActive` - Whether this navigation item is currrently active (i.e. we are on that page)
+  * - <a class="label type-hint type-hint-string">string</a> `href` - Location that this navigation item points to
+  * 
+  * @example
+    <example name="bd-navigation" module="buildium.angular-elements.navigation">
+        <file name="index.html">
+            <div class="page-content">
+                <bd-navigation>
+                    <bd-navigation-item>
+                        <bd-navigation-link>
+                            <navigation-title>Home</navigation-title>
+                        </bd-navigation-link>
+                    </bd-navigation-item>
+                    <bd-navigation-item>
+                        <bd-navigation-link>
+                            <navigation-title>Settings</navigation-title>
+                        </bd-navigation-link>
+                        <bd-navigation-menu>
+                            <bd-navigation>
+                                <bd-navigation-item>
+                                    <bd-navigation-link>
+                                        <navigation-title>Billing</navigation-title>
+                                    </bd-navigation-link>
+                                </bd-navigation-item>
+                            </bd-navigation>
+                        </bd-navigation-menu>
+                    </bd-navigation-item>
+                    <bd-navigation-item>
+                        <bd-navigation-link>
+                            <navigation-title>About</navigation-title>
+                        </bd-navigation-link>
+                    </bd-navigation-item>
+                </bd-navigation>
+            </div>
+        </file>
+    </example>
+  *
+  */
+
+component.template = "\n<bd-accordion single-section-only=\"true\">\n    <nav class=\"navigation\" ng-transclude></nav>\n</bd-accordion>\n";
+
+component.transclude = true;
+
+module.exports = component;
+},{}],13:[function(require,module,exports){
+'use strict';
+
+var component = {};
+
+/**
+  * @ngdoc directive
+  * @name bdVerticalNavigation
+  * @module buildium.angular-elements.navigation
+  * @restrict E
+  * 
+  * @description
+  * 
+  * A vertical navigation element suitable for sidebar navs
+  *
+  * @param {Array} [navigationItems] - The collection of navigation items that should be added
+  * - <a class="label type-hint type-hint-string">string</a> `title` - <strong>Name to display for this navigation item</strong>
+  * - <a class="label type-hint type-hint-boolean">boolean</a> `isEnabled` - Whether user is able to interact with this navigation item 
+  * - <a class="label type-hint type-hint-boolean">boolean</a> `isActive` - Whether this navigation item is currrently active (i.e. we are on that page)
+  * - <a class="label type-hint type-hint-string">string</a> `href` - Location that this navigation item points to
+  * - <a class="label type-hint type-hint-string">string</a> `cssClass` - Custom class(es) to add to this navigation item
+  * - <a class="label type-hint type-hint-array">array</a> `menu` - a sub-navigation with the same collection structure as `navigationItems`
+  * 
+  * @example
+    <example name="bd-navigation" module="exampleModule">
+        <file name="index.html">
+            <div class="page-content" ng-controller="ExampleController as vm">
+                <bd-vertical-navigation navigation-items="vm.navItems" class="navigation--large"></bd-vertical-navigation>
+            </div>
+        </file>
+        <file name="script.js">
+            angular.module('exampleModule', ['buildium.angular-elements.navigation'])
+            .controller('ExampleController', function () {
+                this.navItems = [
+                    {
+                        title: 'Appearance',
+                        isEnabled: true,
+                        isActive: false,
+                        href: 'https://appearance.example.com'
+                    },
+                    {
+                        title: 'Policies',
+                        isActive: true,
+                        href: 'https://policies.example.com'
+                    },
+                    {
+                        title: 'Manage',
+                        href: 'https://manage.example.com'
+                    }
+                ]
+            })
+        </file>
+    </example>
+  * @example
+    <example name="bd-navigation" module="exampleModule">
+        <file name="index.html">
+            <div class="page-content" ng-controller="ExampleController as vm">
+                <bd-vertical-navigation navigation-items="vm.navItems"></bd-vertical-navigation>
+            </div>
+        </file>
+        <file name="script.js">
+            angular.module('exampleModule', ['buildium.angular-elements.navigation'])
+            .controller('ExampleController', function () {
+                this.navItems = [
+                    {
+                        title: 'Appearance',
+                        href: '#appearance',
+                        menu: [
+                            {
+                                title: 'Branding'
+                            },
+                            
+                            {
+                                title: 'Logos'
+                            },
+                            {
+                                title: 'Profile photos'
+                            },
+                            {
+                                title: 'Domain'
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Policies',
+                        isActive: true,
+                        href: '#policies',
+                        menu: [
+                            {
+                                title: 'Frequency'
+                            },
+                            {
+                                title: 'Period'
+                            },
+                            {
+                                title: 'Rules'
+                            },
+                            {
+                                title: 'Fees'
+                            },
+                            {
+                                title: 'Notifications'
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Management',
+                        isDisabled: true,
+                        href: '#management',
+                        menu: [
+                            {
+                                title: 'Type'
+                            },
+                            {
+                                title: 'Income'
+                            },
+                            {
+                                title: 'Summary'
+                            }
+                        ]
+                    }
+                ]
+            })
+        </file>
+    </example>
+  *
+  */
+
+component.bindings = {
+    navigationItems: '<'
+};
+
+component.template = '\n<bd-navigation class="navigation--vertical">\n    <bd-navigation-item ng-repeat="navigationItem in $ctrl.navigationItems" is-active="navigationItem.isActive" is-disabled="navigationItem.isDisabled">\n        <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled">\n            <navigation-title>{{navigationItem.title}}</navigation-title>\n        </bd-navigation-link>\n        <navigation-menu class="navigation__menu" ng-if="navigationItem.menu" ng-class="{{$ctrl.getMenuClassName(navigationItem.title)}}">\n            <bd-vertical-navigation navigation-items="navigationItem.menu"></bd-vertical-navigation>\n        </navigation-menu>\n    </bd-navigation>\n</bd-navigation>\n';
+
+component.controller = function VerticalNavigationController() {
+    var ctrl = this;
+
+    function sanitizeString(string) {
+        return string.toLowerCase().replace(/\W/g, '');
+    }
+
+    ctrl.getMenuClassName = function getMenuClassName(title) {
+        return 'navigation__menu--' + sanitizeString(title);
+    };
+};
+
+module.exports = component;
+},{}],14:[function(require,module,exports){
+'use strict';
+
 var moduleName = 'buildium.angular-elements.popover';
 var $ = require('jquery');
 
@@ -750,7 +1088,7 @@ angular.module(moduleName, [])
 }]).service('BdSubmenu', ['$rootScope', '$timeout', '$document', require('./submenu')]);
 
 module.exports = moduleName;
-},{"./submenu":10,"jquery":11}],10:[function(require,module,exports){
+},{"./submenu":15,"jquery":16}],15:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -760,9 +1098,10 @@ var $ = require('jquery');
  * @name BdSubmenu
  * @module buildium.angular-elements.popover
  * @kind function 
- * @require $rootScope
- * @require $timeout
- * @require $document
+ * 
+ * @requires ng.service.$rootScope
+ * @requires ng.service.$timeout
+ * @requires ng.service.$document
  * 
  * @description
  * Control the positioning and display of the popover element
@@ -866,7 +1205,7 @@ module.exports = function BdSubmenu($rootScope, $timeout, $document) {
         }
     };
 };
-},{"jquery":11}],11:[function(require,module,exports){
+},{"jquery":16}],16:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.2.4
  * http://jquery.com/

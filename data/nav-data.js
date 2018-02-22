@@ -58,6 +58,40 @@ angular.module('docApp').constant('DOCS_NAVIGATION', {
         ]
       },
       {
+        "name": "buildium.angular-elements.navigation",
+        "type": "groups",
+        "href": "api/buildium.angular-elements.navigation",
+        "navItems": [
+          {
+            "name": "directive",
+            "type": "section",
+            "href": "api/buildium.angular-elements.navigation/directive",
+            "navItems": [
+              {
+                "name": "bdNavigation",
+                "type": "directive",
+                "href": "api/buildium.angular-elements.navigation/directive/bdNavigation"
+              },
+              {
+                "name": "bdNavigationItem",
+                "type": "directive",
+                "href": "api/buildium.angular-elements.navigation/directive/bdNavigationItem"
+              },
+              {
+                "name": "bdNavigationLink",
+                "type": "directive",
+                "href": "api/buildium.angular-elements.navigation/directive/bdNavigationLink"
+              },
+              {
+                "name": "bdVerticalNavigation",
+                "type": "directive",
+                "href": "api/buildium.angular-elements.navigation/directive/bdVerticalNavigation"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "name": "buildium.angular-elements.popover",
         "type": "groups",
         "href": "api/buildium.angular-elements.popover",
