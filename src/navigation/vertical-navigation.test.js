@@ -4,6 +4,7 @@ require('./index.js');
 
 describe('VerticalNavigationController', () => {
     let ctrl;
+    let compile;
 
     beforeEach(angular.mock.module('buildium.angular-elements.navigation'));
 
