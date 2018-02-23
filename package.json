@@ -13,7 +13,7 @@
     "predocs": "npm run build",
     "docs": "node .build/docs.js",
     "postversion": "npm run docs -- --gh-pages",
-    "watch": "nodemon --watch src/ --exec npm run docs"
+    "watch:docs": "nodemon --watch src/ --exec npm run docs"
   },
   "repository": {
     "type": "git",
@@ -55,7 +55,6 @@
     "karma-electron-launcher": "0.2.0",
     "karma-jasmine": "1.1.0",
     "mkdirp": "0.5.1",
-    "nodemon": "1.14.12",
     "watchify": "3.9.0"
   },
   "eslintConfig": {
