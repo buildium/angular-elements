@@ -747,7 +747,7 @@ component.controller = function NavigationLinkController() {
     var ctrl = this;
 
     ctrl.onClick = function onClick(event) {
-        if (!ctrl.linkEnabled) {
+        if (ctrl.linkDisabled) {
             event.preventDefault();
         }
     };
