@@ -15,6 +15,7 @@ const component = {};
   * - <a class="label type-hint type-hint-boolean">boolean</a> `isEnabled` - Whether user is able to interact with this navigation item 
   * - <a class="label type-hint type-hint-boolean">boolean</a> `isActive` - Whether this navigation item is currrently active (i.e. we are on that page)
   * - <a class="label type-hint type-hint-string">string</a> `href` - Location that this navigation item points to
+  * - <a class="label type-hint type-hint-string">string</a> `sref` - State that this navigation item points to
   * - <a class="label type-hint type-hint-string">string</a> `cssClass` - Custom class(es) to add to this navigation item
   * - <a class="label type-hint type-hint-array">array</a> `menu` - a sub-navigation with the same collection structure as `navigationItems`
   * 
@@ -129,8 +130,7 @@ component.bindings = {
 
 component.template = `
 <bd-navigation class="navigation--vertical">
-    <bd-navigation-item ng-repeat="navigationItem in $ctrl.navigationItems" is-active="navigationItem.isActive" is-disabled="navigationItem.isDisabled">
-        <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled">
+        <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled" link-sref="navigationItem.sref">
             <navigation-title>{{navigationItem.title}}</navigation-title>
         </bd-navigation-link>
         <navigation-menu class="navigation__menu" ng-if="navigationItem.menu" ng-class="{{$ctrl.getMenuClassName(navigationItem.title)}}">

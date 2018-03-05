@@ -7,8 +7,17 @@ describe('NavigationLinkController', () => {
     let locals;
     let bindings;
     let compile;
+    let $state = jasmine.createSpyObj('$state', ['go']);
 
     beforeEach(angular.mock.module('buildium.angular-elements.navigation'));
+
+    beforeEach(() => {
+        $state.go.calls.reset();
+
+        angular.mock.module({
+            $state: $state
+        });
+    });
 
     beforeEach(angular.mock.inject(($componentController) => {
         locals = {};
@@ -20,9 +29,14 @@ describe('NavigationLinkController', () => {
     }));
 
     describe('onClick', () => {
+        const event = jasmine.createSpyObj('event', ['preventDefault']);
+
+        beforeEach(() => {
+            event.preventDefault.calls.reset();
+        });
+
         it('should prevent the default behavior if the link is disabled', () => {
             bindings.linkDisabled = true;
-            const event = jasmine.createSpyObj('event', ['preventDefault']);
             compile();
 
             ctrl.onClick(event);
@@ -31,11 +45,18 @@ describe('NavigationLinkController', () => {
 
         it('should allow the default behavior if the link is not disabled', () => {
             bindings.linkDisabled = false;
-            const event = jasmine.createSpyObj('event', ['preventDefault']);
             compile();
 
             ctrl.onClick(event);
             expect(event.preventDefault).not.toHaveBeenCalled();
+        });
+
+        it('should navigation using $state if an sref is provided', () => {
+            bindings.linkSref = "hello.world";
+            compile();
+
+            ctrl.onClick(event);
+            expect($state.go).toHaveBeenCalledWith(bindings.linkSref);
         });
     });
 });
