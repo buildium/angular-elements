@@ -679,7 +679,7 @@ component.bindings = {
     isDisabled: '<?'
 };
 
-component.template = '\n<div class="navigation__item" \n    bd-accordion-toggle \n    disabled="$ctrl.isDisabled"\n    is-open="$ctrl.isActive"\n    on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)"\n    ng-class="{\'navigation__item--active\': $ctrl.isActive}">\n\n    <ng-transclude></ng-transclude>\n    <div bd-accordion-group ng-transclude ng-transclude-slot="menu"></div>\n</div>\n';
+component.template = '\n<div bd-accordion-toggle \n    disabled="$ctrl.isDisabled"\n    is-open="$ctrl.isActive"\n    on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)"\n    ng-class="[\'navigation__item\', {\'navigation__item--active\': $ctrl.isActive, \'navigation__item--disabled\': $ctrl.isDisabled}]">\n\n    <ng-transclude></ng-transclude>\n    <div bd-accordion-group ng-transclude ng-transclude-slot="menu"></div>\n</div>\n';
 
 component.transclude = {
     menu: '?navigationMenu'
@@ -710,6 +710,7 @@ var component = {};
   * @restrict E
   * 
   * @param {String} linkHref
+  * @param {String} linkSref
   * @param {Boolean} linkDisabled
   * 
   * @example
@@ -730,10 +731,11 @@ var component = {};
 
 component.bindings = {
     linkHref: '<?',
+    linkSref: '<?',
     linkDisabled: '<?'
 };
 
-component.template = '\n    <a class="navigation__item-link" \n        ng-class="{\'navigation__item-link--disabled\': $ctrl.linkDisabled}"\n        ng-href="{{$ctrl.linkHref}}" \n        ng-click="$ctrl.onClick($event)">\n\n        <div ng-transclude ng-transclude-slot="title" class="navigation__item-title"></div>\n    </a>\n';
+component.template = '\n    <a class="navigation__item-link" \n        ng-class="{\'navigation__item-link--disabled\': $ctrl.linkDisabled}"\n        ng-click="$ctrl.onClick($event)">\n\n        <div ng-transclude ng-transclude-slot="title" class="navigation__item-title"></div>\n    </a>\n';
 
 component.transclude = {
     title: '?navigationTitle'
@@ -743,15 +745,21 @@ component.require = {
     navigationItem: '^^bdNavigationItem'
 };
 
-component.controller = function NavigationLinkController() {
+component.controller = function NavigationLinkController($injector, $window) {
     var ctrl = this;
 
     ctrl.onClick = function onClick(event) {
         if (ctrl.linkDisabled) {
             event.preventDefault();
+        } else if (ctrl.linkSref && $injector.has('$state')) {
+            $injector.get('$state').go(ctrl.linkSref);
+        } else if (ctrl.linkHref) {
+            $window.location.assign(ctrl.linkHref);
         }
     };
 };
+
+component.controller.$inject = ['$injector', '$window'];
 
 module.exports = component;
 },{}],12:[function(require,module,exports){
@@ -770,12 +778,6 @@ var component = {};
   * A flexible component for building all types of navigation elements. 
   * CSS classes are generously added throughout to enable style overrides 
   * for horizontal, tabbed, or vertical navigation bars.
-  *
-  * @param {Array} [navItems] - The collection of navigation items that should be added
-  * - <a class="label type-hint type-hint-string">string</a> `title` - <strong>Name to display for this navigation item</strong>
-  * - <a class="label type-hint type-hint-boolean">boolean</a> `isEnabled` - Whether user is able to interact with this navigation item 
-  * - <a class="label type-hint type-hint-boolean">boolean</a> `isActive` - Whether this navigation item is currrently active (i.e. we are on that page)
-  * - <a class="label type-hint type-hint-string">string</a> `href` - Location that this navigation item points to
   * 
   * @example
     <example name="bd-navigation" module="buildium.angular-elements.navigation">
@@ -835,9 +837,10 @@ var component = {};
   *
   * @param {Array} [navigationItems] - The collection of navigation items that should be added
   * - <a class="label type-hint type-hint-string">string</a> `title` - <strong>Name to display for this navigation item</strong>
-  * - <a class="label type-hint type-hint-boolean">boolean</a> `isEnabled` - Whether user is able to interact with this navigation item 
+  * - <a class="label type-hint type-hint-boolean">boolean</a> `isDisabled` - Whether user is able to interact with this navigation item 
   * - <a class="label type-hint type-hint-boolean">boolean</a> `isActive` - Whether this navigation item is currrently active (i.e. we are on that page)
   * - <a class="label type-hint type-hint-string">string</a> `href` - Location that this navigation item points to
+  * - <a class="label type-hint type-hint-string">string</a> `sref` - State that this navigation item points to
   * - <a class="label type-hint type-hint-string">string</a> `cssClass` - Custom class(es) to add to this navigation item
   * - <a class="label type-hint type-hint-array">array</a> `menu` - a sub-navigation with the same collection structure as `navigationItems`
   * 
@@ -950,7 +953,7 @@ component.bindings = {
     navigationItems: '<'
 };
 
-component.template = '\n<bd-navigation class="navigation--vertical">\n    <bd-navigation-item ng-repeat="navigationItem in $ctrl.navigationItems" is-active="navigationItem.isActive" is-disabled="navigationItem.isDisabled">\n        <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled">\n            <navigation-title>{{navigationItem.title}}</navigation-title>\n        </bd-navigation-link>\n        <navigation-menu class="navigation__menu" ng-if="navigationItem.menu" ng-class="{{$ctrl.getMenuClassName(navigationItem.title)}}">\n            <bd-vertical-navigation navigation-items="navigationItem.menu"></bd-vertical-navigation>\n        </navigation-menu>\n    </bd-navigation>\n</bd-navigation>\n';
+component.template = '\n<bd-navigation class="navigation--vertical">\n    <bd-navigation-item ng-repeat="navigationItem in $ctrl.navigationItems" is-active="navigationItem.isActive" is-disabled="navigationItem.isDisabled" class="{{navigationItem.cssClass}}">\n        <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled" link-sref="navigationItem.sref">\n            <navigation-title>{{navigationItem.title}}</navigation-title>\n        </bd-navigation-link>\n        <navigation-menu class="navigation__menu" ng-if="navigationItem.menu" ng-class="{{$ctrl.getMenuClassName(navigationItem.title)}}">\n            <bd-vertical-navigation navigation-items="navigationItem.menu"></bd-vertical-navigation>\n        </navigation-menu>\n    </bd-navigation>\n</bd-navigation>\n';
 
 component.controller = function VerticalNavigationController() {
     var ctrl = this;
