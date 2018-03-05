@@ -11,12 +11,6 @@ const component = {};
   * A flexible component for building all types of navigation elements. 
   * CSS classes are generously added throughout to enable style overrides 
   * for horizontal, tabbed, or vertical navigation bars.
-  *
-  * @param {Array} [navItems] - The collection of navigation items that should be added
-  * - <a class="label type-hint type-hint-string">string</a> `title` - <strong>Name to display for this navigation item</strong>
-  * - <a class="label type-hint type-hint-boolean">boolean</a> `isEnabled` - Whether user is able to interact with this navigation item 
-  * - <a class="label type-hint type-hint-boolean">boolean</a> `isActive` - Whether this navigation item is currrently active (i.e. we are on that page)
-  * - <a class="label type-hint type-hint-string">string</a> `href` - Location that this navigation item points to
   * 
   * @example
     <example name="bd-navigation" module="buildium.angular-elements.navigation">
