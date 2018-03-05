@@ -12,7 +12,7 @@ const component = {};
   *
   * @param {Array} [navigationItems] - The collection of navigation items that should be added
   * - <a class="label type-hint type-hint-string">string</a> `title` - <strong>Name to display for this navigation item</strong>
-  * - <a class="label type-hint type-hint-boolean">boolean</a> `isEnabled` - Whether user is able to interact with this navigation item 
+  * - <a class="label type-hint type-hint-boolean">boolean</a> `isDisabled` - Whether user is able to interact with this navigation item 
   * - <a class="label type-hint type-hint-boolean">boolean</a> `isActive` - Whether this navigation item is currrently active (i.e. we are on that page)
   * - <a class="label type-hint type-hint-string">string</a> `href` - Location that this navigation item points to
   * - <a class="label type-hint type-hint-string">string</a> `sref` - State that this navigation item points to
@@ -130,6 +130,7 @@ component.bindings = {
 
 component.template = `
 <bd-navigation class="navigation--vertical">
+    <bd-navigation-item ng-repeat="navigationItem in $ctrl.navigationItems" is-active="navigationItem.isActive" is-disabled="navigationItem.isDisabled" class="{{navigationItem.cssClass}}">
         <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled" link-sref="navigationItem.sref">
             <navigation-title>{{navigationItem.title}}</navigation-title>
         </bd-navigation-link>
