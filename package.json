@@ -1,6 +1,6 @@
 {
   "name": "@buildium/angular-elements",
-  "version": "1.2.0-1",
+  "version": "1.2.0-7",
   "description": "A collection of directives for building angular applications",
   "main": "lib/index.js",
   "scripts": {
@@ -13,14 +13,14 @@
     "predocs": "npm run build",
     "docs": "node .build/docs.js",
     "postversion": "npm run docs -- --gh-pages",
-    "watch": "nodemon --watch src/ --exec npm run docs"
+    "watch:docs": "nodemon --watch src/ --exec npm run docs"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/buildium/angular-elements.git"
   },
   "keywords": [],
-  "author": "Buildium <buidiumadmin@buildium.com",
+  "author": "Buildium <buidiumadmin@buildium.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/buildium/angular-elements/issues"
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@buildium/angular-docs": "1.1.0",
-    "@buildium/theme": "2.6.8",
+    "@buildium/theme": "3.2.2",
     "angular": "1.5.9",
     "angular-mocks": "1.5.9",
     "babel-cli": "6.24.0",
@@ -55,7 +55,6 @@
     "karma-electron-launcher": "0.2.0",
     "karma-jasmine": "1.1.0",
     "mkdirp": "0.5.1",
-    "nodemon": "1.14.12",
     "watchify": "3.9.0"
   },
   "eslintConfig": {

@@ -1,5 +1,6 @@
 .build/
-docs/
-!dist/
-src/
 karma.conf.js
+!dist/
+!lib/
+docs/
+src/
