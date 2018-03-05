@@ -55,10 +55,7 @@ component.controller = function NavigationLinkController($injector, $window) {
     ctrl.onClick = function onClick(event) {
         if (ctrl.linkDisabled) {
             event.preventDefault();
-            return false;
-        }
-
-        if (ctrl.linkSref && $injector.has('$state')) {
+        } else if (ctrl.linkSref && $injector.has('$state')) {
             $injector.get('$state').go(ctrl.linkSref);
         } else if (ctrl.linkHref) {
             $window.location.assign(ctrl.linkHref);

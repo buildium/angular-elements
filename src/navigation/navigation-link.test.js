@@ -7,7 +7,7 @@ describe('NavigationLinkController', () => {
     let locals;
     let bindings;
     let compile;
-    let $state = jasmine.createSpyObj('$state', ['go']);
+    const $state = jasmine.createSpyObj('$state', ['go']);
 
     beforeEach(angular.mock.module('buildium.angular-elements.navigation'));
 
@@ -15,7 +15,7 @@ describe('NavigationLinkController', () => {
         $state.go.calls.reset();
 
         angular.mock.module({
-            $state: $state
+            $state
         });
     });
 
@@ -52,7 +52,7 @@ describe('NavigationLinkController', () => {
         });
 
         it('should navigation using $state if an sref is provided', () => {
-            bindings.linkSref = "hello.world";
+            bindings.linkSref = 'hello.world';
             compile();
 
             ctrl.onClick(event);
