@@ -1,5 +1,3 @@
-﻿'use strict';
-
 /**
  * @ngdoc directive
  * @name bdMediaGallery
@@ -33,6 +31,13 @@
  * @example
     <example name="bd-media-gallery" module="buildium.angular-elements.media-gallery">
         <file name="index.html">
+            <style>
+                .media-gallery__media-container {
+                    height: 100px;
+                    width: 100px;
+                    margin: 10px;
+                }
+            </style>
             <script>
                 angular.module('buildium.angular-elements.media-gallery')
                     .controller('ExampleController', function() {
@@ -107,16 +112,16 @@ component.template = `
             ng-click="vm.viewLarger(media)">
             View larger
         </button>
-        <button class="media-gallery__image-delete svgicon svgicon--delete"
-            ng-if="media.isRemovable || (media.isRemovable !== false && vm.allowRemove)"
-            ng-click="vm.removeMedia(media)">
-            <span class="media-gallery__screen-reader-only">Remove</span>
-        </button>
         <button class="media-gallery__view-all"
             ng-if="vm.limitTo < vm.media.length"
             ng-show="$last"
             ng-click="vm.viewAll()">
             +{{ vm.media.length - vm.limitTo + 1 }}
+        </button>
+        <button class="media-gallery__image-delete svgicon svgicon--delete"
+            ng-if="media.isRemovable || (media.isRemovable !== false && vm.allowRemove)"
+            ng-click="vm.removeMedia(media)">
+            <span class="media-gallery__screen-reader-only">Remove</span>
         </button>
     </div>
 </div>
@@ -133,19 +138,19 @@ component.controller = function MediaGalleryController() {
 
     vm.selectMedia = function selectMedia(item) {
         if (typeof vm.onSelect === 'function') {
-            vm.onSelect({ item: item });
+            vm.onSelect({ item });
         }
     };
     
     vm.removeMedia = function removeMedia(item) {
-        if (typeof vm.onRemove !== 'function' || vm.onRemove({ item: item }) !== false) {
+        if (typeof vm.onRemove !== 'function' || vm.onRemove({ item }) !== false) {
             vm.media.splice(vm.media.indexOf(item), 1);
         }
     };
 
     vm.viewLarger = function viewLarger(item) {
         if (typeof vm.onEnlarge === 'function') {
-            vm.onEnlarge({ item: item });
+            vm.onEnlarge({ item });
         }
     };
 
