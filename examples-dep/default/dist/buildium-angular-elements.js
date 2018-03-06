@@ -679,7 +679,7 @@ component.bindings = {
     isDisabled: '<?'
 };
 
-component.template = '\n<div bd-accordion-toggle \n    disabled="$ctrl.isDisabled"\n    is-open="$ctrl.isActive"\n    on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)"\n    ng-class="[\'navigation__item\', {\'navigation__item--active\': $ctrl.isActive, \'navigation__item--disabled\': $ctrl.isDisabled}]">\n\n    <ng-transclude></ng-transclude>\n    <div bd-accordion-group ng-transclude ng-transclude-slot="menu"></div>\n</div>\n';
+component.template = '\n<div bd-accordion-toggle \n    disabled="$ctrl.isDisabled"\n    is-open="$ctrl.isActive"\n    on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)"\n    class="navigation__item"\n    ng-class="{\'navigation__item--active\': $ctrl.isActive, \'navigation__item--disabled\': $ctrl.isDisabled}">\n\n    <ng-transclude></ng-transclude>\n    <div bd-accordion-group ng-transclude ng-transclude-slot="menu"></div>\n</div>\n';
 
 component.transclude = {
     menu: '?navigationMenu'
