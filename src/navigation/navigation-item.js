@@ -45,7 +45,8 @@ component.template = `
     disabled="$ctrl.isDisabled"
     is-open="$ctrl.isActive"
     on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)"
-    ng-class="['navigation__item', {'navigation__item--active': $ctrl.isActive, 'navigation__item--disabled': $ctrl.isDisabled}]">
+    class="navigation__item"
+    ng-class="{'navigation__item--active': $ctrl.isActive, 'navigation__item--disabled': $ctrl.isDisabled}">
 
     <ng-transclude></ng-transclude>
     <div bd-accordion-group ng-transclude ng-transclude-slot="menu"></div>
