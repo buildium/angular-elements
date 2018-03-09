@@ -8,7 +8,6 @@ const component = {};
   * 
   * @param {Boolean} isActive
   * @param {Boolean} isDisabled
-  * @param {Function} onToggle  called when navigation item is opened or closed
   * 
   * @example
     <example name="bd-navigation" module="buildium.angular-elements.navigation">
@@ -38,20 +37,16 @@ const component = {};
 
 component.bindings = {
     isActive: '<?',
-    isDisabled: '<?',
-    onToggle: '&?'
+    isDisabled: '<?'
 };
 
 component.template = `
 <div bd-accordion-toggle 
     disabled="$ctrl.isDisabled"
-    is-open="$ctrl.isOpen"
+    is-open="$ctrl.isActive"
     on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)"
     class="navigation__item"
-    ng-class="{
-        'navigation__item--active': $ctrl.isActive, 
-        'navigation__item--open': $ctrl.isOpen, 
-        'navigation__item--disabled': $ctrl.isDisabled}">
+    ng-class="{'navigation__item--active': $ctrl.isActive, 'navigation__item--disabled': $ctrl.isDisabled}">
 
     <ng-transclude></ng-transclude>
     <div bd-accordion-group ng-transclude ng-transclude-slot="menu"></div>
@@ -69,18 +64,8 @@ component.require = {
 component.controller = function NavigationItemController() {
     const ctrl = this;
 
-    ctrl.$onInit = function onInit() {
-        ctrl.isOpen = ctrl.isActive;
-    };
-
     ctrl.onAccordionToggleChange = function onAccordionToggleChange(isAccordionGroupOpen) {
-        ctrl.isOpen = isAccordionGroupOpen;
-
-        if (ctrl.onToggle) {
-            ctrl.onToggle({ isActive: isAccordionGroupOpen });
-        } else {
-            ctrl.isActive = isAccordionGroupOpen;
-        }
+        ctrl.isActive = isAccordionGroupOpen;
     };
 };
 
