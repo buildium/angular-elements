@@ -18,6 +18,7 @@ const component = {};
   * - <a class="label type-hint type-hint-string">string</a> `sref` - State that this navigation item points to
   * - <a class="label type-hint type-hint-string">string</a> `cssClass` - Custom class(es) to add to this navigation item
   * - <a class="label type-hint type-hint-array">array</a> `menu` - a sub-navigation with the same collection structure as `navigationItems`
+  * - <a class="label type-hint type-hint-function">function</a> `onToggle(isActive)` - called when this navigation item is selected or deselected 
   * 
   * @example
     <example name="bd-navigation" module="exampleModule">
@@ -32,18 +33,18 @@ const component = {};
                 this.navItems = [
                     {
                         title: 'Appearance',
-                        isEnabled: true,
+                        isDisabled: true,
                         isActive: false,
-                        href: 'https://appearance.example.com'
+                        href: '#https://appearance.example.com'
                     },
                     {
                         title: 'Policies',
                         isActive: true,
-                        href: 'https://policies.example.com'
+                        href: '#https://policies.example.com'
                     },
                     {
                         title: 'Manage',
-                        href: 'https://manage.example.com'
+                        href: '#https://manage.example.com'
                     }
                 ]
             })
@@ -130,7 +131,7 @@ component.bindings = {
 
 component.template = `
 <bd-navigation class="navigation--vertical">
-    <bd-navigation-item ng-repeat="navigationItem in $ctrl.navigationItems" is-active="navigationItem.isActive" is-disabled="navigationItem.isDisabled" class="{{navigationItem.cssClass}}">
+    <bd-navigation-item ng-repeat="navigationItem in $ctrl.navigationItems" is-active="navigationItem.isActive" is-disabled="navigationItem.isDisabled" on-toggle="navigationItem.onToggle(isActive)" class="{{navigationItem.cssClass}}">
         <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled" link-sref="navigationItem.sref">
             <navigation-title>{{navigationItem.title}}</navigation-title>
         </bd-navigation-link>
