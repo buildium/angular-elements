@@ -69,12 +69,21 @@ component.require = {
     navigation: '^^bdNavigation'
 };
 
-component.controller = function NavigationItemController() {
+component.controller = function NavigationItemController($attrs, $transclude) {
     const ctrl = this;
+
+    ctrl.$onInit = function onInit() {
+        let subMenuOptionNotProvided = !('hasSubMenu' in $attrs);
+        if (subMenuOptionNotProvided) {
+            ctrl.hasSubMenu = $transclude.isSlotFilled('menu');
+        }
+    };
 
     ctrl.onAccordionToggleChange = function onAccordionToggleChange(isAccordionGroupOpen) {
         ctrl.isActive = isAccordionGroupOpen;
     };
 };
+
+component.controller.$inject = ['$attrs', '$transclude'];
 
 module.exports = component;
