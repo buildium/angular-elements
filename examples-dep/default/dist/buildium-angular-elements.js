@@ -647,6 +647,7 @@ var component = {};
   * 
   * @param {Boolean} isActive
   * @param {Boolean} isDisabled
+  * @param {Boolean} hasSubMenu
   * 
   * @example
     <example name="bd-navigation" module="buildium.angular-elements.navigation">
@@ -676,10 +677,11 @@ var component = {};
 
 component.bindings = {
     isActive: '<?',
-    isDisabled: '<?'
+    isDisabled: '<?',
+    hasSubMenu: '<?'
 };
 
-component.template = '\n<div bd-accordion-toggle \n    disabled="$ctrl.isDisabled"\n    is-open="$ctrl.isActive"\n    on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)"\n    class="navigation__item"\n    ng-class="{\'navigation__item--active\': $ctrl.isActive, \'navigation__item--disabled\': $ctrl.isDisabled}">\n\n    <ng-transclude></ng-transclude>\n    <div bd-accordion-group ng-transclude ng-transclude-slot="menu"></div>\n</div>\n';
+component.template = '\n<div ng-if="$ctrl.hasSubMenu"\n    class="navigation__item"\n    ng-class="{\'navigation__item--active\': $ctrl.isActive, \'navigation__item--disabled\': $ctrl.isDisabled}"\n    bd-accordion-toggle\n    disabled="$ctrl.isDisabled"\n    is-open="$ctrl.isActive"\n    on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)">\n\n    <ng-transclude></ng-transclude>\n    <div bd-accordion-group ng-transclude ng-transclude-slot="menu"></div>\n</div>\n<div ng-if="!$ctrl.hasSubMenu" \n    class="navigation__item" \n    ng-class="{\'navigation__item--active\': $ctrl.isActive, \'navigation__item--disabled\': $ctrl.isDisabled}" \n    ng-transclude>\n</div>\n';
 
 component.transclude = {
     menu: '?navigationMenu'
@@ -689,13 +691,22 @@ component.require = {
     navigation: '^^bdNavigation'
 };
 
-component.controller = function NavigationItemController() {
+component.controller = function NavigationItemController($attrs, $transclude) {
     var ctrl = this;
+
+    ctrl.$onInit = function onInit() {
+        var subMenuOptionNotProvided = !('hasSubMenu' in $attrs);
+        if (subMenuOptionNotProvided) {
+            ctrl.hasSubMenu = $transclude.isSlotFilled('menu');
+        }
+    };
 
     ctrl.onAccordionToggleChange = function onAccordionToggleChange(isAccordionGroupOpen) {
         ctrl.isActive = isAccordionGroupOpen;
     };
 };
+
+component.controller.$inject = ['$attrs', '$transclude'];
 
 module.exports = component;
 },{}],11:[function(require,module,exports){
@@ -857,18 +868,18 @@ var component = {};
                 this.navItems = [
                     {
                         title: 'Appearance',
-                        isEnabled: true,
+                        isDisabled: true,
                         isActive: false,
-                        href: 'https://appearance.example.com'
+                        href: '#https://appearance.example.com'
                     },
                     {
                         title: 'Policies',
                         isActive: true,
-                        href: 'https://policies.example.com'
+                        href: '#https://policies.example.com'
                     },
                     {
                         title: 'Manage',
-                        href: 'https://manage.example.com'
+                        href: '#https://manage.example.com'
                     }
                 ]
             })
@@ -953,7 +964,7 @@ component.bindings = {
     navigationItems: '<'
 };
 
-component.template = '\n<bd-navigation class="navigation--vertical">\n    <bd-navigation-item ng-repeat="navigationItem in $ctrl.navigationItems" is-active="navigationItem.isActive" is-disabled="navigationItem.isDisabled" class="{{navigationItem.cssClass}}">\n        <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled" link-sref="navigationItem.sref">\n            <navigation-title>{{navigationItem.title}}</navigation-title>\n        </bd-navigation-link>\n        <navigation-menu class="navigation__menu" ng-if="navigationItem.menu" ng-class="{{$ctrl.getMenuClassName(navigationItem.title)}}">\n            <bd-vertical-navigation navigation-items="navigationItem.menu"></bd-vertical-navigation>\n        </navigation-menu>\n    </bd-navigation>\n</bd-navigation>\n';
+component.template = '\n<bd-navigation class="navigation--vertical">\n    <bd-navigation-item \n        ng-repeat="navigationItem in $ctrl.navigationItems" \n        is-active="navigationItem.isActive" \n        is-disabled="navigationItem.isDisabled" \n        has-sub-menu="navigationItem.menu && navigationItem.menu.length" \n        class="{{navigationItem.cssClass}}">\n        <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled" link-sref="navigationItem.sref">\n            <navigation-title>{{navigationItem.title}}</navigation-title>\n        </bd-navigation-link>\n        <navigation-menu class="navigation__menu" ng-if="navigationItem.menu" ng-class="{{$ctrl.getMenuClassName(navigationItem.title)}}">\n            <bd-vertical-navigation navigation-items="navigationItem.menu"></bd-vertical-navigation>\n        </navigation-menu>\n    </bd-navigation>\n</bd-navigation>\n';
 
 component.controller = function VerticalNavigationController() {
     var ctrl = this;
