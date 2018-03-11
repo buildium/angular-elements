@@ -73,7 +73,7 @@ component.controller = function NavigationItemController($attrs, $transclude) {
     const ctrl = this;
 
     ctrl.$onInit = function onInit() {
-        let subMenuOptionNotProvided = !('hasSubMenu' in $attrs);
+        const subMenuOptionNotProvided = !('hasSubMenu' in $attrs);
         if (subMenuOptionNotProvided) {
             ctrl.hasSubMenu = $transclude.isSlotFilled('menu');
         }

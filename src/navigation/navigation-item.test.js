@@ -42,9 +42,11 @@ describe('NavigationItemController', () => {
             null,
             undefined,
             false
-        ].forEach(hasSubMenu => {
+        ].forEach((hasSubMenu) => {
             it('should respect binding as false if provided', () => {
-                bindings.hasSubMenu = $attrs.hasSubMenu = hasSubMenu;
+                bindings.hasSubMenu = hasSubMenu;
+                $attrs.hasSubMenu = hasSubMenu;
+
                 compile();
                 expect(ctrl.hasSubMenu).toBeFalsy();
             });
@@ -54,9 +56,11 @@ describe('NavigationItemController', () => {
             true,
             [],
             faker.random.number({min: 1})
-        ].forEach(hasSubMenu => {
+        ].forEach((hasSubMenu) => {
             it('should respect binding as true if provided', () => {
-                bindings.hasSubMenu = $attrs.hasSubMenu = hasSubMenu;
+                bindings.hasSubMenu = hasSubMenu;
+                $attrs.hasSubMenu = hasSubMenu;
+
                 compile();
                 expect(ctrl.hasSubMenu).toBeTruthy();
             });
@@ -69,7 +73,8 @@ describe('NavigationItemController', () => {
         });
 
         it('should give precedence to binding value', () => {
-            bindings.hasSubMenu = $attrs.hasSubMenu = false;
+            bindings.hasSubMenu = false;
+            $attrs.hasSubMenu = false;
             $transclude.isSlotFilled.and.returnValue(true);
 
             compile();
