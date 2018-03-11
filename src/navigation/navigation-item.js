@@ -8,6 +8,7 @@ const component = {};
   * 
   * @param {Boolean} isActive
   * @param {Boolean} isDisabled
+  * @param {Boolean} hasSubMenu
   * 
   * @example
     <example name="bd-navigation" module="buildium.angular-elements.navigation">
@@ -37,19 +38,26 @@ const component = {};
 
 component.bindings = {
     isActive: '<?',
-    isDisabled: '<?'
+    isDisabled: '<?',
+    hasSubMenu: '<?'
 };
 
 component.template = `
-<div bd-accordion-toggle 
+<div ng-if="$ctrl.hasSubMenu"
+    class="navigation__item"
+    ng-class="{'navigation__item--active': $ctrl.isActive, 'navigation__item--disabled': $ctrl.isDisabled}"
+    bd-accordion-toggle
     disabled="$ctrl.isDisabled"
     is-open="$ctrl.isActive"
-    on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)"
-    class="navigation__item"
-    ng-class="{'navigation__item--active': $ctrl.isActive, 'navigation__item--disabled': $ctrl.isDisabled}">
+    on-change="$ctrl.onAccordionToggleChange(isAccordionGroupOpen)">
 
     <ng-transclude></ng-transclude>
     <div bd-accordion-group ng-transclude ng-transclude-slot="menu"></div>
+</div>
+<div ng-if="!$ctrl.hasSubMenu" 
+    class="navigation__item" 
+    ng-class="{'navigation__item--active': $ctrl.isActive, 'navigation__item--disabled': $ctrl.isDisabled}" 
+    ng-transclude>
 </div>
 `;
 

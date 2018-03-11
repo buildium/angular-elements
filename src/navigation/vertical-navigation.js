@@ -32,18 +32,18 @@ const component = {};
                 this.navItems = [
                     {
                         title: 'Appearance',
-                        isEnabled: true,
+                        isDisabled: true,
                         isActive: false,
-                        href: 'https://appearance.example.com'
+                        href: '#https://appearance.example.com'
                     },
                     {
                         title: 'Policies',
                         isActive: true,
-                        href: 'https://policies.example.com'
+                        href: '#https://policies.example.com'
                     },
                     {
                         title: 'Manage',
-                        href: 'https://manage.example.com'
+                        href: '#https://manage.example.com'
                     }
                 ]
             })
@@ -130,7 +130,12 @@ component.bindings = {
 
 component.template = `
 <bd-navigation class="navigation--vertical">
-    <bd-navigation-item ng-repeat="navigationItem in $ctrl.navigationItems" is-active="navigationItem.isActive" is-disabled="navigationItem.isDisabled" class="{{navigationItem.cssClass}}">
+    <bd-navigation-item 
+        ng-repeat="navigationItem in $ctrl.navigationItems" 
+        is-active="navigationItem.isActive" 
+        is-disabled="navigationItem.isDisabled" 
+        has-sub-menu="navigationItem.menu && navigationItem.menu.length" 
+        class="{{navigationItem.cssClass}}">
         <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled" link-sref="navigationItem.sref">
             <navigation-title>{{navigationItem.title}}</navigation-title>
         </bd-navigation-link>
