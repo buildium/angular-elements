@@ -55,7 +55,7 @@ describe('Directive: buildium.angular-elements.popover', () => {
     it('should render a pointer', () => {
         expect($(elem).find('.popover__pointer').length).toBe(0);
 
-        elem = angular.element('<bd-popover link-idkarma="rentalsMenu.Title" pointer="true"></bd-popover>');
+        elem = angular.element('<bd-popover link-id="rentalsMenu.Title" pointer="true"></bd-popover>');
 
         $compile(elem)(scope);
         scope.$digest(); 
