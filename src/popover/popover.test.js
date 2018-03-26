@@ -27,7 +27,7 @@ describe('Directive: buildium.angular-elements.popover', () => {
         $compile = _$compile_;
 
         elem = angular.element(
-            '<bd-popover title="rentalsMenu.Title">' +
+            '<bd-popover link-id="rentalsMenu.Title">' +
             '   <ul class="sub-menu">' +
             '       <li ng-repeat="menuItem in rentalsMenu.ChildItems" bd-menu-item="menuItem"></li>' +
             '   </ul>' +
@@ -55,7 +55,7 @@ describe('Directive: buildium.angular-elements.popover', () => {
     it('should render a pointer', () => {
         expect($(elem).find('.popover__pointer').length).toBe(0);
 
-        elem = angular.element('<bd-popover title="rentalsMenu.Title" pointer="true"></bd-popover>');
+        elem = angular.element('<bd-popover link-idkarma="rentalsMenu.Title" pointer="true"></bd-popover>');
 
         $compile(elem)(scope);
         scope.$digest(); 
@@ -63,4 +63,3 @@ describe('Directive: buildium.angular-elements.popover', () => {
         expect($(elem).find('.popover__pointer').length).toBe(1);
     }); 
 });
-
