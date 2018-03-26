@@ -20,7 +20,7 @@ angular.module(moduleName, [])
  * 
  * @param {boolean} selected 
  *
- * @param {string} title
+ * @param {string} linkId
  * 
  * @param {boolean} pointer
  *
@@ -38,7 +38,7 @@ angular.module(moduleName, [])
     <example name="bd-popover" module="buildium.angular-elements.popover">
         <file name="index.html">
             <bd-popover selected="false" 
-                        title="Ygritte" 
+                        link-id="Ygritte" 
                         pointer="true" 
                         show-on-hover="true" 
                         link-class="popover-link" 
@@ -63,7 +63,7 @@ angular.module(moduleName, [])
     directive.restrict = 'E';
     directive.template = `
         <a href
-           id="bd-popover-{{:: ctrl.title}}"
+           id="bd-popover-{{:: ctrl.linkId}}"
            insert-point="popover-link"
            ng-click="!ctrl.showOnHover && ctrl.linkClicked()"
            ng-mouseover="ctrl.showOnHover && ctrl.linkClicked()"
@@ -85,7 +85,7 @@ angular.module(moduleName, [])
         </div>`;
     directive.scope = {
         selected: '=',
-        title: '=',
+        linkId: '=',
         pointer: '=',
         popoverContainerClass: '=containerClass',
         popoverLinkClass: '=linkClass',
