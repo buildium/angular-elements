@@ -9,11 +9,11 @@ const filter = require('lodash/filter');
  * 
  * An input with an action dropdown, can be wrapped with bdFormElement for validation
  * 
- * @param {Array} phones array of phone types
+ * @param {Array} options array of objects containing Name, Value, and Icon
  * 
- * @param {Object} [selectedPhone] currently selected phone
+ * @param {Object} [selectedOption] currently selected Value
  *
- * @param {Function} [onChange] callback to be executed when phone number is updated
+ * @param {Function} [onChange] callback to be executed when selectedOption is changed
  * 
  * @example
     <example name="bd-action-input" module="buildium.angular-elements.action-input">
@@ -22,15 +22,33 @@ const filter = require('lodash/filter');
                 angular.module('buildium.angular-elements.action-input')
                     .controller('ExampleController', function() {
                         this.phones = [
-                            'Home',
-                            'Mobile',
-                            'Work',
-                            'Fax'
+                            {
+                                Name: 'Home',
+                                Value: 'home',
+                                Icon: 'icon-tel icon-tel--home-std'
+                            },
+                            {
+                                Name: 'Mobile',
+                                Value: 'mobile',
+                                Icon: 'icon-tel icon-tel--mobile-std'
+                            },
+                            {
+                                Name: 'Work',
+                                Value: 'work',
+                                Icon: 'icon-tel icon-tel--work-std'
+                            },
+                            {
+                                Name: 'Fax',
+                                Value: 'fax',
+                                Icon: 'icon-tel icon-tel--fax-std'
+                            }
                         ]
                     })
             </script>
             <section ng-controller="ExampleController as vm">
-                <bd-action-input phones="vm.phones" selected-phone="vm.phones[1]"></bd-action-input>
+                <bd-action-input options="vm.phones" selected-option="vm.phones[1]">
+                    <input type="tel" val-type-tel name="phone" id="phone" class="form-element__input" ng-model="vm.phone" />
+                </bd-action-input>
             </section>
         </file>
     </example>
@@ -40,9 +58,13 @@ const component = {};
 
 component.controllerAs = 'vm';
 
+component.transclude = true;
 component.bindings = {
-    phones: '<',
-    selectedPhone: '<?',
+    options: '<',
+    inputType: '@',
+    inputId: '@',
+    validation: '@?',
+    selectedOption: '<?',
     onChange: '&?'
 };
 
@@ -52,8 +74,8 @@ component.template = `
         <bd-popover pointer="true">
             <popover-link>
                 <button id="btn" class="btn btn--no-right-border-radius no-border">
-                    <span class="icon-tel icon-tel--{{vm.selectedPhone.toLowerCase()}}-std" aria-hidden="true"></span>
-                    <span class="screen-reader-only">{{vm.selectedPhone}}</span>
+                    <span class="{{vm.selectedOption.Icon}}" aria-hidden="true"></span>
+                    <span class="screen-reader-only">{{vm.selectedOption.Name}}</span>
                     <span class="icon-link-menu-pointer"></span>
                 </button>
             </popover-link>
@@ -62,9 +84,9 @@ component.template = `
                     <ul class="popover__menu">
                         <li class="popover__group">
                             <ul>
-                                <li class="popover__item" ng-repeat="phone in vm.phoneNumbers" ng-click="vm.selectPhone(phone)">
+                                <li class="popover__item" ng-repeat="option in vm.filteredOptions" ng-click="vm.selectOption(option)">
                                     <a href class="popover__item-link" role="button">
-                                        <span class="icon-tel icon-tel--{{phone.toLowerCase()}}-std" aria-hidden="true"></span> {{phone}}
+                                        <span class="{{option.Icon}}" aria-hidden="true"></span> {{option.Name}}
                                     </a>
                                 </li>
                             </ul>
@@ -75,7 +97,7 @@ component.template = `
         </bd-popover>
     </div>
     <div class="form-element__input-group-input">
-        <input type="tel" val-type-tel name="phone" id="phone" class="form-element__input" ng-model="vm.phone" ng-change="vm.callOnChange()" />
+        <ng-transclude></ng-transclude>
     </div>
 </div>
 `;
@@ -84,25 +106,23 @@ component.controller = function ActionInputController() {
     const vm = this;
 
     vm.$onInit = function onInit() {
-        if (!vm.selectedPhone) {
-            vm.selectedPhone = vm.phones[0];
+        if (!vm.selectedOption) {
+            vm.selectedOption = vm.options[0];
         }
         
-        vm.phoneNumbers = filter(vm.phones, function(phone) {
-            return phone !== vm.selectedPhone;
+        vm.filteredOptions = filter(vm.options, function(option) {
+            return option !== vm.selectedOption;
         });
     };
     
-    vm.selectPhone = function selectPhone(selectedPhone) {
-        vm.selectedPhone = selectedPhone;
-        vm.phoneNumbers = filter(vm.phones, function(phone) {
-            return phone !== vm.selectedPhone;
-        }); 
-    };
+    vm.selectOption = function selectOption(option) {
+        vm.selectedOption = option;
+        vm.filteredOptions = filter(vm.options, function(option) {
+            return option !== vm.selectedOption;
+        });
 
-    vm.callOnChange = function callOnChange() {
         if (vm.onChange) {
-            vm.onChange({phone: vm.phone, phoneType: vm.selectedPhone});
+            vm.onChange({selectedOption: vm.selectedOption});
         }
     };
 };
