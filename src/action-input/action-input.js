@@ -9,7 +9,10 @@ const filter = require('lodash/filter');
  * 
  * An input with an action dropdown, can be wrapped with bdFormElement for validation
  * 
- * @param {Array} options array of objects containing Name, Value, and Icon
+ * @param {Object[]} options array of objects. Expected keys are:
+ * - <a class="label type-hint type-hint-string">string</a> `Name` Display name of option
+ * - <a class="label type-hint type-hint-string">string</a> `Value` Value of option
+ * - <a class="label type-hint type-hint-string">string</a> `Icon` icon classes for option
  * 
  * @param {Object} [selectedOption] currently selected Value
  *
