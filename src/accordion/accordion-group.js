@@ -41,7 +41,7 @@ module.exports = function AccordionGroup() {
     directive.require = '^^bdAccordionToggle';
     directive.scope = false;
 
-    directive.link = function link(scope, element, attrs, accordionToggleCtrl) {
+    directive.link = function link(scope, element, attrs) {
         element.on('click keypress', (event) => {
             if (event.type === 'click' || event.keyCode === SPACEBAR_KEYCODE) {
                 event.stopPropagation();

@@ -6,7 +6,6 @@ const moduleName = 'buildium.angular-elements.accordion';
  * @module buildium.angular-elements.accordion
  */
 angular.module(moduleName, [])
-// @ngInject
 
 .component('bdAccordion', require( './accordion.js'))
 .component('bdAccordionSection', require( './accordion-section.js'))

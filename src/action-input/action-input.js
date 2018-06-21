@@ -18,6 +18,11 @@ const filter = require('lodash/filter');
  * @example
     <example name="bd-action-input" module="buildium.angular-elements.action-input">
         <file name="index.html">
+            <style>
+                .padding--none {
+                    padding: 0;
+                }
+            </style>
             <script>
                 angular.module('buildium.angular-elements.action-input')
                     .controller('ExampleController', function() {
@@ -61,16 +66,13 @@ component.controllerAs = 'vm';
 component.transclude = true;
 component.bindings = {
     options: '<',
-    inputType: '@',
-    inputId: '@',
-    validation: '@?',
     selectedOption: '<?',
     onChange: '&?'
 };
 
 component.template = `
 <div class="form-element__input-group">
-    <div class="form-element__input-group-prepend padding--none" style="padding: 0;">
+    <div class="form-element__input-group-prepend padding--none">
         <bd-popover pointer="true">
             <popover-link>
                 <button id="btn" class="btn btn--no-right-border-radius no-border">
