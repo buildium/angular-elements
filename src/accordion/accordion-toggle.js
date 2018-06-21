@@ -56,11 +56,10 @@ module.exports = function AccordionToggle() {
     const directive = {};
 
     directive.restrict = 'A';
-    directive.require = '^bdAccordion';
-    directive.bindToController = true;
-    directive.controllerAs = 'vm';
+    directive.require = '^^bdAccordion';
     
-    directive.scope = {
+    directive.scope = true;
+    directive.bindToController = {
         isOpen: '<?',
         onChange: '&?',
         disabled: '<?',
@@ -68,50 +67,53 @@ module.exports = function AccordionToggle() {
         disabledClass: '@?'
     };
 
-    directive.controller = ['$element', function AccordionToggleCtrl($element) {
-        const vm = this;
+    directive.controllerAs = 'toggle';
 
-        vm.$onChanges = function onChanges(changes) {
-            if (typeof vm.onChange === 'function' && changes.isOpen) {
-                vm.onChange({isAccordionGroupOpen: changes.isOpen.currentValue});
+    directive.controller = ['$element', function accordionToggleController($element) {
+        const toggle = this;
+
+        toggle.$onChanges = function $onChanges (changes) {
+            if (changes.isOpen && typeof toggle.onChange === 'function') {
+                toggle.onChange({isAccordionGroupOpen: changes.isOpen.currentValue});
             }
 
-            if (changes.disabled && vm.disabledClass) {
-                $element.toggleClass(vm.disabledClass, changes.disabled.currentValue);
+            if (changes.disabled && toggle.disabledClass) {
+                $element.toggleClass(toggle.disabledClass, changes.disabled.currentValue);
             }
-        };
+        }
     }];
 
     directive.link = function link(scope, element, attrs, accordionCtrl) {
-        const vm = scope.vm;
+        const toggle = scope.toggle;
+
         accordionCtrl.addSection(scope);
 
         if (attrs.openClass) {
-            element.toggleClass(attrs.openClass, !!vm.isOpen);
+            element.toggleClass(attrs.openClass, !!toggle.isOpen);
         }
         
         if (attrs.disabledClass) {
-            element.toggleClass(attrs.disabledClass, vm.disabled);
+            element.toggleClass(attrs.disabledClass, toggle.disabled);
         }
 
         function toggleAccordion() {
-            vm.isOpen = !vm.isOpen;
+            toggle.isOpen = !toggle.isOpen;
 
             if (attrs.openClass) {
-                element.toggleClass(attrs.openClass, vm.isOpen);
+                element.toggleClass(attrs.openClass, toggle.isOpen);
             }
 
-            if (typeof vm.onChange === 'function') {
-                vm.onChange({isAccordionGroupOpen: vm.isOpen});
+            if (typeof toggle.onChange === 'function') {
+                toggle.onChange({isAccordionGroupOpen: toggle.isOpen});
             }
         }
 
-        vm.handleAccordionEvent = function handleAccordionEvent(event) {
-            if (!vm.disabled) {
+        toggle.handleAccordionEvent = function handleAccordionEvent(event) {
+            if (!toggle.disabled) {
                 if (!event || event.type === 'click' || event.keyCode === SPACEBAR_KEYCODE.Space) {
                     toggleAccordion();
 
-                    if (event && vm.isOpen) {
+                    if (event && toggle.isOpen) {
                         accordionCtrl.closeAllBut(scope);
                     }
                 }
@@ -126,7 +128,7 @@ module.exports = function AccordionToggle() {
 
         toggleElement.on('click keypress', (event) => {
             scope.$apply(() => {
-                vm.handleAccordionEvent(event);
+                toggle.handleAccordionEvent(event);
             });
         });
     };

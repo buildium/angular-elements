@@ -1,11 +1,8 @@
 /**
- * @ngdoc directive
+ * @ngdoc component
  * @name bdAccordion
  * @module buildium.angular-elements.accordion
- * @restrict E
  * 
- * @transclude true
- *
  * @description
  * 
  * Collapsible content panels with configurable headings and triggers
@@ -44,7 +41,7 @@
 const component = {};
 
 component.transclude = true;
-component.controllerAs = 'vm';
+component.controllerAs = 'accordion';
 
 component.bindings = {
     singleSectionOnly: '<?'
@@ -53,31 +50,31 @@ component.bindings = {
 component.template = '<div class="accordion" ng-transclude></div>';
 
 component.controller = function AccordionController() {
-    const vm = this;
+    const accordion = this;
     const sections = [];
-    vm.$sectionIndex = 0;
+    accordion.$sectionIndex = 0;
     
-    vm.addSection = function addSection(sectionScope) {
+    accordion.addSection = function addSection(sectionScope) {
         sections.push(sectionScope);
-        vm.$sectionIndex += 1;
+        accordion.$sectionIndex += 1;
 
         // Remove from sections if child section directive is removed
         sectionScope.$on('$destroy', () => {
-            vm.deleteSection(sectionScope);
+            accordion.deleteSection(sectionScope);
         });
     };
 
-    vm.closeAllBut = function closeAllBut(openSection) {
-        if (vm.singleSectionOnly) {
+    accordion.closeAllBut = function closeAllBut(openSection) {
+        if (accordion.singleSectionOnly) {
             sections.forEach((section) => {
-                if (section !== openSection && section.vm.isOpen) {
-                    section.vm.handleAccordionEvent();
+                if (section !== openSection && section.toggle.isOpen) {
+                    section.toggle.handleAccordionEvent();
                 }
             });
         }
     };
 
-    vm.deleteSection = function deleteSection(section) {
+    accordion.deleteSection = function deleteSection(section) {
         const index = sections.indexOf(section);
         if (index !== -1) {
             sections.splice(index, 1);

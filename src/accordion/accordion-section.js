@@ -1,16 +1,13 @@
 /**
- * @ngdoc directive
+ * @ngdoc component
  * @name bdAccordionSection
  * @module buildium.angular-elements.accordion
- * @restrict E
- * 
- * @transclude true
  *
  * @description
  * 
- * Section to hold content in {@link buildium.angular-elements.accordion.directive:bdAccordion bdAccordion}
+ * Section to hold content in {@link buildium.angular-elements.accordion.component:bdAccordion bdAccordion}
  *
- * @param {String} header - What will be shown in header
+ * @param {String} heading - What will be shown in header
  * @param {String} subHeading
  * @param {Boolean} [isOpen] - Set to be initally open
  * @param {Boolean} [disabled]
@@ -38,8 +35,9 @@ const component = {};
 component.require = {
     accordion: '^bdAccordion'
 };
+
 component.transclude = true;
-component.controllerAs = 'vm';
+component.controllerAs = 'section';
 
 component.bindings = {
     heading: '@',
@@ -50,22 +48,22 @@ component.bindings = {
 
 component.template = `
 <div bd-accordion-toggle
-    on-change="vm.toggleClass(isAccordionGroupOpen)"
-    is-open="vm.isOpen"
-    disabled="vm.disabled"
+    on-change="section.toggleClass(isAccordionGroupOpen)"
+    is-open="section.isOpen"
+    disabled="section.disabled"
     open-class="accordion__section--open"
-    ng-class="{'accordion__section--first': vm.$index === 0}">
+    ng-class="{'accordion__section--first': section.$index === 0}">
     <div class="accordion__section-heading"
-        ng-class="{'accordion__section-heading--disabled': vm.disabled}">
+        ng-class="{'accordion__section-heading--disabled': section.disabled}">
         <h4 class="accordion__section-heading-title">
-            <a role="button" href="#" class="accordion__toggle" ng-class="{'accordion__toggle--disabled': vm.disabled}">
-                <span ng-hide="vm.isOpen" 
+            <a role="button" href="#" class="accordion__toggle" ng-class="{'accordion__toggle--disabled': section.disabled}">
+                <span ng-hide="section.isOpen" 
                     class="accordion__toggle-icon svgicon"
-                    ng-class="{'svgicon--arrowhead-right': !vm.disabled, 'svgicon--arrowhead-right-muted': vm.disabled}">
+                    ng-class="{'svgicon--arrowhead-right': !section.disabled, 'svgicon--arrowhead-right-muted': section.disabled}">
                 </span>
-                <span ng-show="vm.isOpen" class="accordion__toggle-icon svgicon svgicon--arrowhead-down"></span>
-                <span>{{vm.heading}}</span>
-                <span class="accordion__section-sub-heading-title" ng-if="vm.subHeading">{{vm.subHeading}}</span>
+                <span ng-show="section.isOpen" class="accordion__toggle-icon svgicon svgicon--arrowhead-down"></span>
+                <span>{{section.heading}}</span>
+                <span class="accordion__section-sub-heading-title" ng-if="section.subHeading">{{section.subHeading}}</span>
             </a>
         </h4>
     </div>
@@ -74,19 +72,19 @@ component.template = `
 `;
 
 component.controller = function AccordionSectionController() {
-    const vm = this;
+    const section = this;
 
-    vm.$onInit = function onInit() {
-        vm.$index = vm.accordion.$sectionIndex;
+    section.$onInit = function onInit() {
+        section.$index = section.accordion.$sectionIndex;
     };
 
-    vm.toggleClass = function toggleClass(isAccordionGroupOpen) {
-        vm.isOpen = isAccordionGroupOpen;
+    section.toggleClass = function toggleClass(isAccordionGroupOpen) {
+        section.isOpen = isAccordionGroupOpen;
     };
 
-    vm.$onChanges = function onChanges(changes) {
+    section.$onChanges = function onChanges(changes) {
         if (changes.isOpen) {
-            vm.toggleClass(changes.isOpen.currentValue);
+            section.toggleClass(changes.isOpen.currentValue);
         }
     };
 };

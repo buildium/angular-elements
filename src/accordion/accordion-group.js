@@ -38,13 +38,10 @@ module.exports = function AccordionGroup() {
     const directive = {};
 
     directive.restrict = 'A';
-    directive.require = '^bdAccordionToggle';
-    directive.bindToController = true;
-    directive.controllerAs = 'vm';
+    directive.require = '^^bdAccordionToggle';
+    directive.scope = false;
 
     directive.link = function link(scope, element, attrs, accordionToggleCtrl) {
-        scope.accordionToggleCtrl = accordionToggleCtrl;
-
         element.on('click keypress', (event) => {
             if (event.type === 'click' || event.keyCode === SPACEBAR_KEYCODE) {
                 event.stopPropagation();
@@ -52,15 +49,15 @@ module.exports = function AccordionGroup() {
         });
 
         function toggleOpen() {
-            element.toggleClass('hide', !accordionToggleCtrl.isOpen);
+            element.toggleClass('hide', !scope.toggle.isOpen);
             if (attrs.openClass) {
-                element.toggleClass(attrs.openClass, accordionToggleCtrl.isOpen);
+                element.toggleClass(attrs.openClass, !scope.toggle.isOpen);
             }
         }
 
         toggleOpen();
 
-        scope.$watch('accordionToggleCtrl.isOpen', () => {
+        scope.$watch('toggle.isOpen', () => {
             toggleOpen();
         });
     };

@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@buildium/angular-docs": "1.1.0",
-    "@buildium/theme": "3.2.2",
+    "@buildium/theme": "3.10.3",
     "angular": "1.5.9",
     "angular-mocks": "1.5.9",
     "babel-cli": "6.24.0",
@@ -48,12 +48,14 @@
     "eslint-plugin-buildium": "2.1.0",
     "eslint-plugin-import": "2.8.0",
     "faker": "4.1.0",
+    "glob": "7.1.2",
     "jasmine": "2.5.3",
     "jquery": "2.2.4",
     "karma": "1.5.0",
     "karma-browserify": "5.1.1",
     "karma-electron-launcher": "0.2.0",
     "karma-jasmine": "1.1.0",
+    "lodash": "4.1.0",
     "mkdirp": "0.5.1",
     "watchify": "3.9.0"
   },

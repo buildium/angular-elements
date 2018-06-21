@@ -78,7 +78,8 @@ angular.module(moduleName, [
     require('./popover'),
     require('./media-gallery'),
     require('./accordion'),
-    require('./navigation')
+    require('./navigation'),
+    require('./action-input')
 ]);
 
 module.exports = moduleName;

@@ -1,10 +1,9 @@
 const component = {};
 
 /**
-  * @ngdoc directive
+  * @ngdoc component
   * @name bdNavigationLink
   * @module buildium.angular-elements.navigation
-  * @restrict E
   * 
   * @param {String} linkHref
   * @param {String} linkSref
