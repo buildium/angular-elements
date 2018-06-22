@@ -10,11 +10,11 @@ const filter = require('lodash/filter');
  * An input with an action dropdown, can be wrapped with bdFormElement for validation
  * 
  * @param {Object[]} options array of objects. Expected keys are:
- * - <a class="label type-hint type-hint-string">string</a> `Name` Display name of option
- * - <a class="label type-hint type-hint-string">string</a> `Value` Value of option
- * - <a class="label type-hint type-hint-string">string</a> `Icon` icon classes for option
+ * - <a class="label type-hint type-hint-string">string</a> `name` Display name of option
+ * - <a class="label type-hint type-hint-string">string</a> `value` Value of option
+ * - <a class="label type-hint type-hint-string">string</a> `icon` icon classes for option
  * 
- * @param {Object} [selectedOption] currently selected Value
+ * @param {Object} [selectedOption] currently selected value
  *
  * @param {Function} [onChange] callback to be executed when selectedOption is changed
  * 
@@ -31,24 +31,24 @@ const filter = require('lodash/filter');
                     .controller('ExampleController', function() {
                         this.phones = [
                             {
-                                Name: 'Home',
-                                Value: 'home',
-                                Icon: 'icon-tel icon-tel--home-std'
+                                name: 'Home',
+                                value: 'home',
+                                icon: 'icon-tel icon-tel--home-std'
                             },
                             {
-                                Name: 'Mobile',
-                                Value: 'mobile',
-                                Icon: 'icon-tel icon-tel--mobile-std'
+                                name: 'Mobile',
+                                value: 'mobile',
+                                icon: 'icon-tel icon-tel--mobile-std'
                             },
                             {
-                                Name: 'Work',
-                                Value: 'work',
-                                Icon: 'icon-tel icon-tel--work-std'
+                                name: 'Work',
+                                value: 'work',
+                                icon: 'icon-tel icon-tel--work-std'
                             },
                             {
-                                Name: 'Fax',
-                                Value: 'fax',
-                                Icon: 'icon-tel icon-tel--fax-std'
+                                name: 'Fax',
+                                value: 'fax',
+                                icon: 'icon-tel icon-tel--fax-std'
                             }
                         ]
                     })
@@ -79,8 +79,8 @@ component.template = `
         <bd-popover pointer="true">
             <popover-link>
                 <button id="btn" class="btn btn--no-right-border-radius no-border">
-                    <span class="{{vm.selectedOption.Icon}}" aria-hidden="true"></span>
-                    <span class="screen-reader-only">{{vm.selectedOption.Name}}</span>
+                    <span class="{{vm.selectedOption.icon}}" aria-hidden="true"></span>
+                    <span class="screen-reader-only">{{vm.selectedOption.name}}</span>
                     <span class="icon-link-menu-pointer"></span>
                 </button>
             </popover-link>
@@ -91,7 +91,7 @@ component.template = `
                             <ul>
                                 <li class="popover__item" ng-repeat="option in vm.filteredOptions" ng-click="vm.selectOption(option)">
                                     <a href class="popover__item-link" role="button">
-                                        <span class="{{option.Icon}}" aria-hidden="true"></span> {{option.Name}}
+                                        <span class="{{option.icon}}" aria-hidden="true"></span> {{option.name}}
                                     </a>
                                 </li>
                             </ul>
