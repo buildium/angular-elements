@@ -1,0 +1,156 @@
+
+
+<a href='https://github.com///tree//src/navigation/vertical-navigation.js#L3' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">bdVerticalNavigation</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - component in module <a href="api/buildium.angular-elements.navigation">buildium.angular-elements.navigation</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>A vertical navigation element suitable for sidebar navs</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <ul>
+      <li>as element:
+      <pre><code>&lt;bd-vertical-navigation&#10;  navigation-items=&quot;Array&quot;&gt;&#10;...&#10;&lt;/bd-vertical-navigation&gt;</code></pre>
+      </li>
+  </div>
+  
+<section class="api-section">
+  <h3>Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        navigationItems
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array</a>
+      </td>
+      <td>
+        <p>The collection of navigation items that should be added</p>
+<ul>
+<li><a class="label type-hint type-hint-string">string</a> <code>title</code> - <strong>Name to display for this navigation item</strong></li>
+<li><a class="label type-hint type-hint-boolean">boolean</a> <code>isDisabled</code> - Whether user is able to interact with this navigation item </li>
+<li><a class="label type-hint type-hint-boolean">boolean</a> <code>isActive</code> - Whether this navigation item is currrently active (i.e. we are on that page)</li>
+<li><a class="label type-hint type-hint-string">string</a> <code>href</code> - Location that this navigation item points to</li>
+<li><a class="label type-hint type-hint-string">string</a> <code>sref</code> - State that this navigation item points to</li>
+<li><a class="label type-hint type-hint-string">string</a> <code>cssClass</code> - Custom class(es) to add to this navigation item</li>
+<li><a class="label type-hint type-hint-array">array</a> <code>menu</code> - a sub-navigation with the same collection structure as <code>navigationItems</code></li>
+</ul>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+
+  
+  <h2 id="example">Examples</h2><p>
+
+<div>
+  <plnkr-opener example-path="examples/example-bd-navigation2"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-bd-navigation2"
+      name="bd-navigation"
+      module="exampleModule">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div class=&quot;page-content&quot; ng-controller=&quot;ExampleController as vm&quot;&gt;&#10;    &lt;bd-vertical-navigation navigation-items=&quot;vm.navItems&quot; class=&quot;navigation--large&quot;&gt;&lt;/bd-vertical-navigation&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;exampleModule&#39;, [&#39;buildium.angular-elements.navigation&#39;])&#10;.controller(&#39;ExampleController&#39;, function () {&#10;    this.navItems = [&#10;        {&#10;            title: &#39;Appearance&#39;,&#10;            isEnabled: true,&#10;            isActive: false,&#10;            href: &#39;https://appearance.example.com&#39;&#10;        },&#10;        {&#10;            title: &#39;Policies&#39;,&#10;            isActive: true,&#10;            href: &#39;https://policies.example.com&#39;&#10;        },&#10;        {&#10;            title: &#39;Manage&#39;,&#10;            href: &#39;https://manage.example.com&#39;&#10;        }&#10;    ]&#10;})</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-bd-navigation2/index.html" name="example-bd-navigation2"></iframe>
+  </div>
+</div>
+
+
+</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-bd-navigation3"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-bd-navigation3"
+      name="bd-navigation"
+      module="exampleModule">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div class=&quot;page-content&quot; ng-controller=&quot;ExampleController as vm&quot;&gt;&#10;    &lt;bd-vertical-navigation navigation-items=&quot;vm.navItems&quot;&gt;&lt;/bd-vertical-navigation&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;exampleModule&#39;, [&#39;buildium.angular-elements.navigation&#39;])&#10;.controller(&#39;ExampleController&#39;, function () {&#10;    this.navItems = [&#10;        {&#10;            title: &#39;Appearance&#39;,&#10;            href: &#39;#appearance&#39;,&#10;            menu: [&#10;                {&#10;                    title: &#39;Branding&#39;&#10;                },&#10;                &#10;                {&#10;                    title: &#39;Logos&#39;&#10;                },&#10;                {&#10;                    title: &#39;Profile photos&#39;&#10;                },&#10;                {&#10;                    title: &#39;Domain&#39;&#10;                }&#10;            ]&#10;        },&#10;        {&#10;            title: &#39;Policies&#39;,&#10;            isActive: true,&#10;            href: &#39;#policies&#39;,&#10;            menu: [&#10;                {&#10;                    title: &#39;Frequency&#39;&#10;                },&#10;                {&#10;                    title: &#39;Period&#39;&#10;                },&#10;                {&#10;                    title: &#39;Rules&#39;&#10;                },&#10;                {&#10;                    title: &#39;Fees&#39;&#10;                },&#10;                {&#10;                    title: &#39;Notifications&#39;&#10;                }&#10;            ]&#10;        },&#10;        {&#10;            title: &#39;Management&#39;,&#10;            isDisabled: true,&#10;            href: &#39;#management&#39;,&#10;            menu: [&#10;                {&#10;                    title: &#39;Type&#39;&#10;                },&#10;                {&#10;                    title: &#39;Income&#39;&#10;                },&#10;                {&#10;                    title: &#39;Summary&#39;&#10;                }&#10;            ]&#10;        }&#10;    ]&#10;})</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-bd-navigation3/index.html" name="example-bd-navigation3"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+
