@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/buildium/angular-elements#readme",
   "dependencies": {
+    "lodash.filter": "4.1.0",
     "lodash.uniqueid": "4.0.1"
   },
   "peerDependencies": {
@@ -55,7 +56,6 @@
     "karma-browserify": "5.1.1",
     "karma-electron-launcher": "0.2.0",
     "karma-jasmine": "1.1.0",
-    "lodash": "4.1.0",
     "mkdirp": "0.5.1",
     "watchify": "3.9.0"
   },

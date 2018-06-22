@@ -72,7 +72,7 @@ module.exports = function AccordionToggle() {
     directive.controller = ['$element', function accordionToggleController($element) {
         const toggle = this;
 
-        toggle.$onChanges = function $onChanges (changes) {
+        toggle.$onChanges = function $onChanges(changes) {
             if (changes.isOpen && typeof toggle.onChange === 'function') {
                 toggle.onChange({isAccordionGroupOpen: changes.isOpen.currentValue});
             }
@@ -80,7 +80,7 @@ module.exports = function AccordionToggle() {
             if (changes.disabled && toggle.disabledClass) {
                 $element.toggleClass(toggle.disabledClass, changes.disabled.currentValue);
             }
-        }
+        };
     }];
 
     directive.link = function link(scope, element, attrs, accordionCtrl) {

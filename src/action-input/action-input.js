@@ -115,14 +115,14 @@ component.controller = function ActionInputController() {
             vm.selectedOption = vm.options[0];
         }
         
-        vm.filteredOptions = filter(vm.options, function(option) {
+        vm.filteredOptions = filter(vm.options, (option) => {
             return option !== vm.selectedOption;
         });
     };
     
-    vm.selectOption = function selectOption(option) {
-        vm.selectedOption = option;
-        vm.filteredOptions = filter(vm.options, function(option) {
+    vm.selectOption = function selectOption(optionSelected) {
+        vm.selectedOption = optionSelected;
+        vm.filteredOptions = filter(vm.options, (option) => {
             return option !== vm.selectedOption;
         });
 
