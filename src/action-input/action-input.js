@@ -1,4 +1,4 @@
-const filter = require('lodash/filter');
+const filter = require('lodash.filter');
 
 /**
  * @ngdoc component
@@ -110,21 +110,21 @@ component.template = `
 component.controller = function ActionInputController() {
     const vm = this;
 
+    function isNotSelectedOption(option) {
+        return option !== vm.selectedOption;
+    }
+
     vm.$onInit = function onInit() {
         if (!vm.selectedOption) {
             vm.selectedOption = vm.options[0];
         }
         
-        vm.filteredOptions = filter(vm.options, (option) => {
-            return option !== vm.selectedOption;
-        });
+        vm.filteredOptions = filter(vm.options, isNotSelectedOption);
     };
     
     vm.selectOption = function selectOption(optionSelected) {
         vm.selectedOption = optionSelected;
-        vm.filteredOptions = filter(vm.options, (option) => {
-            return option !== vm.selectedOption;
-        });
+        vm.filteredOptions = filter(vm.options, isNotSelectedOption);
 
         if (vm.onChange) {
             vm.onChange({selectedOption: vm.selectedOption});
