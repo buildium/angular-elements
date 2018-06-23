@@ -465,10 +465,6 @@ component.template = '\n<div class="form-element__input-group">\n    <div class=
 component.controller = function ActionInputController() {
     var vm = this;
 
-    function isNotSelectedOption(option) {
-        return option !== vm.selectedOption;
-    }
-
     vm.$onInit = function onInit() {
         if (!vm.selectedOption) {
             vm.selectedOption = vm.options[0];
