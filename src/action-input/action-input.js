@@ -107,7 +107,7 @@ component.template = `
 </div>
 `;
 
-component.controller = function ActionInputController() {
+component.controller = ['BdSubmenu', function ActionInputController(BdSubmenu) {
     const vm = this;
 
     vm.$onInit = function onInit() {
@@ -123,8 +123,10 @@ component.controller = function ActionInputController() {
             if (vm.onChange) {
                 vm.onChange({selectedOption: vm.selectedOption});
             }
+
+            BdSubmenu.closeAll();
         }
     };
-};
+}];
 
 module.exports = component;
