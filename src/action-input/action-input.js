@@ -1,3 +1,5 @@
+const find = require('lodash.find');
+
 /**
  * @ngdoc component
  * @name bdActionInput
@@ -32,7 +34,8 @@
                             {
                                 name: 'Home',
                                 value: 'home',
-                                icon: 'icon-tel icon-tel--home-std'
+                                icon: 'icon-tel icon-tel--home-std',
+                                disabled: true
                             },
                             {
                                 name: 'Mobile',
@@ -42,8 +45,7 @@
                             {
                                 name: 'Work',
                                 value: 'work',
-                                icon: 'icon-tel icon-tel--work-std',
-                                disabled: true
+                                icon: 'icon-tel icon-tel--work-std'
                             },
                             {
                                 name: 'Fax',
@@ -79,7 +81,7 @@ component.template = `
         <bd-popover pointer="true">
             <popover-link>
                 <button id="btn" class="btn btn--no-right-border-radius no-border">
-                    <span class="{{vm.selectedOption.icon}}" aria-hidden="true"></span>
+                    <span ng-class="vm.selectedOption.icon" aria-hidden="true"></span>
                     <span class="screen-reader-only">{{vm.selectedOption.name}}</span>
                     <span class="icon-link-menu-pointer"></span>
                 </button>
@@ -91,7 +93,7 @@ component.template = `
                             <ul>
                                 <li class="popover__item" ng-repeat="option in vm.options" ng-click="vm.selectOption(option)">
                                     <a href class="popover__item-link" role="button" ng-class="{'popover__item-link--disabled': option.disabled}">
-                                        <span class="{{option.icon}}" aria-hidden="true"></span> {{option.name}}
+                                        <span ng-class="option.icon" aria-hidden="true"></span> {{option.name}}
                                     </a>
                                 </li>
                             </ul>
@@ -112,7 +114,8 @@ component.controller = ['BdSubmenu', function ActionInputController(BdSubmenu) {
 
     vm.$onInit = function onInit() {
         if (!vm.selectedOption) {
-            vm.selectedOption = vm.options[0];
+            //defaults to first enabled option
+            vm.selectedOption = find(vm.options, {disabled: false});
         }
     };
     

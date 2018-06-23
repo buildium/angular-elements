@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/buildium/angular-elements#readme",
   "dependencies": {
+    "lodash.find": "4.6.0",
     "lodash.uniqueid": "4.0.1"
   },
   "peerDependencies": {
