@@ -1,5 +1,3 @@
-const filter = require('lodash.filter');
-
 /**
  * @ngdoc component
  * @name bdActionInput
@@ -13,6 +11,7 @@ const filter = require('lodash.filter');
  * - <a class="label type-hint type-hint-string">string</a> `name` Display name of option
  * - <a class="label type-hint type-hint-string">string</a> `value` Value of option
  * - <a class="label type-hint type-hint-string">string</a> `icon` icon classes for option
+ * - <a class="label type-hint type-hint-boolean">boolean</a> `disabled` whether the option is disabled
  * 
  * @param {Object} [selectedOption] currently selected value
  *
@@ -43,7 +42,8 @@ const filter = require('lodash.filter');
                             {
                                 name: 'Work',
                                 value: 'work',
-                                icon: 'icon-tel icon-tel--work-std'
+                                icon: 'icon-tel icon-tel--work-std',
+                                disabled: true
                             },
                             {
                                 name: 'Fax',
@@ -89,8 +89,8 @@ component.template = `
                     <ul class="popover__menu">
                         <li class="popover__group">
                             <ul>
-                                <li class="popover__item" ng-repeat="option in vm.filteredOptions" ng-click="vm.selectOption(option)">
-                                    <a href class="popover__item-link" role="button">
+                                <li class="popover__item" ng-repeat="option in vm.options" ng-click="vm.selectOption(option)">
+                                    <a href class="popover__item-link" role="button" ng-class="{'popover__item-link--disabled': option.disabled}">
                                         <span class="{{option.icon}}" aria-hidden="true"></span> {{option.name}}
                                     </a>
                                 </li>
@@ -118,16 +118,15 @@ component.controller = function ActionInputController() {
         if (!vm.selectedOption) {
             vm.selectedOption = vm.options[0];
         }
-        
-        vm.filteredOptions = filter(vm.options, isNotSelectedOption);
     };
     
     vm.selectOption = function selectOption(optionSelected) {
-        vm.selectedOption = optionSelected;
-        vm.filteredOptions = filter(vm.options, isNotSelectedOption);
+        if (!optionSelected.disabled) {
+            vm.selectedOption = optionSelected;
 
-        if (vm.onChange) {
-            vm.onChange({selectedOption: vm.selectedOption});
+            if (vm.onChange) {
+                vm.onChange({selectedOption: vm.selectedOption});
+            }
         }
     };
 };
