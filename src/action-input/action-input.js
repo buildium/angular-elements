@@ -110,10 +110,6 @@ component.template = `
 component.controller = function ActionInputController() {
     const vm = this;
 
-    function isNotSelectedOption(option) {
-        return option !== vm.selectedOption;
-    }
-
     vm.$onInit = function onInit() {
         if (!vm.selectedOption) {
             vm.selectedOption = vm.options[0];
