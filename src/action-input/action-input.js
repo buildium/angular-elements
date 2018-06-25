@@ -15,7 +15,7 @@ const find = require('lodash.find');
  * - <a class="label type-hint type-hint-string">string</a> `icon` icon classes for option
  * - <a class="label type-hint type-hint-boolean">boolean</a> `disabled` whether the option is disabled
  * 
- * @param {Object} [selectedOption] currently selected value
+ * @param {Object} [selectedOption] currently selected value; defaults to first enabled option
  *
  * @param {Function} [onChange] callback to be executed when selectedOption is changed
  * 
@@ -78,13 +78,11 @@ component.bindings = {
 component.template = `
 <div class="form-element__input-group">
     <div class="form-element__input-group-prepend padding--none">
-        <bd-popover pointer="true">
+        <bd-popover pointer="true" link-id="vm.selectedOption.value" link-class="'btn btn--no-right-border-radius no-border'">
             <popover-link>
-                <button id="btn" class="btn btn--no-right-border-radius no-border">
-                    <span ng-class="vm.selectedOption.icon" aria-hidden="true"></span>
-                    <span class="screen-reader-only">{{vm.selectedOption.name}}</span>
-                    <span class="icon-link-menu-pointer"></span>
-                </button>
+                <span ng-class="vm.selectedOption.icon" aria-hidden="true"></span>
+                <span class="screen-reader-only">{{vm.selectedOption.name}}</span>
+                <span class="icon-link-menu-pointer"></span>
             </popover-link>
             <popover-body>
                 <div class="popover__body">
