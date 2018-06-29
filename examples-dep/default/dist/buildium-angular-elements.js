@@ -402,18 +402,13 @@ var find = require('lodash.find');
  * - <a class="label type-hint type-hint-string">string</a> `icon` icon classes for option
  * - <a class="label type-hint type-hint-boolean">boolean</a> `disabled` whether the option is disabled
  * 
- * @param {Object} [selectedOption] currently selected value
+ * @param {Object} [selectedOption] currently selected value; defaults to first enabled option
  *
  * @param {Function} [onChange] callback to be executed when selectedOption is changed
  * 
  * @example
     <example name="bd-action-input" module="buildium.angular-elements.action-input">
         <file name="index.html">
-            <style>
-                .padding--none {
-                    padding: 0;
-                }
-            </style>
             <script>
                 angular.module('buildium.angular-elements.action-input')
                     .controller('ExampleController', function() {
@@ -462,7 +457,7 @@ component.bindings = {
     onChange: '&?'
 };
 
-component.template = '\n<div class="form-element__input-group">\n    <div class="form-element__input-group-prepend padding--none">\n        <bd-popover pointer="true">\n            <popover-link>\n                <button id="btn" class="btn btn--no-right-border-radius no-border">\n                    <span ng-class="vm.selectedOption.icon" aria-hidden="true"></span>\n                    <span class="screen-reader-only">{{vm.selectedOption.name}}</span>\n                    <span class="icon-link-menu-pointer"></span>\n                </button>\n            </popover-link>\n            <popover-body>\n                <div class="popover__body">\n                    <ul class="popover__menu">\n                        <li class="popover__group">\n                            <ul>\n                                <li class="popover__item" ng-repeat="option in vm.options" ng-click="vm.selectOption(option)">\n                                    <a href class="popover__item-link" role="button" ng-class="{\'popover__item-link--disabled\': option.disabled}">\n                                        <span ng-class="option.icon" aria-hidden="true"></span> {{option.name}}\n                                    </a>\n                                </li>\n                            </ul>\n                        </li>\n                    </ul>\n                </div>\n            </popover-body>\n        </bd-popover>\n    </div>\n    <div class="form-element__input-group-input">\n        <ng-transclude></ng-transclude>\n    </div>\n</div>\n';
+component.template = '\n<div class="form-element__input-group">\n    <div class="form-element__input-group-prepend form-element__input-group-prepend--action">\n        <bd-popover pointer="true" link-id="vm.selectedOption.value" link-class="\'btn btn--no-right-border-radius no-border\'">\n            <popover-link>\n                <span ng-class="vm.selectedOption.icon" aria-hidden="true"></span>\n                <span class="screen-reader-only">{{vm.selectedOption.name}}</span>\n                <span class="icon-link-menu-pointer"></span>\n            </popover-link>\n            <popover-body>\n                <div class="popover__body">\n                    <ul class="popover__menu">\n                        <li class="popover__group">\n                            <ul>\n                                <li class="popover__item" ng-repeat="option in vm.options" ng-click="vm.selectOption(option)">\n                                    <a href class="popover__item-link" role="button" ng-class="{\'popover__item-link--disabled\': option.disabled}">\n                                        <span ng-class="option.icon" aria-hidden="true"></span> {{option.name}}\n                                    </a>\n                                </li>\n                            </ul>\n                        </li>\n                    </ul>\n                </div>\n            </popover-body>\n        </bd-popover>\n    </div>\n    <div class="form-element__input-group-input">\n        <ng-transclude></ng-transclude>\n    </div>\n</div>\n';
 
 component.controller = ['BdSubmenu', function ActionInputController(BdSubmenu) {
     var vm = this;
