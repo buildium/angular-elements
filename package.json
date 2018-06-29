@@ -35,8 +35,8 @@
     "jquery": "^2.2.3"
   },
   "devDependencies": {
-    "@buildium/angular-docs": "1.2.0",
-    "@buildium/theme": "3.10.3",
+    "@buildium/angular-docs": "1.2.1",
+    "@buildium/theme": "3.12.0-0",
     "angular": "1.5.9",
     "angular-mocks": "1.5.9",
     "babel-cli": "6.24.0",
