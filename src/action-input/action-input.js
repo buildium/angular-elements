@@ -22,11 +22,6 @@ const find = require('lodash.find');
  * @example
     <example name="bd-action-input" module="buildium.angular-elements.action-input">
         <file name="index.html">
-            <style>
-                .padding--none {
-                    padding: 0;
-                }
-            </style>
             <script>
                 angular.module('buildium.angular-elements.action-input')
                     .controller('ExampleController', function() {
@@ -77,7 +72,7 @@ component.bindings = {
 
 component.template = `
 <div class="form-element__input-group">
-    <div class="form-element__input-group-prepend padding--none">
+    <div class="form-element__input-group-prepend form-element__input-group-prepend--action">
         <bd-popover pointer="true" link-id="vm.selectedOption.value" link-class="'btn btn--no-right-border-radius no-border'">
             <popover-link>
                 <span ng-class="vm.selectedOption.icon" aria-hidden="true"></span>
