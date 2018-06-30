@@ -5,7 +5,7 @@ var path = require('path'),
     buildiumAngularDocs = require('@buildium/angular-docs'),
     ghPages = process.argv.indexOf('--gh-pages') !== -1,
     buildiumThemeFiles = glob.sync(path.join(__dirname, '../node_modules/@buildium/theme/dist/**/*'), {nodir: true}),
-    styles = ['https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'].concat(buildiumThemeFiles);
+    styles = [path.join(__dirname, '../node_modules/reset-css/reset.css')].concat(buildiumThemeFiles);
 
 buildiumAngularDocs({
     angularVersion: '1.5.9',

@@ -57,6 +57,7 @@
     "karma-electron-launcher": "0.2.0",
     "karma-jasmine": "1.1.0",
     "mkdirp": "0.5.1",
+    "reset-css": "4.0.1",
     "watchify": "3.9.0"
   },
   "eslintConfig": {
