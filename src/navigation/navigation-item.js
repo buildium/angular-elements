@@ -1,10 +1,9 @@
 const component = {};
 
 /**
-  * @ngdoc directive
+  * @ngdoc component
   * @name bdNavigationItem
   * @module buildium.angular-elements.navigation
-  * @restrict E
   * 
   * @param {Boolean} isActive
   * @param {Boolean} isDisabled

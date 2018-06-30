@@ -1,10 +1,9 @@
 const component = {};
 
 /**
-  * @ngdoc directive
+  * @ngdoc component
   * @name bdNavigation
   * @module buildium.angular-elements.navigation
-  * @restrict E
   * 
   * @description
   * 
@@ -48,11 +47,7 @@ const component = {};
   *
   */
 
-component.template = `
-<bd-accordion single-section-only="true">
-    <nav class="navigation" ng-transclude></nav>
-</bd-accordion>
-`;
+component.template = '<bd-accordion single-section-only="true"><nav class="navigation" ng-transclude></nav></bd-accordion>';
 
 component.transclude = true;
 

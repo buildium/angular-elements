@@ -1,8 +1,7 @@
 /**
- * @ngdoc directive
+ * @ngdoc component
  * @name bdMediaGallery
  * @module buildium.angular-elements.media-gallery
- * @restrict E
  * 
  * @description
  * 

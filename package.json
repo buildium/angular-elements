@@ -1,6 +1,6 @@
 {
   "name": "@buildium/angular-elements",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A collection of directives for building angular applications",
   "main": "lib/index.js",
   "scripts": {
@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/buildium/angular-elements#readme",
   "dependencies": {
+    "lodash.find": "4.6.0",
     "lodash.uniqueid": "4.0.1"
   },
   "peerDependencies": {
@@ -34,8 +35,8 @@
     "jquery": "^2.2.3"
   },
   "devDependencies": {
-    "@buildium/angular-docs": "1.1.0",
-    "@buildium/theme": "3.2.2",
+    "@buildium/angular-docs": "1.2.1",
+    "@buildium/theme": "3.13.0",
     "angular": "1.5.9",
     "angular-mocks": "1.5.9",
     "babel-cli": "6.24.0",
@@ -48,6 +49,7 @@
     "eslint-plugin-buildium": "2.1.0",
     "eslint-plugin-import": "2.8.0",
     "faker": "4.1.0",
+    "glob": "7.1.2",
     "jasmine": "2.5.3",
     "jquery": "2.2.4",
     "karma": "1.5.0",
@@ -55,6 +57,7 @@
     "karma-electron-launcher": "0.2.0",
     "karma-jasmine": "1.1.0",
     "mkdirp": "0.5.1",
+    "reset-css": "4.0.1",
     "watchify": "3.9.0"
   },
   "eslintConfig": {

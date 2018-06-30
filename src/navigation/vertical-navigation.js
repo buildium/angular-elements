@@ -1,10 +1,9 @@
 const component = {};
 
 /**
-  * @ngdoc directive
+  * @ngdoc component
   * @name bdVerticalNavigation
   * @module buildium.angular-elements.navigation
-  * @restrict E
   * 
   * @description
   * 
