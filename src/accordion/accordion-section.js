@@ -10,7 +10,7 @@
  * @param {String} heading - What will be shown in header
  * @param {String} subHeading
  * @param {Boolean} [isOpen] - Set to be initally open
- * @param {Boolean} [disabled]
+ * @param {Boolean} [isDisabled]
  * 
  * @example
  *
@@ -43,14 +43,14 @@ component.bindings = {
     heading: '@',
     subHeading: '@',
     isOpen: '<?',
-    disabled: '<?'
+    isDisabled: '<?'
 };
 
 component.template = `
 <div bd-accordion-toggle
     on-change="section.toggleClass(isAccordionGroupOpen)"
     is-open="section.isOpen"
-    disabled="section.disabled"
+    is-disabled="section.disabled"
     open-class="accordion__section--open"
     ng-class="{'accordion__section--first': section.$index === 0}">
     <div class="accordion__section-heading"
@@ -67,7 +67,7 @@ component.template = `
             </a>
         </h4>
     </div>
-    <div bd-accordion-group ng-if="!disabled" class="accordion__section-content" ng-transclude></div>
+    <div bd-accordion-group ng-if="!isDisabled" class="accordion__section-content" ng-transclude></div>
 </div>
 `;
 
