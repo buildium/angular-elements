@@ -9,7 +9,7 @@
  * Element responsible for toggling a {@link buildium.angular-elements.accordion.directive:bdAccordionGroup bdAccordionGroup} open or closed
  *
  * @param {Boolean} [isOpen] - is toggle open by default
- * @param {Boolean} [disabled] - is toggle disabled
+ * @param {Boolean} [isDisabled] - is toggle disabled
  * @param {Function} [onChange] - change event to fire when open state changes
  * @param {String} [openClass] - class to add when toggle is open
  * @param {String} [disabledClass] - class to add when toggle is disabled
@@ -62,7 +62,7 @@ module.exports = function AccordionToggle() {
     directive.bindToController = {
         isOpen: '<?',
         onChange: '&?',
-        disabled: '<?',
+        isDisabled: '<?',
         openClass: '@?',
         disabledClass: '@?'
     };
@@ -77,8 +77,8 @@ module.exports = function AccordionToggle() {
                 toggle.onChange({isAccordionGroupOpen: changes.isOpen.currentValue});
             }
 
-            if (changes.disabled && toggle.disabledClass) {
-                $element.toggleClass(toggle.disabledClass, changes.disabled.currentValue);
+            if (changes.isDisabled && toggle.disabledClass) {
+                $element.toggleClass(toggle.disabledClass, changes.isDisabled.currentValue);
             }
         };
     }];
@@ -93,7 +93,7 @@ module.exports = function AccordionToggle() {
         }
         
         if (attrs.disabledClass) {
-            element.toggleClass(attrs.disabledClass, toggle.disabled);
+            element.toggleClass(attrs.disabledClass, toggle.isDisabled);
         }
 
         function toggleAccordion() {
@@ -109,7 +109,7 @@ module.exports = function AccordionToggle() {
         }
 
         toggle.handleAccordionEvent = function handleAccordionEvent(event) {
-            if (!toggle.disabled) {
+            if (!toggle.isDisabled) {
                 if (!event || event.type === 'click' || event.keyCode === SPACEBAR_KEYCODE.Space) {
                     toggleAccordion();
 
