@@ -84,7 +84,7 @@ module.exports = function AccordionGroup() {
  * @param {String} heading - What will be shown in header
  * @param {String} subHeading
  * @param {Boolean} [isOpen] - Set to be initally open
- * @param {Boolean} [disabled]
+ * @param {Boolean} [isDisabled]
  * 
  * @example
  *
@@ -117,10 +117,10 @@ component.bindings = {
     heading: '@',
     subHeading: '@',
     isOpen: '<?',
-    disabled: '<?'
+    isDisabled: '<?'
 };
 
-component.template = '\n<div bd-accordion-toggle\n    on-change="section.toggleClass(isAccordionGroupOpen)"\n    is-open="section.isOpen"\n    disabled="section.disabled"\n    open-class="accordion__section--open"\n    ng-class="{\'accordion__section--first\': section.$index === 0}">\n    <div class="accordion__section-heading"\n        ng-class="{\'accordion__section-heading--disabled\': section.disabled}">\n        <h4 class="accordion__section-heading-title">\n            <a role="button" href="#" class="accordion__toggle" ng-class="{\'accordion__toggle--disabled\': section.disabled}">\n                <span ng-hide="section.isOpen" \n                    class="accordion__toggle-icon svgicon"\n                    ng-class="{\'svgicon--arrowhead-right\': !section.disabled, \'svgicon--arrowhead-right-muted\': section.disabled}">\n                </span>\n                <span ng-show="section.isOpen" class="accordion__toggle-icon svgicon svgicon--arrowhead-down"></span>\n                <span>{{section.heading}}</span>\n                <span class="accordion__section-sub-heading-title" ng-if="section.subHeading">{{section.subHeading}}</span>\n            </a>\n        </h4>\n    </div>\n    <div bd-accordion-group ng-if="!disabled" class="accordion__section-content" ng-transclude></div>\n</div>\n';
+component.template = '\n<div bd-accordion-toggle\n    on-change="section.toggleClass(isAccordionGroupOpen)"\n    is-open="section.isOpen"\n    is-disabled="section.disabled"\n    open-class="accordion__section--open"\n    ng-class="{\'accordion__section--first\': section.$index === 0}">\n    <div class="accordion__section-heading"\n        ng-class="{\'accordion__section-heading--disabled\': section.disabled}">\n        <h4 class="accordion__section-heading-title">\n            <a role="button" href="#" class="accordion__toggle" ng-class="{\'accordion__toggle--disabled\': section.disabled}">\n                <span ng-hide="section.isOpen" \n                    class="accordion__toggle-icon svgicon"\n                    ng-class="{\'svgicon--arrowhead-right\': !section.disabled, \'svgicon--arrowhead-right-muted\': section.disabled}">\n                </span>\n                <span ng-show="section.isOpen" class="accordion__toggle-icon svgicon svgicon--arrowhead-down"></span>\n                <span>{{section.heading}}</span>\n                <span class="accordion__section-sub-heading-title" ng-if="section.subHeading">{{section.subHeading}}</span>\n            </a>\n        </h4>\n    </div>\n    <div bd-accordion-group ng-if="!isDisabled" class="accordion__section-content" ng-transclude></div>\n</div>\n';
 
 component.controller = function AccordionSectionController() {
     var section = this;
@@ -155,7 +155,7 @@ module.exports = component;
  * Element responsible for toggling a <a href="api/buildium.angular-elements.accordion/directive/bdAccordionGroup">bdAccordionGroup</a> open or closed
  *
  * @param {Boolean} [isOpen] - is toggle open by default
- * @param {Boolean} [disabled] - is toggle disabled
+ * @param {Boolean} [isDisabled] - is toggle disabled
  * @param {Function} [onChange] - change event to fire when open state changes
  * @param {String} [openClass] - class to add when toggle is open
  * @param {String} [disabledClass] - class to add when toggle is disabled
@@ -208,7 +208,7 @@ module.exports = function AccordionToggle() {
     directive.bindToController = {
         isOpen: '<?',
         onChange: '&?',
-        disabled: '<?',
+        isDisabled: '<?',
         openClass: '@?',
         disabledClass: '@?'
     };
@@ -223,8 +223,8 @@ module.exports = function AccordionToggle() {
                 toggle.onChange({ isAccordionGroupOpen: changes.isOpen.currentValue });
             }
 
-            if (changes.disabled && toggle.disabledClass) {
-                $element.toggleClass(toggle.disabledClass, changes.disabled.currentValue);
+            if (changes.isDisabled && toggle.disabledClass) {
+                $element.toggleClass(toggle.disabledClass, changes.isDisabled.currentValue);
             }
         };
     }];
@@ -239,7 +239,7 @@ module.exports = function AccordionToggle() {
         }
 
         if (attrs.disabledClass) {
-            element.toggleClass(attrs.disabledClass, toggle.disabled);
+            element.toggleClass(attrs.disabledClass, toggle.isDisabled);
         }
 
         function toggleAccordion() {
@@ -255,7 +255,7 @@ module.exports = function AccordionToggle() {
         }
 
         toggle.handleAccordionEvent = function handleAccordionEvent(event) {
-            if (!toggle.disabled) {
+            if (!toggle.isDisabled) {
                 if (!event || event.type === 'click' || event.keyCode === SPACEBAR_KEYCODE.Space) {
                     toggleAccordion();
 
