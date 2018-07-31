@@ -106,7 +106,7 @@ describe('[Component] bdMediaGallery', () => {
             bindings.onSetView = onSetView;
             compile();
             vm.setView();
-            expect(onSetView);
+            expect(onSetView).toHaveBeenCalled();
         });
     });
 });
