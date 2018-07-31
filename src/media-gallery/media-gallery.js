@@ -104,12 +104,12 @@ component.bindings = {
 component.template = `
 <div ng-if="vm.enableListView && (vm.media && vm.media.length > 0)" class="button-container right row media-gallery__view-controls">
     <ul class="button-group row">
-        <li><a class="btn svgicon svgicon--icon_grid-view media-gallery__btn" ng-class="{'media-gallery__btn--active': vm.view === vm.viewPreferences.TILE}" ng-click="vm.setView(vm.viewPreferences.TILE)"></a></li>
-        <li><a class="btn svgicon svgicon--icon_list-view media-gallery__btn" ng-class="{'media-gallery__btn--active': vm.view === vm.viewPreferences.LIST}" ng-click="vm.setView(vm.viewPreferences.LIST)"></a></li>
+        <li><a class="btn svgicon svgicon--icon_grid-view media-gallery__btn" ng-class="{'media-gallery__btn--active': vm.view === vm.galleryView.TILE}" ng-click="vm.setView(vm.galleryView.TILE)"></a></li>
+        <li><a class="btn svgicon svgicon--icon_list-view media-gallery__btn" ng-class="{'media-gallery__btn--active': vm.view === vm.galleryView.LIST}" ng-click="vm.setView(vm.galleryView.LIST)"></a></li>
     </ul>
 </div>
 <div class="media-gallery">
-    <div class="media-gallery__media-container" ng-if="vm.view === vm.viewPreferences.TILE"
+    <div class="media-gallery__media-container" ng-if="vm.view === vm.galleryView.TILE"
         ng-repeat="media in vm.media | limitTo:vm.limitTo track by media.fileName">
         <div class="media-gallery__image" 
             ng-style="{'background-image': 'url(' + media.imageUrl + ')' }"
@@ -135,8 +135,8 @@ component.template = `
             <span class="media-gallery__screen-reader-only">Remove</span>
         </button>
     </div>
-    <div class="media-list__media-container" ng-if="vm.view === vm.viewPreferences.LIST"
-         ng-repeat="media in vm.media">
+    <div class="media-list__media-container" ng-if="vm.view === vm.galleryView.LIST"
+         ng-repeat="media in vm.media" track by media.fileName>
         <div class="col-md-12 media-list__row">
             <div class="col-md-1" ng-click=""vm.viewLarger(media)">
                 <div class="media-list__image" 
@@ -154,19 +154,15 @@ component.template = `
 </div>
 `;
 
-component.controller = function MediaGalleryController() {
+component.controller = ['GalleryView', function MediaGalleryController(GalleryView) {
     const vm = this;
-
-    vm.viewPreferences = {
-        TILE: 'Tile',
-        LIST: 'List'
-    };
 
     vm.$onInit = function onInit() {
         if (vm.allowRemove === undefined) {
             vm.allowRemove = true;
         }
-        vm.view = vm.viewPreferences.TILE;
+        vm.galleryView = GalleryView;
+        vm.view = vm.galleryView.TILE;
     };
 
     vm.selectMedia = function selectMedia(item) {
@@ -199,6 +195,6 @@ component.controller = function MediaGalleryController() {
             vm.onSetView();
         }
     };  
-};
+}];
 
 module.exports = component;
