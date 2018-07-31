@@ -175,7 +175,7 @@ component.template = `
     <div class="media-list__media-container" ng-if="vm.view === vm.galleryView.LIST"
          ng-repeat="media in vm.media" track by media.fileName>
         <div class="col-md-12 media-list__row">
-            <div class="col-md-1" ng-click=""vm.viewLarger(media)">
+            <div class="col-md-1" ng-click="vm.viewLarger(media)">
                 <div class="media-list__image" 
                      ng-style="{'background-image': 'url(' + media.imageUrl + ')' }"> 
                     <img class="media-gallery__screen-reader-only" 
@@ -229,7 +229,7 @@ component.controller = ['GalleryView', function MediaGalleryController(GalleryVi
     vm.setView = function setView(view) {
         vm.view = view;
         if (typeof vm.onSetView === 'function') {
-            vm.onSetView();
+            vm.onSetView(view);
         }
     };  
 }];
