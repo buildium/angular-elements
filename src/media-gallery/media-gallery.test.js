@@ -10,12 +10,14 @@ describe('[Component] bdMediaGallery', () => {
     let compile;
     let onRemove;
     let onSelect;
+    let onSetView;
 
     beforeEach(angular.mock.module('buildium.angular-elements.media-gallery'));
 
     beforeEach(() => {
         onRemove = jasmine.createSpy('onRemove');
         onSelect = jasmine.createSpy('onSelect');
+        onSetView = jasmine.createSpy('onSetView');
     });
 
     beforeEach(angular.mock.inject(($rootScope, $componentController) => {
@@ -96,6 +98,15 @@ describe('[Component] bdMediaGallery', () => {
             compile();
             vm.selectMedia(item);
             expect(onSelect).toHaveBeenCalledWith({ item });
+        });
+    });
+
+    describe('setView', () => {
+        it('should call the onSetView method if defined', () => {
+            bindings.onSetView = onSetView;
+            compile();
+            vm.setView();
+            expect(onSetView);
         });
     });
 });

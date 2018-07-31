@@ -40,6 +40,35 @@
                     width: 100px;
                     margin: 10px;
                 }
+
+                .media-gallery__btn {
+                    background-size: 18px;
+                    background-position: center;
+                    width: 40px;
+                    height: 30px;
+                }
+
+                .media-list__image {
+                    height: 40px;
+                    width: 40px;
+                    background-size: cover;
+                    background-position: center;
+                    background-color: #EAEAEA;
+                }
+
+                .media-list__delete {
+                    min-height: 40px;
+                    top: 15px;
+                    position: relative;
+                }
+
+                .media-list__row {
+                    cursor: pointer;
+                }
+
+                .media-gallery__btn--active {
+                    background-color: #EAEAEA;
+                }
             </style>
             <script>
                 angular.module('buildium.angular-elements.media-gallery')
@@ -79,7 +108,7 @@
                     })
             </script>
             <section ng-controller="ExampleController as vm">
-                <bd-media-gallery media="vm.media" allow-remove="true" allow-enlarge="true" limit-to="3"></bd-media-gallery>
+                <bd-media-gallery media="vm.media" allow-remove="true" allow-enlarge="true" limit-to="3" enable-list-view="true"></bd-media-gallery>
             </section>
         </file>
     </example>
