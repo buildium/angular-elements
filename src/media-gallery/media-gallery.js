@@ -201,19 +201,19 @@ component.controller = ['GalleryView', function MediaGalleryController(GalleryVi
 
     vm.selectMedia = function selectMedia(item) {
         if (typeof vm.onSelect === 'function') {
-            vm.onSelect({ item: item });
+            vm.onSelect({ item });
         }
     };
     
     vm.removeMedia = function removeMedia(item) {
-        if (typeof vm.onRemove !== 'function' || vm.onRemove({ item: item }) !== false) {
+        if (typeof vm.onRemove !== 'function' || vm.onRemove({ item }) !== false) {
             vm.media.splice(vm.media.indexOf(item), 1);
         }
     };
 
     vm.viewLarger = function viewLarger(item) {
         if (typeof vm.onEnlarge === 'function') {
-            vm.onEnlarge({ item: item });
+            vm.onEnlarge({ item });
         }
     };
 
@@ -226,7 +226,7 @@ component.controller = ['GalleryView', function MediaGalleryController(GalleryVi
     vm.setView = function setView(view) {
         vm.view = view;
         if (typeof vm.onSetView === 'function') {
-            vm.onSetView({ view: view });
+            vm.onSetView({ view });
         }
     };  
 }];
