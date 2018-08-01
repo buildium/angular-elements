@@ -588,7 +588,10 @@ var moduleName = 'buildium.angular-elements.media-gallery';
  * @name buildium.angular-elements.media-gallery
  * @module buildium.angular-elements.media-gallery
  */
-angular.module(moduleName, []).component('bdMediaGallery', require('./media-gallery.js'));
+angular.module(moduleName, []).component('bdMediaGallery', require('./media-gallery.js')).constant('GalleryView', {
+    TILE: 'Tile',
+    LIST: 'List'
+});
 
 module.exports = moduleName;
 },{"./media-gallery.js":10}],10:[function(require,module,exports){
@@ -623,6 +626,10 @@ module.exports = moduleName;
  * 
  * @param {Function} [onViewAll] if `limitTo` provided, callback to be executed when user chooses to view all items 
  * 
+ * @param {Boolean} [enableListView=false] whether to show option to toggle between list view and tile view
+ * 
+ * @param {Function} [onSetView] if `listView` provided, callback to be executed when user chooses to display list view
+ * 
  * @example
     <example name="bd-media-gallery" module="buildium.angular-elements.media-gallery">
         <file name="index.html">
@@ -631,6 +638,33 @@ module.exports = moduleName;
                     height: 100px;
                     width: 100px;
                     margin: 10px;
+                }
+
+                .media-list__image-container {
+                    min-width: 400px;
+                    display: inline-block;
+                }
+
+                .media-gallery__btn {
+                    background-size: 18px;
+                    background-position: center;
+                    width: 40px;
+                    height: 30px;
+                }
+
+                .media-list__image {
+                    height: 40px;
+                    width: 40px;
+                    background-size: cover;
+                    background-position: center;
+                    background-color: #EAEAEA;
+                }
+
+                .media-list__delete {
+                    min-height: 40px;
+                    top: 15px;
+                    position: relative;
+                    display: inline-table;
                 }
             </style>
             <script>
@@ -671,7 +705,7 @@ module.exports = moduleName;
                     })
             </script>
             <section ng-controller="ExampleController as vm">
-                <bd-media-gallery media="vm.media" allow-remove="true" allow-enlarge="true" limit-to="3"></bd-media-gallery>
+                <bd-media-gallery media="vm.media" allow-remove="true" allow-enlarge="true" limit-to="3" enable-list-view="true"></bd-media-gallery>
             </section>
         </file>
     </example>
@@ -688,18 +722,22 @@ component.bindings = {
     allowEnlarge: '<?',
     onEnlarge: '&?',
     limitTo: '<?',
-    onViewAll: '&?'
+    onViewAll: '&?',
+    enableListView: '<?',
+    onSetView: '&?'
 };
 
-component.template = '\n<div class="media-gallery">\n    <div class="media-gallery__media-container"\n        ng-repeat="media in vm.media | limitTo:vm.limitTo track by media.fileName">\n        <div class="media-gallery__image" \n            ng-style="{\'background-image\': \'url(\' + media.imageUrl + \')\' }"\n            ng-click="vm.selectMedia(media)"> \n            <img class="media-gallery__screen-reader-only" \n                ng-src="{{:: media.imageUrl}}" \n                alt="{{:: media.title}}">\n        </div>\n        <button class="media-gallery__view-larger"\n            ng-if="vm.allowEnlarge"\n            ng-click="vm.viewLarger(media)">\n            View larger\n        </button>\n        <button class="media-gallery__view-all"\n            ng-if="vm.limitTo < vm.media.length"\n            ng-show="$last"\n            ng-click="vm.viewAll()">\n            +{{ vm.media.length - vm.limitTo + 1 }}\n        </button>\n        <button class="media-gallery__image-delete svgicon svgicon--delete"\n            ng-if="media.isRemovable || (media.isRemovable !== false && vm.allowRemove)"\n            ng-click="vm.removeMedia(media)">\n            <span class="media-gallery__screen-reader-only">Remove</span>\n        </button>\n    </div>\n</div>\n';
+component.template = '\n<div ng-if="vm.enableListView && (vm.media && vm.media.length > 0)" class="button-container right row media-gallery__view-controls">\n    <ul class="button-group row">\n        <li>\n            <button type="button" class="btn svgicon svgicon--grid-view media-gallery__btn" ng-class="{\'media-gallery__btn--active\': vm.view === vm.galleryView.TILE}" ng-click="vm.setView(vm.galleryView.TILE)">\n                <span class="screen-reader-only">Grid View</span>\n            </button>\n        </li>\n        <li>\n            <button type="button" class="btn svgicon svgicon--list-view media-gallery__btn" ng-class="{\'media-gallery__btn--active\': vm.view === vm.galleryView.LIST}" ng-click="vm.setView(vm.galleryView.LIST)">\n                <span class="screen-reader-only">List View</span>\n            </button>\n        </li>\n    </ul>\n</div>\n<div class="media-gallery">\n    <div class="media-gallery__media-container" ng-if="vm.view === vm.galleryView.TILE"\n        ng-repeat="media in vm.media | limitTo:vm.limitTo track by media.fileName">\n        <div class="media-gallery__image" \n            ng-style="{\'background-image\': \'url(\' + media.imageUrl + \')\' }"\n            ng-click="vm.selectMedia(media)"> \n            <img class="media-gallery__screen-reader-only" \n                ng-src="{{:: media.imageUrl}}" \n                alt="{{:: media.title}}">\n        </div>\n        <button class="media-gallery__view-larger"\n            ng-if="vm.allowEnlarge"\n            ng-click="vm.viewLarger(media)">\n            View larger\n        </button>\n        <button class="media-gallery__view-all"\n            ng-if="vm.limitTo < vm.media.length"\n            ng-show="$last"\n            ng-click="vm.viewAll()">\n            +{{ vm.media.length - vm.limitTo + 1 }}\n        </button>\n        <button class="media-gallery__image-delete svgicon svgicon--delete"\n            ng-if="media.isRemovable || (media.isRemovable !== false && vm.allowRemove)"\n            ng-click="vm.removeMedia(media)">\n            <span class="media-gallery__screen-reader-only">Remove</span>\n        </button>\n    </div>\n    <div class="media-list__media-container" ng-if="vm.view === vm.galleryView.LIST"\n         ng-repeat="media in vm.media track by media.fileName">\n        <div class="col-md-12 media-list__row">\n            <span class="media-list__image-container" ng-click="vm.viewLarger(media)">\n                <div class="media-list__image" \n                     ng-style="{\'background-image\': \'url(\' + media.imageUrl + \')\' }"> \n                    <img class="media-gallery__screen-reader-only" \n                         ng-src="{{:: media.imageUrl}}" \n                         alt="{{:: media.title}}">\n                </div>\n            </span>\n            <span class="col-md-1"><a href="#" class="media-list__delete svgicon--trash-can btn--icon" ng-click="vm.removeMedia(media)" alt="" title=""></a></span>\n        </div>\n        <div class="col-md-12 editable-panel__divider media-list__divider"></div>\n    </div>\n</div>\n';
 
-component.controller = function MediaGalleryController() {
+component.controller = ['GalleryView', function MediaGalleryController(GalleryView) {
     var vm = this;
 
     vm.$onInit = function onInit() {
         if (vm.allowRemove === undefined) {
             vm.allowRemove = true;
         }
+        vm.galleryView = GalleryView;
+        vm.view = vm.galleryView.TILE;
     };
 
     vm.selectMedia = function selectMedia(item) {
@@ -725,7 +763,14 @@ component.controller = function MediaGalleryController() {
             vm.onViewAll();
         }
     };
-};
+
+    vm.setView = function setView(view) {
+        vm.view = view;
+        if (typeof vm.onSetView === 'function') {
+            vm.onSetView({ view: view });
+        }
+    };
+}];
 
 module.exports = component;
 },{}],11:[function(require,module,exports){
