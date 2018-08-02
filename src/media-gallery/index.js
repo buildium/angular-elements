@@ -9,9 +9,9 @@ angular.module(moduleName, [])
 
 .component('bdMediaGallery', require('./media-gallery.js'))
 .constant('GalleryView',
-{
-    TILE: 'Tile',
-    LIST: 'List'
-});
+    {
+        TILE: 'Tile',
+        LIST: 'List'
+    });
 
 module.exports = moduleName;
