@@ -4,10 +4,10 @@ const component = {};
   * @ngdoc component
   * @name bdNavigationItem
   * @module buildium.angular-elements.navigation
-  * 
+  *
   * @param {Boolean} isActive
   * @param {Boolean} isDisabled
-  * 
+  *
   * @example
     <example name="bd-navigation" module="buildium.angular-elements.navigation">
         <file name="index.html">
@@ -36,7 +36,8 @@ const component = {};
 
 component.bindings = {
     isActive: '<?',
-    isDisabled: '<?'
+    isDisabled: '<?',
+    ignoreAccordionToggle: '<?'
 };
 
 component.template = `
@@ -64,7 +65,9 @@ component.controller = function NavigationItemController() {
     const ctrl = this;
 
     ctrl.onAccordionToggleChange = function onAccordionToggleChange(isAccordionGroupOpen) {
-        ctrl.isActive = isAccordionGroupOpen;
+        if (!ctrl.ignoreAccordionToggle) {
+            ctrl.isActive = isAccordionGroupOpen;
+        }
     };
 };
 

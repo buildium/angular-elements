@@ -1,14 +1,15 @@
 const component = {};
+const angular = require('angular');
 
 /**
   * @ngdoc component
   * @name bdNavigationLink
   * @module buildium.angular-elements.navigation
-  * 
+  *
   * @param {String} linkHref
   * @param {String} linkSref
   * @param {Boolean} linkDisabled
-  * 
+  *
   * @example
     <example name="bd-navigation-link" module="buildium.angular-elements.navigation">
         <file name="index.html">
@@ -28,7 +29,9 @@ const component = {};
 component.bindings = {
     linkHref: '<?',
     linkSref: '<?',
-    linkDisabled: '<?'
+    linkDisabled: '<?',
+    template: '<?',
+    templateScope: '<?'
 };
 
 component.template = `
@@ -48,8 +51,16 @@ component.require = {
     navigationItem: '^^bdNavigationItem'
 };
 
-component.controller = function NavigationLinkController($injector, $window) {
+component.controller = function NavigationLinkController($injector, $window, $element, $compile) {
     const ctrl = this;
+
+    ctrl.$onInit = function onInit() {
+        if (ctrl.template && ctrl.templateScope) {
+            const insertionElement = angular.element(ctrl.template);
+            $element.append(insertionElement);
+            $compile(insertionElement)(ctrl.templateScope);
+        }
+    };
 
     ctrl.onClick = function onClick(event) {
         if (ctrl.linkDisabled) {
@@ -62,6 +73,6 @@ component.controller = function NavigationLinkController($injector, $window) {
     };
 };
 
-component.controller.$inject = ['$injector', '$window'];
+component.controller.$inject = ['$injector', '$window', '$element', '$compile'];
 
 module.exports = component;
