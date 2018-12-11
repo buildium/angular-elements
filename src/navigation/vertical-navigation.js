@@ -133,7 +133,7 @@ component.template = `
         <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled" link-sref="navigationItem.sref" template="navigationItem.template" template-scope="navigationItem.templateScope">
             <navigation-title>{{navigationItem.title}}</navigation-title>
         </bd-navigation-link>
-        <navigation-menu class="navigation__menu" ng-if="navigationItem.menu" ng-class="{{$ctrl.getMenuClassName(navigationItem.title)}}">
+        <navigation-menu class="navigation__menu {{$ctrl.getMenuClassName(navigationItem.title)}}" ng-if="navigationItem.menu">
             <bd-vertical-navigation navigation-items="navigationItem.menu"></bd-vertical-navigation>
         </navigation-menu>
     </bd-navigation>

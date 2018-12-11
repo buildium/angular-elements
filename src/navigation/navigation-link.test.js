@@ -8,6 +8,7 @@ describe('NavigationLinkController', () => {
     let bindings;
     let compile;
     const $state = jasmine.createSpyObj('$state', ['go']);
+    const $element = jasmine.createSpyObj('$element', ['append']);
 
     beforeEach(angular.mock.module('buildium.angular-elements.navigation'));
 
@@ -15,7 +16,8 @@ describe('NavigationLinkController', () => {
         $state.go.calls.reset();
 
         angular.mock.module({
-            $state
+            $state,
+            $element
         });
     });
 
