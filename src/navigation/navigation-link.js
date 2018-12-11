@@ -9,6 +9,8 @@ const angular = require('angular');
   * @param {String} linkHref
   * @param {String} linkSref
   * @param {Boolean} linkDisabled
+  * @param (String) template - template to be rendered with $compile using templateScope
+  * @param {Object} templateScope - angular scope to be used for compiling template
   *
   * @example
     <example name="bd-navigation-link" module="buildium.angular-elements.navigation">
