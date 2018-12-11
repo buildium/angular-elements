@@ -36,8 +36,7 @@ const component = {};
 
 component.bindings = {
     isActive: '<?',
-    isDisabled: '<?',
-    ignoreAccordionToggle: '<?'
+    isDisabled: '<?'
 };
 
 component.template = `
@@ -65,9 +64,7 @@ component.controller = function NavigationItemController() {
     const ctrl = this;
 
     ctrl.onAccordionToggleChange = function onAccordionToggleChange(isAccordionGroupOpen) {
-        if (!ctrl.ignoreAccordionToggle) {
-            ctrl.isActive = isAccordionGroupOpen;
-        }
+        ctrl.isActive = isAccordionGroupOpen;
     };
 };
 

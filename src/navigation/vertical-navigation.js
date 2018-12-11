@@ -129,7 +129,7 @@ component.bindings = {
 
 component.template = `
 <bd-navigation class="navigation--vertical">
-    <bd-navigation-item ng-repeat="navigationItem in $ctrl.navigationItems" is-active="navigationItem.isActive" is-disabled="navigationItem.isDisabled" class="{{navigationItem.cssClass}}" ignore-accordion-toggle="!navigationItem.menu">
+    <bd-navigation-item ng-repeat="navigationItem in $ctrl.navigationItems" is-active="navigationItem.isActive" is-disabled="navigationItem.isDisabled" class="{{navigationItem.cssClass}}">
         <bd-navigation-link link-href="navigationItem.href" link-disabled="navigationItem.isDisabled" link-sref="navigationItem.sref" template="navigationItem.template" template-scope="navigationItem.templateScope">
             <navigation-title>{{navigationItem.title}}</navigation-title>
         </bd-navigation-link>
