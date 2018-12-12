@@ -4,10 +4,10 @@ const component = {};
   * @ngdoc component
   * @name bdNavigationItem
   * @module buildium.angular-elements.navigation
-  * 
+  *
   * @param {Boolean} isActive
   * @param {Boolean} isDisabled
-  * 
+  *
   * @example
     <example name="bd-navigation" module="buildium.angular-elements.navigation">
         <file name="index.html">

@@ -7,7 +7,14 @@ describe('NavigationLinkController', () => {
     let locals;
     let bindings;
     let compile;
+    let $rootScope;
     const $state = jasmine.createSpyObj('$state', ['go']);
+    const $element = jasmine.createSpyObj('$element', ['append']);
+    const $compile = jasmine.createSpy().and.callFake(() => function compileSpy(scope) {
+        if (typeof scope === 'function') {
+            scope();
+        }
+    });
 
     beforeEach(angular.mock.module('buildium.angular-elements.navigation'));
 
@@ -15,11 +22,14 @@ describe('NavigationLinkController', () => {
         $state.go.calls.reset();
 
         angular.mock.module({
-            $state
+            $state,
+            $element,
+            $compile
         });
     });
 
-    beforeEach(angular.mock.inject(($componentController) => {
+    beforeEach(angular.mock.inject(($componentController, _$rootScope_) => {
+        $rootScope = _$rootScope_;
         locals = {};
         bindings = {};
 
@@ -57,6 +67,22 @@ describe('NavigationLinkController', () => {
 
             ctrl.onClick(event);
             expect($state.go).toHaveBeenCalledWith(bindings.linkSref);
+        });
+    });
+
+    describe('navigation with additional template', () => {
+        it('should compile template using templateScope', () => {
+            const templateScope = $rootScope.$new();
+            templateScope.test = 'Testing123$';
+
+            bindings.template = '<div>{{test}}</div>';
+            bindings.templateScope = templateScope;
+            compile();
+
+            ctrl.$onInit();
+
+            expect($compile).toHaveBeenCalled();
+            expect($element.append).toHaveBeenCalled();
         });
     });
 });
