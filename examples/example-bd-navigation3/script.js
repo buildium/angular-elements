@@ -10,7 +10,7 @@ angular.module('exampleModule', ['buildium.angular-elements.navigation'])
                 {
                     title: 'Branding'
                 },
-                
+
                 {
                     title: 'Logos'
                 },
